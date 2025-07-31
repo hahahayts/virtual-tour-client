@@ -28,248 +28,147 @@ import {
   Home,
 } from "lucide-react";
 
-// Mock hotel data - replace with your actual data
+// Updated mock hotel data based on the provided schema
 const mockHotels = [
   {
-    id: 1,
+    id: "1",
     name: "Bohol Beach Club",
-    imageUrl:
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
-    images: [
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
-      "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80",
-      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
-    ],
     description:
       "Luxury beachfront resort with world-class amenities and stunning ocean views",
-    location: "Panglao Island, Bohol",
-    rating: 4.8,
-    reviewCount: 1247,
-    priceRange: "₱8,000 - ₱15,000",
-    category: "Luxury",
-    amenities: [
-      "Wifi",
-      "Pool",
-      "Restaurant",
-      "Beach Access",
-      "Spa",
-      "Air Conditioning",
-    ],
-    features: ["Beachfront", "Free Breakfast", "Airport Shuttle"],
-    roomTypes: ["Deluxe Room", "Ocean View Suite", "Beach Villa"],
-    isPopular: true,
-    availability: "Available",
-    distance: "2.5 km from city center",
+    address: "Panglao Island, Bohol, Philippines",
+    type: "HOTEL",
+    email: "info@boholbeachclub.com",
+    phone: "+63382551234",
+    website: "https://www.boholbeachclub.com",
+    facebook: "https://facebook.com/boholbeachclub",
+    imageUrl_1:
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
+    imageUrl_2:
+      "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80",
+    imageUrl_3:
+      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
+    imageUrl_4: null,
+    imageUrl_5: null,
+    videoUrl: null,
+    latitude: null,
+    longitude: null,
+    createdAt: null,
+    updatedAt: null,
   },
   {
-    id: 2,
+    id: "2",
     name: "Tubigon Grand Hotel",
-    imageUrl:
-      "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&q=80",
-    images: [
-      "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&q=80",
-      "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80",
-    ],
     description:
       "Modern business hotel in the heart of Tubigon with excellent facilities",
-    location: "Tubigon Town Center, Bohol",
-    rating: 4.5,
-    reviewCount: 892,
-    priceRange: "₱3,500 - ₱6,000",
-    category: "Business",
-    amenities: [
-      "Wifi",
-      "Restaurant",
-      "Conference Room",
-      "Gym",
-      "Air Conditioning",
-    ],
-    features: ["City Center", "Business Center", "24/7 Front Desk"],
-    roomTypes: ["Standard Room", "Executive Suite", "Family Room"],
-    isPopular: false,
-    availability: "Available",
-    distance: "0.5 km from city center",
+    address: "Tubigon Town Center, Bohol, Philippines",
+    type: "HOTEL",
+    email: "reservations@tubigongrand.com",
+    phone: "+63382345678",
+    website: "https://www.tubigongrand.com",
+    facebook: "https://facebook.com/tubigongrand",
+    imageUrl_1:
+      "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&q=80",
+    imageUrl_2:
+      "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80",
+    imageUrl_3: null,
+    imageUrl_4: null,
+    imageUrl_5: null,
+    videoUrl: null,
+    latitude: null,
+    longitude: null,
+    createdAt: null,
+    updatedAt: null,
   },
   {
-    id: 3,
+    id: "3",
     name: "Paradise Bay Resort",
-    imageUrl:
-      "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80",
-    images: [
-      "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80",
-      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80",
-    ],
     description:
       "Eco-friendly resort surrounded by lush tropical gardens and pristine beaches",
-    location: "Anda, Bohol",
-    rating: 4.6,
-    reviewCount: 645,
-    priceRange: "₱5,000 - ₱9,000",
-    category: "Resort",
-    amenities: ["Wifi", "Pool", "Restaurant", "Spa", "Garden", "Beach Access"],
-    features: ["Eco-Friendly", "Garden View", "Snorkeling"],
-    roomTypes: ["Garden Villa", "Beach Cottage", "Premium Suite"],
-    isPopular: true,
-    availability: "Limited",
-    distance: "15 km from city center",
+    address: "Anda, Bohol, Philippines",
+    type: "RESORT",
+    email: "bookings@paradisebay.com",
+    phone: "+63382765432",
+    website: "https://www.paradisebaybohol.com",
+    facebook: "https://facebook.com/paradisebaybohol",
+    imageUrl_1:
+      "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80",
+    imageUrl_2:
+      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80",
+    imageUrl_3: null,
+    imageUrl_4: null,
+    imageUrl_5: null,
+    videoUrl: null,
+    latitude: null,
+    longitude: null,
+    createdAt: null,
+    updatedAt: null,
   },
   {
-    id: 4,
+    id: "4",
     name: "Budget Inn Tubigon",
-    imageUrl:
-      "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&q=80",
-    images: [
-      "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&q=80",
-    ],
     description:
       "Clean and comfortable budget accommodation perfect for backpackers",
-    location: "Tubigon Port Area, Bohol",
-    rating: 4.2,
-    reviewCount: 324,
-    priceRange: "₱1,200 - ₱2,500",
-    category: "Budget",
-    amenities: ["Wifi", "Air Conditioning", "24/7 Front Desk"],
-    features: ["Near Port", "Budget Friendly", "Clean Rooms"],
-    roomTypes: ["Standard Room", "Family Room"],
-    isPopular: false,
-    availability: "Available",
-    distance: "1 km from city center",
+    address: "Tubigon Port Area, Bohol, Philippines",
+    type: "HOTEL",
+    email: "stay@budgetinntubigon.com",
+    phone: "+63382123456",
+    website: null,
+    facebook: "https://facebook.com/budgetinntubigon",
+    imageUrl_1:
+      "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&q=80",
+    imageUrl_2: null,
+    imageUrl_3: null,
+    imageUrl_4: null,
+    imageUrl_5: null,
+    videoUrl: null,
+    latitude: null,
+    longitude: null,
+    createdAt: null,
+    updatedAt: null,
   },
   {
-    id: 5,
+    id: "5",
     name: "Seaside Boutique Hotel",
-    imageUrl:
-      "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&q=80",
-    images: [
-      "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&q=80",
-      "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&q=80",
-    ],
     description:
       "Intimate boutique hotel with personalized service and unique design",
-    location: "Panglao Beach, Bohol",
-    rating: 4.7,
-    reviewCount: 456,
-    priceRange: "₱6,000 - ₱12,000",
-    category: "Boutique",
-    amenities: [
-      "Wifi",
-      "Pool",
-      "Restaurant",
-      "Bar",
-      "Concierge",
-      "Beach Access",
-    ],
-    features: ["Boutique Design", "Personalized Service", "Romantic"],
-    roomTypes: ["Designer Room", "Ocean Suite", "Penthouse"],
-    isPopular: true,
-    availability: "Available",
-    distance: "8 km from city center",
+    address: "Panglao Beach, Bohol, Philippines",
+    type: "HOTEL",
+    email: "hello@seasideboutique.com",
+    phone: "+63382987654",
+    website: "https://www.seasideboutique.com",
+    facebook: "https://facebook.com/seasideboutique",
+    imageUrl_1:
+      "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&q=80",
+    imageUrl_2:
+      "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&q=80",
+    imageUrl_3: null,
+    imageUrl_4: null,
+    imageUrl_5: null,
+    videoUrl: null,
+    latitude: null,
+    longitude: null,
+    createdAt: null,
+    updatedAt: null,
   },
 ];
 
 const GuestHotelPage = () => {
   const [viewMode, setViewMode] = useState("grid");
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedType, setSelectedType] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
-  const [priceRange, setPriceRange] = useState("All");
-  const [sortBy, setSortBy] = useState("popular");
   const [favorites, setFavorites] = useState(new Set());
   const [showFilters, setShowFilters] = useState(false);
 
-  const categories = [
-    "All",
-    "Luxury",
-    "Business",
-    "Resort",
-    "Budget",
-    "Boutique",
-  ];
-  const priceRanges = [
-    "All",
-    "Under ₱3,000",
-    "₱3,000 - ₱6,000",
-    "₱6,000 - ₱10,000",
-    "Above ₱10,000",
-  ];
-  const sortOptions = [
-    { value: "popular", label: "Most Popular" },
-    { value: "rating", label: "Highest Rated" },
-    { value: "price-low", label: "Price: Low to High" },
-    { value: "price-high", label: "Price: High to Low" },
-  ];
-
-  const amenityIcons = {
-    Wifi: Wifi,
-    Pool: Waves,
-    Restaurant: Utensils,
-    "Beach Access": Waves,
-    Spa: Wind,
-    "Air Conditioning": Wind,
-    "Conference Room": Building,
-    Gym: Zap,
-    "24/7 Front Desk": Clock,
-    Bar: Coffee,
-    Concierge: Phone,
-    Garden: Home,
-  };
+  const hotelTypes = ["All", "HOTEL", "RESORT", "GUESTHOUSE"];
 
   const filteredHotels = mockHotels.filter((hotel) => {
-    const matchesCategory =
-      selectedCategory === "All" || hotel.category === selectedCategory;
+    const matchesType = selectedType === "All" || hotel.type === selectedType;
     const matchesSearch =
       hotel.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       hotel.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      hotel.location.toLowerCase().includes(searchTerm.toLowerCase());
-
-    let matchesPrice = true;
-    if (priceRange !== "All") {
-      const price = parseInt(
-        hotel.priceRange.split(" - ")[0].replace("₱", "").replace(",", "")
-      );
-      switch (priceRange) {
-        case "Under ₱3,000":
-          matchesPrice = price < 3000;
-          break;
-        case "₱3,000 - ₱6,000":
-          matchesPrice = price >= 3000 && price <= 6000;
-          break;
-        case "₱6,000 - ₱10,000":
-          matchesPrice = price >= 6000 && price <= 10000;
-          break;
-        case "Above ₱10,000":
-          matchesPrice = price > 10000;
-          break;
-      }
-    }
-
-    return matchesCategory && matchesSearch && matchesPrice;
-  });
-
-  const sortedHotels = [...filteredHotels].sort((a, b) => {
-    switch (sortBy) {
-      case "rating":
-        return b.rating - a.rating;
-      case "price-low":
-        return (
-          parseInt(
-            a.priceRange.split(" - ")[0].replace("₱", "").replace(",", "")
-          ) -
-          parseInt(
-            b.priceRange.split(" - ")[0].replace("₱", "").replace(",", "")
-          )
-        );
-      case "price-high":
-        return (
-          parseInt(
-            b.priceRange.split(" - ")[0].replace("₱", "").replace(",", "")
-          ) -
-          parseInt(
-            a.priceRange.split(" - ")[0].replace("₱", "").replace(",", "")
-          )
-        );
-      default:
-        return b.isPopular - a.isPopular || b.rating - a.rating;
-    }
+      (hotel.address &&
+        hotel.address.toLowerCase().includes(searchTerm.toLowerCase()));
+    return matchesType && matchesSearch;
   });
 
   const toggleFavorite = (id) => {
@@ -282,10 +181,35 @@ const GuestHotelPage = () => {
     setFavorites(newFavorites);
   };
 
+  const getImageCount = (hotel) => {
+    let count = 0;
+    if (hotel.imageUrl_1) count++;
+    if (hotel.imageUrl_2) count++;
+    if (hotel.imageUrl_3) count++;
+    if (hotel.imageUrl_4) count++;
+    if (hotel.imageUrl_5) count++;
+    return count;
+  };
+
+  const getImageUrls = (hotel) => {
+    const urls = [];
+    if (hotel.imageUrl_1) urls.push(hotel.imageUrl_1);
+    if (hotel.imageUrl_2) urls.push(hotel.imageUrl_2);
+    if (hotel.imageUrl_3) urls.push(hotel.imageUrl_3);
+    if (hotel.imageUrl_4) urls.push(hotel.imageUrl_4);
+    if (hotel.imageUrl_5) urls.push(hotel.imageUrl_5);
+    return urls;
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-teal-50">
       {/* Header Section */}
-      <div className="bg-gradient-to-r from-blue-600 via-blue-700 to-teal-600 text-white py-16">
+      <div
+        className="bg-gradient-to-r from-blue-600 via-blue-700 to-teal-600 text-white py-16"
+        style={{
+          animation: "slide-in-from-top-5 0.8s ease-out both",
+        }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="flex items-center justify-center space-x-3 mb-4">
@@ -295,8 +219,7 @@ const GuestHotelPage = () => {
               </h1>
             </div>
             <p className="text-xl text-blue-100 max-w-2xl mx-auto">
-              Find the perfect place to stay in beautiful Bohol. From luxury
-              resorts to budget-friendly inns.
+              Find the perfect place to stay in beautiful Bohol
             </p>
           </div>
         </div>
@@ -304,7 +227,12 @@ const GuestHotelPage = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Search and Filter Bar */}
-        <div className="bg-white/60 backdrop-blur-md border border-white/40 rounded-2xl p-6 mb-8 shadow-xl">
+        <div
+          className="bg-white/60 backdrop-blur-md border border-white/40 rounded-2xl p-6 mb-8 shadow-xl"
+          style={{
+            animation: "fadeInUp 0.6s ease-out 0.2s both",
+          }}
+        >
           <div className="flex flex-col space-y-4">
             {/* Top Row - Search and Toggle */}
             <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
@@ -361,99 +289,70 @@ const GuestHotelPage = () => {
                 showFilters ? "flex" : "hidden lg:flex"
               } flex-col lg:flex-row gap-4 items-center`}
             >
-              {/* Category Filter */}
+              {/* Type Filter */}
               <div className="flex items-center space-x-2 overflow-x-auto pb-2 lg:pb-0">
-                {categories.map((category) => (
+                {hotelTypes.map((type) => (
                   <button
-                    key={category}
-                    onClick={() => setSelectedCategory(category)}
+                    key={type}
+                    onClick={() => setSelectedType(type)}
                     className={`flex items-center space-x-2 px-4 py-2 rounded-full whitespace-nowrap transition-all duration-300 ${
-                      selectedCategory === category
+                      selectedType === type
                         ? "bg-gradient-to-r from-blue-500 to-teal-500 text-white shadow-lg"
                         : "bg-white/50 text-gray-600 hover:bg-white/70"
                     }`}
                   >
                     <Building className="w-4 h-4" />
-                    <span className="font-medium">{category}</span>
+                    <span className="font-medium">{type}</span>
                   </button>
                 ))}
               </div>
-
-              {/* Price Range */}
-              <select
-                value={priceRange}
-                onChange={(e) => setPriceRange(e.target.value)}
-                className="bg-white/50 border border-white/30 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-              >
-                {priceRanges.map((range) => (
-                  <option key={range} value={range}>
-                    {range}
-                  </option>
-                ))}
-              </select>
-
-              {/* Sort By */}
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="bg-white/50 border border-white/30 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-              >
-                {sortOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
             </div>
           </div>
         </div>
 
         {/* Results Count */}
-        <div className="mb-6 flex items-center justify-between">
+        <div
+          className="mb-6 flex items-center justify-between "
+          style={{
+            animation: "fade-in 0.5s ease-out 0.4s both",
+          }}
+        >
           <p className="text-gray-600">
             Showing{" "}
             <span className="font-semibold text-blue-600">
-              {sortedHotels.length}
+              {filteredHotels.length}
             </span>{" "}
             hotels
-            {selectedCategory !== "All" && (
+            {selectedType !== "All" && (
               <span>
                 {" "}
-                in{" "}
+                of type{" "}
                 <span className="font-semibold text-teal-600">
-                  {selectedCategory}
-                </span>{" "}
-                category
+                  {selectedType}
+                </span>
               </span>
             )}
           </p>
-
-          {/* Quick Stats */}
-          <div className="hidden md:flex items-center space-x-6 text-sm text-gray-500">
-            <div className="flex items-center space-x-1">
-              <Award className="w-4 h-4" />
-              <span>Premium Quality</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <Shield className="w-4 h-4" />
-              <span>Secure Booking</span>
-            </div>
-          </div>
         </div>
 
         {/* Hotels Grid/List */}
         {viewMode === "grid" ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {sortedHotels.map((hotel) => (
+            {filteredHotels.map((hotel, index) => (
               <div
                 key={hotel.id}
                 className="group bg-white/60 backdrop-blur-md border border-white/40 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] cursor-pointer"
+                style={{
+                  animation: `fadeInUp 0.6s ease-out ${
+                    0.5 + index * 0.1
+                  }s both`,
+                }}
               >
                 {/* Image Gallery */}
                 <div className="relative h-56 overflow-hidden">
-                  {hotel.imageUrl ? (
+                  {hotel.imageUrl_1 ? (
                     <img
-                      src={hotel.imageUrl}
+                      src={hotel.imageUrl_1}
                       alt={hotel.name}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
@@ -470,24 +369,6 @@ const GuestHotelPage = () => {
 
                   {/* Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                  {/* Badges */}
-                  <div className="absolute top-4 left-4 flex flex-col space-y-2">
-                    {hotel.isPopular && (
-                      <span className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
-                        Popular
-                      </span>
-                    )}
-                    <span
-                      className={`px-3 py-1 rounded-full text-xs font-bold shadow-lg ${
-                        hotel.availability === "Available"
-                          ? "bg-green-500 text-white"
-                          : "bg-orange-500 text-white"
-                      }`}
-                    >
-                      {hotel.availability}
-                    </span>
-                  </div>
 
                   {/* Action Buttons */}
                   <div className="absolute top-4 right-4 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -511,16 +392,18 @@ const GuestHotelPage = () => {
                     <button className="p-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white hover:bg-white/30 transition-all duration-300">
                       <Share2 className="w-4 h-4" />
                     </button>
-                    <button className="p-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white hover:bg-white/30 transition-all duration-300">
-                      <Camera className="w-4 h-4" />
-                    </button>
+                    {getImageCount(hotel) > 1 && (
+                      <button className="p-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white hover:bg-white/30 transition-all duration-300">
+                        <Camera className="w-4 h-4" />
+                      </button>
+                    )}
                   </div>
 
                   {/* Image Count */}
-                  {hotel.images && hotel.images.length > 1 && (
+                  {getImageCount(hotel) > 1 && (
                     <div className="absolute bottom-4 right-4 bg-black/50 backdrop-blur-md text-white px-2 py-1 rounded-lg text-xs flex items-center space-x-1">
                       <Camera className="w-3 h-3" />
-                      <span>{hotel.images.length} photos</span>
+                      <span>{getImageCount(hotel)} photos</span>
                     </div>
                   )}
                 </div>
@@ -534,80 +417,63 @@ const GuestHotelPage = () => {
                       </h3>
                       <div className="flex items-center space-x-1 text-sm text-gray-500">
                         <MapPin className="w-4 h-4" />
-                        <span>{hotel.location}</span>
+                        <span>{hotel.address}</span>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <div className="flex items-center space-x-1 text-yellow-500 mb-1">
-                        <Star className="w-4 h-4 fill-current" />
-                        <span className="text-sm font-medium text-gray-800">
-                          {hotel.rating}
-                        </span>
-                      </div>
-                      <span className="text-xs text-gray-500">
-                        ({hotel.reviewCount} reviews)
-                      </span>
-                    </div>
+                    <span
+                      className={`px-3 py-1 rounded-full text-xs font-medium ${
+                        hotel.type === "RESORT"
+                          ? "bg-green-100 text-green-600"
+                          : "bg-blue-100 text-blue-600"
+                      }`}
+                    >
+                      {hotel.type}
+                    </span>
                   </div>
 
                   <p className="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2">
                     {hotel.description}
                   </p>
 
-                  {/* Price */}
-                  <div className="flex items-center justify-between mb-4">
-                    <div>
-                      <span className="text-xs text-gray-500">
-                        Price per night
-                      </span>
-                      <div className="text-lg font-bold text-blue-600">
-                        {hotel.priceRange}
-                      </div>
-                    </div>
-                    <span
-                      className={`px-3 py-1 rounded-full text-xs font-medium ${
-                        hotel.category === "Luxury"
-                          ? "bg-purple-100 text-purple-600"
-                          : hotel.category === "Budget"
-                          ? "bg-green-100 text-green-600"
-                          : "bg-blue-100 text-blue-600"
-                      }`}
-                    >
-                      {hotel.category}
-                    </span>
-                  </div>
-
-                  {/* Amenities */}
+                  {/* Contact Info */}
                   <div className="flex flex-wrap gap-2 mb-4">
-                    {hotel.amenities?.slice(0, 4).map((amenity, index) => {
-                      const IconComponent = amenityIcons[amenity] || Wifi;
-                      return (
-                        <div
-                          key={index}
-                          className="flex items-center space-x-1 bg-gray-100 px-2 py-1 rounded-lg text-xs text-gray-600"
-                        >
-                          <IconComponent className="w-3 h-3" />
-                          <span>{amenity}</span>
-                        </div>
-                      );
-                    })}
-                    {hotel.amenities && hotel.amenities.length > 4 && (
-                      <span className="text-xs text-gray-500">
-                        +{hotel.amenities.length - 4} more
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Features */}
-                  <div className="flex flex-wrap gap-1 mb-4">
-                    {hotel.features?.slice(0, 3).map((feature, index) => (
-                      <span
-                        key={index}
-                        className="px-2 py-1 bg-blue-50 text-blue-600 text-xs rounded-full"
+                    {hotel.phone && (
+                      <a
+                        href={`tel:${hotel.phone}`}
+                        className="flex items-center space-x-1 bg-gray-100 px-2 py-1 rounded-lg text-xs text-gray-600"
                       >
-                        {feature}
-                      </span>
-                    ))}
+                        <Phone className="w-3 h-3" />
+                        <span>Call</span>
+                      </a>
+                    )}
+                    {hotel.email && (
+                      <a
+                        href={`mailto:${hotel.email}`}
+                        className="flex items-center space-x-1 bg-gray-100 px-2 py-1 rounded-lg text-xs text-gray-600"
+                      >
+                        <span>Email</span>
+                      </a>
+                    )}
+                    {hotel.website && (
+                      <a
+                        href={hotel.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center space-x-1 bg-gray-100 px-2 py-1 rounded-lg text-xs text-gray-600"
+                      >
+                        <span>Website</span>
+                      </a>
+                    )}
+                    {hotel.facebook && (
+                      <a
+                        href={hotel.facebook}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center space-x-1 bg-gray-100 px-2 py-1 rounded-lg text-xs text-gray-600"
+                      >
+                        <span>Facebook</span>
+                      </a>
+                    )}
                   </div>
 
                   {/* Action Buttons */}
@@ -627,17 +493,22 @@ const GuestHotelPage = () => {
         ) : (
           /* List View */
           <div className="space-y-6">
-            {sortedHotels.map((hotel) => (
+            {filteredHotels.map((hotel, index) => (
               <div
                 key={hotel.id}
                 className="group bg-white/60 backdrop-blur-md border border-white/40 rounded-2xl p-6 hover:shadow-xl transition-all duration-300 cursor-pointer"
+                style={{
+                  animation: `fadeInUp 0.6s ease-out ${
+                    0.5 + index * 0.1
+                  }s both`,
+                }}
               >
                 <div className="flex flex-col lg:flex-row gap-6">
                   {/* Image */}
                   <div className="relative w-full lg:w-64 h-48 rounded-xl overflow-hidden flex-shrink-0">
-                    {hotel.imageUrl ? (
+                    {hotel.imageUrl_1 ? (
                       <img
-                        src={hotel.imageUrl}
+                        src={hotel.imageUrl_1}
                         alt={hotel.name}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
@@ -646,17 +517,10 @@ const GuestHotelPage = () => {
                         <Image className="w-8 h-8 text-gray-400" />
                       </div>
                     )}
-                    {hotel.isPopular && (
-                      <div className="absolute top-3 left-3">
-                        <span className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-2 py-1 rounded-full text-xs font-bold">
-                          Popular
-                        </span>
-                      </div>
-                    )}
-                    {hotel.images && hotel.images.length > 1 && (
+                    {getImageCount(hotel) > 1 && (
                       <div className="absolute bottom-3 right-3 bg-black/50 backdrop-blur-md text-white px-2 py-1 rounded-lg text-xs flex items-center space-x-1">
                         <Camera className="w-3 h-3" />
-                        <span>{hotel.images.length}</span>
+                        <span>{getImageCount(hotel)}</span>
                       </div>
                     )}
                   </div>
@@ -668,89 +532,76 @@ const GuestHotelPage = () => {
                         <h3 className="text-2xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors mb-2">
                           {hotel.name}
                         </h3>
-                        <div className="flex items-center space-x-4 text-sm text-gray-500 mb-2">
-                          <div className="flex items-center space-x-1">
-                            <MapPin className="w-4 h-4" />
-                            <span>{hotel.location}</span>
-                          </div>
-                          <span>•</span>
-                          <span>{hotel.distance}</span>
+                        <div className="flex items-center space-x-1 text-sm text-gray-500 mb-2">
+                          <MapPin className="w-4 h-4" />
+                          <span>{hotel.address}</span>
                         </div>
                       </div>
 
-                      <div className="text-right">
-                        <div className="flex items-center space-x-1 text-yellow-500 mb-1">
-                          <Star className="w-5 h-5 fill-current" />
-                          <span className="text-lg font-bold text-gray-800">
-                            {hotel.rating}
-                          </span>
-                        </div>
-                        <span className="text-sm text-gray-500">
-                          ({hotel.reviewCount} reviews)
-                        </span>
-                        <div className="mt-2">
-                          <span className="text-xs text-gray-500">From</span>
-                          <div className="text-xl font-bold text-blue-600">
-                            {hotel.priceRange.split(" - ")[0]}
-                          </div>
-                          <span className="text-xs text-gray-500">
-                            per night
-                          </span>
-                        </div>
-                      </div>
+                      <span
+                        className={`px-3 py-1 rounded-full text-sm font-medium ${
+                          hotel.type === "RESORT"
+                            ? "bg-green-100 text-green-600"
+                            : "bg-blue-100 text-blue-600"
+                        }`}
+                      >
+                        {hotel.type}
+                      </span>
                     </div>
 
                     <p className="text-gray-600 mb-4 leading-relaxed">
                       {hotel.description}
                     </p>
 
-                    {/* Amenities Grid */}
-                    <div className="grid grid-cols-3 md:grid-cols-6 gap-3 mb-4">
-                      {hotel.amenities?.slice(0, 6).map((amenity, index) => {
-                        const IconComponent = amenityIcons[amenity] || Wifi;
-                        return (
-                          <div
-                            key={index}
-                            className="flex items-center space-x-2 bg-gray-50 px-3 py-2 rounded-lg text-sm text-gray-600"
-                          >
-                            <IconComponent className="w-4 h-4" />
-                            <span className="hidden sm:inline">{amenity}</span>
-                          </div>
-                        );
-                      })}
+                    {/* Contact Info */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                      {hotel.phone && (
+                        <a
+                          href={`tel:${hotel.phone}`}
+                          className="flex items-center space-x-2 bg-gray-50 px-3 py-2 rounded-lg text-sm text-gray-600"
+                        >
+                          <Phone className="w-4 h-4" />
+                          <span>Call</span>
+                        </a>
+                      )}
+                      {hotel.email && (
+                        <a
+                          href={`mailto:${hotel.email}`}
+                          className="flex items-center space-x-2 bg-gray-50 px-3 py-2 rounded-lg text-sm text-gray-600"
+                        >
+                          <span>Email</span>
+                        </a>
+                      )}
+                      {hotel.website && (
+                        <a
+                          href={hotel.website}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center space-x-2 bg-gray-50 px-3 py-2 rounded-lg text-sm text-gray-600"
+                        >
+                          <span>Website</span>
+                        </a>
+                      )}
+                      {hotel.facebook && (
+                        <a
+                          href={hotel.facebook}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center space-x-2 bg-gray-50 px-3 py-2 rounded-lg text-sm text-gray-600"
+                        >
+                          <span>Facebook</span>
+                        </a>
+                      )}
                     </div>
 
-                    {/* Features and Action */}
+                    {/* Action Buttons */}
                     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                       <div className="flex flex-wrap gap-2">
-                        <span
-                          className={`px-3 py-1 rounded-full text-sm font-medium ${
-                            hotel.category === "Luxury"
-                              ? "bg-purple-100 text-purple-600"
-                              : hotel.category === "Budget"
-                              ? "bg-green-100 text-green-600"
-                              : "bg-blue-100 text-blue-600"
-                          }`}
-                        >
-                          {hotel.category}
-                        </span>
-                        <span
-                          className={`px-3 py-1 rounded-full text-sm font-medium ${
-                            hotel.availability === "Available"
-                              ? "bg-green-100 text-green-600"
-                              : "bg-orange-100 text-orange-600"
-                          }`}
-                        >
-                          {hotel.availability}
-                        </span>
-                        {hotel.features?.slice(0, 2).map((feature, index) => (
-                          <span
-                            key={index}
-                            className="px-3 py-1 bg-blue-50 text-blue-600 text-sm rounded-full"
-                          >
-                            {feature}
+                        {getImageUrls(hotel).length > 1 && (
+                          <span className="px-3 py-1 bg-gray-100 text-gray-600 text-sm rounded-full">
+                            {getImageUrls(hotel).length} photos available
                           </span>
-                        ))}
+                        )}
                       </div>
 
                       <div className="flex items-center space-x-3">
@@ -792,8 +643,13 @@ const GuestHotelPage = () => {
         )}
 
         {/* No Results */}
-        {sortedHotels.length === 0 && (
-          <div className="text-center py-12">
+        {filteredHotels.length === 0 && (
+          <div
+            className="text-center py-12"
+            style={{
+              animation: "fadeInUp 0.6s ease-out both",
+            }}
+          >
             <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <Building className="w-10 h-10 text-gray-400" />
             </div>
@@ -806,8 +662,7 @@ const GuestHotelPage = () => {
             <button
               onClick={() => {
                 setSearchTerm("");
-                setSelectedCategory("All");
-                setPriceRange("All");
+                setSelectedType("All");
               }}
               className="bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white px-6 py-3 rounded-full font-medium transition-all duration-300 hover:scale-105"
             >
@@ -816,18 +671,23 @@ const GuestHotelPage = () => {
           </div>
         )}
 
-        {/* Quick Book Section */}
-        <div className="mt-12 bg-gradient-to-r from-blue-500/10 to-teal-500/10 backdrop-blur-md border border-white/40 rounded-2xl p-8">
+        {/* Quick Contact Section */}
+        <div
+          className="mt-12 bg-gradient-to-r from-blue-500/10 to-teal-500/10 backdrop-blur-md border border-white/40 rounded-2xl p-8"
+          style={{
+            animation: "fadeInUp 0.6s ease-out both",
+          }}
+        >
           <div className="text-center mb-6">
             <h2 className="text-2xl font-bold text-gray-800 mb-2">
-              Need Help Choosing?
+              Need Help Booking?
             </h2>
             <p className="text-gray-600">
-              Our local experts can help you find the perfect accommodation
+              Contact our local experts for assistance
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="text-center">
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Phone className="w-8 h-8 text-blue-500" />
@@ -846,28 +706,13 @@ const GuestHotelPage = () => {
                 <Users className="w-8 h-8 text-teal-500" />
               </div>
               <h3 className="font-semibold text-gray-800 mb-2">
-                Group Bookings
+                Group Inquiries
               </h3>
               <p className="text-sm text-gray-600 mb-3">
-                Special rates for groups of 5+
+                Special arrangements for groups
               </p>
               <button className="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded-lg transition-colors">
-                Get Quote
-              </button>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Shield className="w-8 h-8 text-green-500" />
-              </div>
-              <h3 className="font-semibold text-gray-800 mb-2">
-                Best Price Guarantee
-              </h3>
-              <p className="text-sm text-gray-600 mb-3">
-                We'll match any lower price
-              </p>
-              <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-colors">
-                Learn More
+                Contact Us
               </button>
             </div>
           </div>

@@ -38,15 +38,12 @@ export const Navbar = ({ isMenuOpen, toggleMenu }: Props) => {
         </Link>
 
         {/* Accommodations */}
-        <div className="relative group">
-          <a
-            href="#accommodations"
-            className="flex items-center space-x-2 text-white/90 hover:text-yellow-300 transition-all duration-300 hover:scale-105"
-          >
+        <div className="relative group cursor-pointer ">
+          <span className="flex items-center space-x-2 text-white/90 hover:text-yellow-300 transition-all duration-300 hover:scale-105">
             <Bed className="w-4 h-4 group-hover:scale-110 transition-transform" />
             <span>Stay</span>
             <ChevronDown className="w-3 h-3 group-hover:rotate-180 transition-transform" />
-          </a>
+          </span>
 
           {/* Desktop accommodation submenu */}
           <DeskTopAccommodation />

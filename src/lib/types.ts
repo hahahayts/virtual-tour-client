@@ -1,3 +1,6 @@
+import type { RestaurantDataSchema } from "@/schema/restaurant";
+import type z from "zod";
+
 export type User = {
   id: string;
   email: string;
@@ -16,3 +19,5 @@ export interface ProtectedRoutesTypes {
   redirectPath?: string;
   children: React.ReactNode;
 }
+
+export type RestaurantType = z.infer<typeof RestaurantDataSchema>;
