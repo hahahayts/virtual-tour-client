@@ -26,6 +26,7 @@ import { fetchDataById, updateData } from "@/db";
 import { toast } from "sonner";
 import { DataFetching } from "@/components/fetch";
 import { ErrorEdit, ErrorFetchingData } from "@/components/error-edit";
+import { PreviewImages } from "@/components/preview-images";
 
 const EditRestaurant = () => {
   const { id } = useParams();
@@ -38,6 +39,7 @@ const EditRestaurant = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    watch,
   } = useForm({
     resolver: zodResolver(RestaurantSchema),
     defaultValues: {
@@ -59,6 +61,14 @@ const EditRestaurant = () => {
       videoUrl: null,
     },
   });
+
+  const imageUrls = watch([
+    "imageUrl_1",
+    "imageUrl_2",
+    "imageUrl_3",
+    "imageUrl_4",
+    "imageUrl_5",
+  ]);
 
   const { data, isFetching, error } = useQuery({
     queryKey: ["restaurant", id],
@@ -393,6 +403,7 @@ const EditRestaurant = () => {
                 ))}
               </div>
             </div>
+            <PreviewImages imageUrls={imageUrls} />
           </CardContent>
         </Card>
 

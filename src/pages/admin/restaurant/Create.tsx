@@ -23,6 +23,7 @@ import { ErrorMessage } from "@/components/form/err-message";
 import { LoadingBtn } from "@/components/form/loader-btn";
 import { useState } from "react";
 import { handleSubmitForm } from "@/lib/handle-submit";
+import { PreviewImages } from "@/components/preview-images";
 
 const Create = () => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -34,6 +35,7 @@ const Create = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    watch,
   } = useForm({
     resolver: zodResolver(RestaurantSchema),
     defaultValues: {
@@ -55,6 +57,14 @@ const Create = () => {
       videoUrl: null,
     },
   });
+
+  const imageUrls = watch([
+    "imageUrl_1",
+    "imageUrl_2",
+    "imageUrl_3",
+    "imageUrl_4",
+    "imageUrl_5",
+  ]);
 
   const onSubmit = async (data: z.infer<typeof RestaurantSchema>) => {
     console.log("Data: ", data);
@@ -346,6 +356,7 @@ const Create = () => {
                 ))}
               </div>
             </div>
+            <PreviewImages imageUrls={imageUrls} />
           </CardContent>
         </Card>
 

@@ -34,6 +34,7 @@ import { useState } from "react";
 import { LoadingBtn } from "@/components/form/loader-btn";
 
 import { handleSubmitForm } from "@/lib/handle-submit";
+import { PreviewImages } from "@/components/preview-images";
 
 const type = ["HOTEL", "RESORT", "INN", "APARTMENT"];
 
@@ -47,6 +48,7 @@ const Create = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    watch,
   } = useForm({
     resolver: zodResolver(AccommodationSchema),
     defaultValues: {
@@ -69,6 +71,14 @@ const Create = () => {
       videoUrl: null,
     },
   });
+
+  const imageUrls = watch([
+    "imageUrl_1",
+    "imageUrl_2",
+    "imageUrl_3",
+    "imageUrl_4",
+    "imageUrl_5",
+  ]);
 
   const onSubmit = async (data: z.infer<typeof AccommodationSchema>) => {
     console.log("Data: ", data);
@@ -387,6 +397,7 @@ const Create = () => {
                 ))}
               </div>
             </div>
+            <PreviewImages imageUrls={imageUrls} />
           </CardContent>
         </Card>
 

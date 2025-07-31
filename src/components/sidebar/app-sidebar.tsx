@@ -28,7 +28,10 @@ export function AppSidebar() {
   console.log("pathname", pathname.split("/"));
 
   return (
-    <Sidebar variant="sidebar" className="border-r border-sidebar-border">
+    <Sidebar
+      variant="sidebar"
+      className="border-r border-sidebar-border scrollbar-none scrollbar-hide"
+    >
       <SidebarHeader className="border-b border-sidebar-border bg-sidebar p-4">
         <div className="flex items-center gap-3">
           <div className="bg-sidebar-primary rounded-lg p-2">

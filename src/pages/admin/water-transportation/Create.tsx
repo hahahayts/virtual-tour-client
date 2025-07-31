@@ -25,6 +25,7 @@ import { useNavigate } from "react-router";
 import { useState } from "react";
 import { LoadingBtn } from "@/components/form/loader-btn";
 import { handleSubmitForm } from "@/lib/handle-submit";
+import { PreviewImages } from "@/components/preview-images";
 
 const daysOfWeek = [
   "Monday",
@@ -65,6 +66,8 @@ const Create = () => {
       imageUrl_3: null,
     },
   });
+
+  const imageUrls = watch(["imageUrl_1", "imageUrl_2", "imageUrl_3"]);
 
   const selectedDays = watch("departure_days") || [];
 
@@ -384,6 +387,7 @@ const Create = () => {
                 ))}
               </div>
             </div>
+            <PreviewImages imageUrls={imageUrls} />
           </CardContent>
         </Card>
 

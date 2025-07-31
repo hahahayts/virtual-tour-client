@@ -38,6 +38,7 @@ import { fetchDataById, updateData } from "@/db";
 import { toast } from "sonner";
 import { DataFetching } from "@/components/fetch";
 import { ErrorEdit, ErrorFetchingData } from "@/components/error-edit";
+import { PreviewImages } from "@/components/preview-images";
 
 const type = ["HOTEL", "RESORT", "INN", "APARTMENT"];
 
@@ -51,6 +52,7 @@ const EditAccommodation = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    watch,
   } = useForm({
     resolver: zodResolver(AccommodationSchema),
     defaultValues: {
@@ -73,6 +75,14 @@ const EditAccommodation = () => {
       videoUrl: null,
     },
   });
+
+  const imageUrls = watch([
+    "imageUrl_1",
+    "imageUrl_2",
+    "imageUrl_3",
+    "imageUrl_4",
+    "imageUrl_5",
+  ]);
 
   const { data, isFetching, error } = useQuery({
     queryKey: ["accommodation", id],
@@ -434,6 +444,7 @@ const EditAccommodation = () => {
                 ))}
               </div>
             </div>
+            <PreviewImages imageUrls={imageUrls} />
           </CardContent>
         </Card>
 

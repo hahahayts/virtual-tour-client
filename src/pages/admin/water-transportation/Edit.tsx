@@ -30,6 +30,7 @@ import { toast } from "sonner";
 import { useEffect } from "react";
 import { DataFetching } from "@/components/fetch";
 import { ErrorEdit, ErrorFetchingData } from "@/components/error-edit";
+import { PreviewImages } from "@/components/preview-images";
 
 const EditWaterTransportation = () => {
   const { id } = useParams();
@@ -60,6 +61,8 @@ const EditWaterTransportation = () => {
       imageUrl_3: null,
     },
   });
+
+  const imageUrls = watch(["imageUrl_1", "imageUrl_2", "imageUrl_3"]);
 
   const { data, isFetching, error } = useQuery({
     queryKey: ["water-transportation", id],
@@ -427,6 +430,8 @@ const EditWaterTransportation = () => {
                 ))}
               </div>
             </div>
+
+            <PreviewImages imageUrls={imageUrls} />
           </CardContent>
         </Card>
 

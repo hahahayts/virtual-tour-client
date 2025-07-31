@@ -8,6 +8,7 @@ import { dateFormatter } from "./date-formatter";
 import axios from "axios";
 import type { NavigateFunction } from "react-router";
 import type { WaterTransportationSchema } from "@/schema/water-transportation";
+import type { CreateLandTransportationSchema } from "@/schema/land-transportation";
 
 interface Args {
   data: z.infer<
@@ -15,6 +16,7 @@ interface Args {
     | typeof AccommodationSchema
     | typeof RestaurantSchema
     | typeof WaterTransportationSchema
+    | typeof CreateLandTransportationSchema
   >;
   name: string;
   url: string;

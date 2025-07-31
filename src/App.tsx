@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 import Dashboard from "@/pages/admin/Dashboard";
 import Destination from "@/pages/admin/destination/Page";
 import Home from "@/pages/admin/Home";
@@ -20,17 +20,29 @@ import EditWaterTransportation from "@/pages/admin/water-transportation/Edit";
 import Login from "./pages/auth/Login";
 import ProtectedRoutes from "./pages/protected-routes";
 import LandingPage from "./pages/guest/Landing";
+import GuestDestination from "./pages/guest/destinations/Page";
+import GuestPage from "./pages/guest/MainPage";
+import GuestHotelPage from "./pages/guest/accommodations/hotels/Page";
+import GuestResortPage from "./pages/guest/accommodations/resort/Page";
+import GuestAppartmentsPage from "./pages/guest/accommodations/appartments/Page";
+import GuestInnPage from "./pages/guest/accommodations/inn/Page";
+import GuestRestaurantPage from "./pages/guest/restaurant/Page";
+import NotFoundPage from "./pages/not-found-page";
+import LandTransporation from "./pages/admin/land-transportations/Page";
+import CreateLandTransportation from "./pages/admin/land-transportations/Create";
+import ViewLandTranspo from "./pages/admin/land-transportations/View";
+import EditLandTransportation from "./pages/admin/land-transportations/Edit";
+import GuestProtectedRoutes from "./pages/guest-protected-routes";
 
 const App = () => {
   return (
     <Routes>
-      {/* Guest Routes */}
-      <Route index element={<LandingPage />} />
+      {/* Public login route - not protected */}
+      <Route path="/admin/auth/login" element={<Login />} />
 
-      {/* Admin Routes */}
-      <Route path="admin/auth/login" element={<Login />} />
+      {/* Admin Routes - Protected for authenticated users */}
       <Route
-        path="admin/*"
+        path="/admin/*"
         element={
           <ProtectedRoutes>
             <Routes>
@@ -38,7 +50,7 @@ const App = () => {
                 <Route index element={<Home />} />
                 <Route path="dashboard" element={<Home />} />
 
-                {/* Destination */}
+                {/* Destination Routes */}
                 <Route path="destinations">
                   <Route index element={<Destination />} />
                   <Route path="create" element={<CreateDestination />} />
@@ -46,7 +58,7 @@ const App = () => {
                   <Route path=":id/edit" element={<EditDestination />} />
                 </Route>
 
-                {/* Accommodation */}
+                {/* Accommodation Routes */}
                 <Route path="accommodations">
                   <Route index element={<Accommodation />} />
                   <Route path="create" element={<CreateAccommodation />} />
@@ -54,7 +66,7 @@ const App = () => {
                   <Route path=":id/edit" element={<EditAccommodation />} />
                 </Route>
 
-                {/* Restaurant */}
+                {/* Restaurant Routes */}
                 <Route path="restaurants">
                   <Route index element={<Restaurant />} />
                   <Route path="create" element={<CreateRestaurant />} />
@@ -62,7 +74,7 @@ const App = () => {
                   <Route path=":id/edit" element={<EditRestaurant />} />
                 </Route>
 
-                {/* Water Transportation */}
+                {/* Water Transportation Routes */}
                 <Route path="water-transportations">
                   <Route index element={<WaterTransportation />} />
                   <Route
@@ -75,11 +87,41 @@ const App = () => {
                     element={<EditWaterTransportation />}
                   />
                 </Route>
+
+                {/* Land Transportation Routes */}
+                <Route path="land-transportations">
+                  <Route index element={<LandTransporation />} />
+                  <Route path="create" element={<CreateLandTransportation />} />
+                  <Route path=":id" element={<ViewLandTranspo />} />
+                  <Route path=":id/edit" element={<EditLandTransportation />} />
+                </Route>
               </Route>
             </Routes>
           </ProtectedRoutes>
         }
       />
+
+      {/* Guest Routes - Protected from authenticated users */}
+      <Route
+        path="/"
+        element={
+          <GuestProtectedRoutes>
+            <GuestPage />
+          </GuestProtectedRoutes>
+        }
+      >
+        <Route index element={<LandingPage />} />
+        <Route path="destinations" element={<GuestDestination />} />
+        <Route path="hotels" element={<GuestHotelPage />} />
+        <Route path="inns" element={<GuestInnPage />} />
+        <Route path="resorts" element={<GuestResortPage />} />
+        <Route path="apartments" element={<GuestAppartmentsPage />} />
+        <Route path="restaurants" element={<GuestRestaurantPage />} />
+      </Route>
+
+      {/* 404 and Catch-all Routes */}
+      <Route path="/404" element={<NotFoundPage />} />
+      <Route path="*" element={<Navigate to="/404" replace />} />
     </Routes>
   );
 };

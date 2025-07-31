@@ -17,6 +17,7 @@ import { PageHeader } from "@/components/page-header";
 import { formatCurrency } from "@/lib/currency";
 import { formatDepartureDays } from "@/lib/date-formatter";
 import { ErrorPage } from "@/components/error-page";
+import { DeleteButton } from "@/components/delete-btn";
 
 const WaterTransportation = () => {
   const { data, isPending, error } = useQuery({
@@ -66,6 +67,7 @@ const WaterTransportation = () => {
                           src={transportation.imageUrl_1}
                           alt={transportation.name}
                           className="w-16 h-16 object-cover rounded-md"
+                          loading="lazy"
                         />
                       ) : (
                         <div className="w-16 h-16 bg-muted rounded-md flex items-center justify-center">
@@ -121,9 +123,11 @@ const WaterTransportation = () => {
                           </Link>
                         </Button>
 
-                        <Button variant={"destructive"} size={"sm"}>
-                          Delete
-                        </Button>
+                        <DeleteButton
+                          querykey="water-transportations"
+                          id={transportation.id}
+                          url="water-transportations"
+                        />
                       </div>
                     </TableCell>
                   </TableRow>
