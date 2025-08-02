@@ -2,9 +2,16 @@ import { useState, useEffect } from "react";
 import { ArrowRight, Camera, ChevronDown } from "lucide-react";
 import { VideoBackground } from "@/components/video-bg";
 import { heroTexts, quickActions } from "@/components/navbar";
+import { useMetadata } from "@/hooks/use-metadata";
 
 const LandingPage = () => {
   const [currentText, setCurrentText] = useState(0);
+
+  useMetadata({
+    title: "Tara na sa Tubigon",
+    description: "The beauty of Tubigon, Bohol",
+    canonicalUrl: "http://localhost:5173/",
+  });
 
   useEffect(() => {
     const interval = setInterval(() => {

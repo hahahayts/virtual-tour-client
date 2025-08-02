@@ -22,9 +22,12 @@ export const Navbar = ({ isMenuOpen, toggleMenu }: Props) => {
         <div className="bg-gradient-to-br from-blue-400/30 to-teal-500/30 backdrop-blur-md border border-white/30 rounded-full p-2 shadow-lg">
           <MapPin className="w-5 h-5 md:w-6 md:h-6 text-white drop-shadow-sm" />
         </div>
-        <span className="text-lg md:text-2xl font-bold text-white drop-shadow-sm">
+        <Link
+          to={"/"}
+          className="text-lg md:text-2xl font-bold text-white drop-shadow-sm"
+        >
           Tara na sa <span className="text-yellow-300">TUBIGON</span>
-        </span>
+        </Link>
       </div>
 
       {/* Desktop Navigation */}

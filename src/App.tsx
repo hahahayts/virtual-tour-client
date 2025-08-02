@@ -33,6 +33,7 @@ import CreateLandTransportation from "./pages/admin/land-transportations/Create"
 import ViewLandTranspo from "./pages/admin/land-transportations/View";
 import EditLandTransportation from "./pages/admin/land-transportations/Edit";
 import GuestProtectedRoutes from "./pages/guest-protected-routes";
+import DestinationViewPage from "./pages/guest/destinations/View";
 
 const App = () => {
   return (
@@ -111,7 +112,11 @@ const App = () => {
         }
       >
         <Route index element={<LandingPage />} />
-        <Route path="destinations" element={<GuestDestination />} />
+        <Route path="destinations">
+          <Route index element={<GuestDestination />} />
+          <Route path=":id" element={<DestinationViewPage />} />
+        </Route>
+
         <Route path="hotels" element={<GuestHotelPage />} />
         <Route path="inns" element={<GuestInnPage />} />
         <Route path="resorts" element={<GuestResortPage />} />

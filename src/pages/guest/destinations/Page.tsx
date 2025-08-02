@@ -12,11 +12,18 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchData } from "@/db";
 import type z from "zod";
 import type { DestinationSchema } from "@/schema/destination";
+import { useMetadata } from "@/hooks/use-metadata";
 
 const GuestDestination = () => {
   const [viewMode, setViewMode] = useState<string>("grid");
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [favorites, setFavorites] = useState(new Set());
+
+  useMetadata({
+    title: "Discover Tubigon",
+    description: "The beauty of Tubigon, Bohol",
+    
+  });
 
   const { data, isPending, error } = useQuery({
     queryKey: ["destinations"],

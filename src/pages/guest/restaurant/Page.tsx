@@ -12,6 +12,7 @@ import { Header } from "@/components/guest/header";
 import { GridListRestaurant } from "@/components/guest/grid-list/restaurant";
 import { RestaurantListView } from "@/components/guest/list/restaurant";
 import { SearchAndFilterBar } from "@/components/guest/search-filter";
+import { useMetadata } from "@/hooks/use-metadata";
 
 const GuestRestaurantPage = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -21,6 +22,12 @@ const GuestRestaurantPage = () => {
   const { data, isPending, error } = useQuery({
     queryKey: ["restaurants"],
     queryFn: () => fetchData("restaurants"),
+  });
+
+  useMetadata({
+    title: "Best Restaurants in Tubigon",
+    description: "Discover the top-rated dining experiences across Tubigon",
+    keywords: ["Tubigon restaurants", "best food Tubigon", "dining guide"],
   });
 
   // Safer filtering with useMemo
@@ -43,6 +50,11 @@ const GuestRestaurantPage = () => {
     const newFavorites = new Set(favorites);
     newFavorites.has(id) ? newFavorites.delete(id) : newFavorites.add(id);
     setFavorites(newFavorites);
+  };
+
+  const handleSearch = (term: string) => {
+    const cleanTerm = term.replace(/[^a-zA-Z0-9\s\-.,]/g, "");
+    setSearchTerm(cleanTerm);
   };
 
   const getImageCount = (restaurant: RestaurantType) => {
@@ -83,7 +95,7 @@ const GuestRestaurantPage = () => {
         {/* Search and Filters */}
         <SearchAndFilterBar
           searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
+          handleSearch={handleSearch}
           setViewMode={setViewMode}
           viewMode={viewMode}
         />
