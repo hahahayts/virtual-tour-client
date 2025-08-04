@@ -11,13 +11,14 @@ import {
 import { ViewDestinationSkeleton } from "@/components/view-skeleton";
 import { ErrorView } from "@/components/error-view";
 import { NotFoundView } from "@/components/not-found";
-import { formatDate } from "@/lib/date-formatter";
+import { formatDate, formatDepartureDays } from "@/lib/date-formatter";
 import { fetchDataById } from "@/db";
 import { ViewPageHeader } from "@/components/view-page-header";
 import { formatCurrency } from "@/lib/currency";
 import { useEffect, useState } from "react";
 import { GalleryImages } from "@/components/gallery-images";
 import MDEditor from "@uiw/react-md-editor";
+import { formatDepartureDaysView, formatDuration } from "@/lib/utils";
 
 const View = () => {
   const { id } = useParams();
@@ -57,21 +58,6 @@ const View = () => {
       <NotFoundView name="Water Transportation" url="water-transportations" />
     );
   }
-
-  const formatDepartureDays = (days: string[]) => {
-    if (!days || days.length === 0) return "No schedule available";
-    return days.join(", ");
-  };
-
-  const formatDuration = (minutes: number | null) => {
-    if (!minutes) return "Not specified";
-    const hours = Math.floor(minutes / 60);
-    const mins = minutes % 60;
-
-    if (hours === 0) return `${mins} minutes`;
-    if (mins === 0) return `${hours} hour${hours > 1 ? "s" : ""}`;
-    return `${hours} hour${hours > 1 ? "s" : ""} ${mins} minutes`;
-  };
 
   const availableImages = [
     data.imageUrl_1,
@@ -197,7 +183,7 @@ const View = () => {
                   <div>
                     <p className="font-medium mb-1">Departure Days</p>
                     <p className="text-sm text-muted-foreground">
-                      {formatDepartureDays(data.departure_days)}
+                      {formatDepartureDaysView(data.departure_days)}
                     </p>
                   </div>
                 </div>

@@ -1,5 +1,6 @@
 import {
   Bed,
+  Building,
   ChevronDown,
   Compass,
   Globe,
@@ -8,8 +9,9 @@ import {
   UtensilsCrossed,
   X,
 } from "lucide-react";
-import { DeskTopAccommodation } from "./desktop-accomoodation";
 import { Link } from "react-router";
+import { LinkNavigation } from "./links";
+import { transportationTypes } from ".";
 
 interface Props {
   toggleMenu: () => void;
@@ -41,16 +43,13 @@ export const Navbar = ({ isMenuOpen, toggleMenu }: Props) => {
         </Link>
 
         {/* Accommodations */}
-        <div className="relative group cursor-pointer ">
-          <span className="flex items-center space-x-2 text-white/90 hover:text-yellow-300 transition-all duration-300 hover:scale-105">
-            <Bed className="w-4 h-4 group-hover:scale-110 transition-transform" />
-            <span>Stay</span>
-            <ChevronDown className="w-3 h-3 group-hover:rotate-180 transition-transform" />
-          </span>
-
-          {/* Desktop accommodation submenu */}
-          <DeskTopAccommodation />
-        </div>
+        <Link
+          to={"/accommodations"}
+          className="flex items-center space-x-2 text-white/90 hover:text-yellow-300 transition-all duration-300 hover:scale-105 group"
+        >
+          <Building className="w-4 h-4 group-hover:rotate-12 transition-transform" />
+          <span>Accommodation</span>
+        </Link>
 
         <Link
           to="restaurants"
@@ -59,6 +58,17 @@ export const Navbar = ({ isMenuOpen, toggleMenu }: Props) => {
           <UtensilsCrossed className="w-4 h-4 group-hover:rotate-12 transition-transform" />
           <span>Dine</span>
         </Link>
+        {/* Transportation */}
+        <div className="relative group cursor-pointer ">
+          <span className="flex items-center space-x-2 text-white/90 hover:text-yellow-300 transition-all duration-300 hover:scale-105">
+            <Bed className="w-4 h-4 group-hover:scale-110 transition-transform" />
+            <span>Transportations</span>
+            <ChevronDown className="w-3 h-3 group-hover:rotate-180 transition-transform" />
+          </span>
+
+          {/* Desktop accommodation submenu */}
+          <LinkNavigation links={transportationTypes} />
+        </div>
       </div>
 
       <div className="flex items-center space-x-4">

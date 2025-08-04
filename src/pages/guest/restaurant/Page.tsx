@@ -1,5 +1,4 @@
 import { useState, useMemo } from "react";
-import { Search, Grid, List } from "lucide-react";
 import { NoResult } from "@/components/guest/no-result";
 import { useQuery } from "@tanstack/react-query";
 import { fetchData } from "@/db";

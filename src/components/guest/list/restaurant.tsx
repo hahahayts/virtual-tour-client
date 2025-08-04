@@ -9,6 +9,13 @@ import {
   Facebook,
 } from "lucide-react";
 import type { RestaurantType } from "@/lib/types";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
 
 interface Props {
   filteredRestaurants: RestaurantType[];
@@ -26,16 +33,16 @@ export const RestaurantListView = ({
   return (
     <div className="space-y-4">
       {filteredRestaurants.map((restaurant, index) => (
-        <div
+        <Card
           key={restaurant.id}
-          className="group bg-white/60 backdrop-blur-md border border-white/40 rounded-2xl p-6 hover:shadow-xl transition-all duration-300 cursor-pointer"
+          className="group hover:shadow-xl transition-shadow duration-300 overflow-hidden"
           style={{
             animation: `fadeInUp 0.6s ease-out ${0.5 + index * 0.1}s both`,
           }}
         >
-          <div className="flex flex-col md:flex-row gap-6">
-            {/* Image */}
-            <div className="relative w-full md:w-48 h-32 rounded-xl overflow-hidden flex-shrink-0">
+          <div className="flex flex-col md:flex-row ">
+            {/* Image without padding */}
+            <div className="relative w-full md:w-48 h-32 flex-shrink-0 pl-5">
               {restaurant.imageUrl_1 ? (
                 <img
                   src={restaurant.imageUrl_1}
@@ -55,12 +62,12 @@ export const RestaurantListView = ({
               )}
             </div>
 
-            {/* Content */}
-            <div className="flex-1">
+            {/* Content with padding */}
+            <div className="flex-1 p-6">
               <div className="flex items-start justify-between mb-2">
-                <h3 className="text-xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors">
+                <CardTitle className="text-xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors">
                   {restaurant.name}
-                </h3>
+                </CardTitle>
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
@@ -80,9 +87,9 @@ export const RestaurantListView = ({
                 </button>
               </div>
 
-              <p className="text-gray-600 mb-3 leading-relaxed line-clamp-3">
+              <CardContent className="text-gray-600 mb-3 leading-relaxed line-clamp-3 p-0">
                 {restaurant.description}
-              </p>
+              </CardContent>
 
               <div className="space-y-1.5 mb-3">
                 {restaurant.address && (
@@ -99,7 +106,7 @@ export const RestaurantListView = ({
                 )}
               </div>
 
-              <div className="flex items-center justify-between">
+              <CardFooter className="flex items-center justify-between p-0">
                 <div className="flex flex-wrap gap-2">
                   {restaurant.website && (
                     <a
@@ -137,10 +144,10 @@ export const RestaurantListView = ({
                   <span>View Menu</span>
                   <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                 </button>
-              </div>
+              </CardFooter>
             </div>
           </div>
-        </div>
+        </Card>
       ))}
     </div>
   );

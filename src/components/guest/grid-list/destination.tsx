@@ -2,6 +2,14 @@ import type { DestinationSchema } from "@/schema/destination";
 import { ArrowRight, Heart, Image, MapPin, Share2 } from "lucide-react";
 import { Link } from "react-router";
 import type z from "zod";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
 
 interface Props {
   filteredDestinations: z.infer<typeof DestinationSchema>[];
@@ -17,20 +25,22 @@ export const GridListDestination = ({
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {filteredDestinations.map((destination, index) => (
-        <div
+        <Card
           key={destination.id}
-          className="group bg-white/60 backdrop-blur-md border border-white/40 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] cursor-pointer"
+          className="bg-white/60 backdrop-blur-md border border-white/40 rounded-2xl overflow-hidden flex flex-col h-full transition-shadow hover:shadow-xl"
           style={{
             animation: `fadeInUp 0.6s ease-out ${0.5 + index * 0.1}s both`,
           }}
         >
-          {/* Image */}
-          <div className="relative h-48 overflow-hidden">
+          {/* Image container without top padding */}
+          <div className="relative h-48 overflow-hidden shrink-0 -mt-6 -mx-6 -mb-0">
+            {" "}
+            {/* Negative margins to remove padding */}
             {destination.imageUrl_1 ? (
               <img
                 src={destination.imageUrl_1}
                 alt={destination.name}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                className="w-full h-full object-cover"
               />
             ) : (
               <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
@@ -42,21 +52,17 @@ export const GridListDestination = ({
                 </div>
               </div>
             )}
-
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
             {/* Action Buttons */}
-            <div className="absolute top-4 right-4 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div className="absolute top-4 right-4 flex space-x-2">
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   toggleFavorite(destination.id);
                 }}
-                className={`p-2 rounded-full backdrop-blur-md border border-white/30 transition-all duration-300 ${
+                className={`p-2 rounded-full backdrop-blur-md border border-white/30 ${
                   favorites.has(destination.id)
                     ? "bg-red-500 text-white"
-                    : "bg-white/20 text-white hover:bg-white/30"
+                    : "bg-white/20 text-white"
                 }`}
               >
                 <Heart
@@ -65,42 +71,43 @@ export const GridListDestination = ({
                   }`}
                 />
               </button>
-              <button className="p-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white hover:bg-white/30 transition-all duration-300">
+              <button className="p-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white">
                 <Share2 className="w-4 h-4" />
               </button>
             </div>
           </div>
 
-          {/* Content */}
-          <div className="p-6">
-            <div className="flex items-start justify-between mb-3">
-              <h3 className="text-xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors">
-                {destination.name}
-              </h3>
-            </div>
+          {/* Rest of the card content remains the same */}
+          <CardHeader className="px-6 pt-6 pb-3">
+            <CardTitle className="text-xl text-gray-800">
+              {destination.name}
+            </CardTitle>
+          </CardHeader>
 
-            <p className="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-5">
+          <CardContent className="flex-grow px-6 pb-4">
+            <CardDescription className="text-gray-600 text-sm leading-relaxed line-clamp-5">
               {destination.description}
-            </p>
+            </CardDescription>
 
             {/* Meta Info */}
             {destination.address && (
-              <div className="flex items-center text-sm text-gray-500 mb-4">
+              <div className="flex items-center text-sm text-gray-500 mt-4">
                 <MapPin className="w-4 h-4 mr-1" />
                 <span>{destination.address}</span>
               </div>
             )}
+          </CardContent>
 
-            {/* Action Button */}
+          <CardFooter className="mt-auto px-6 pb-6">
             <Link
               to={`/destinations/${destination.id}`}
-              className="w-full bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white py-3 rounded-xl font-medium transition-all duration-300 hover:shadow-lg group/btn flex items-center justify-center space-x-2"
+              className="w-full bg-gradient-to-r from-blue-500 to-teal-500 text-white py-3 rounded-xl font-medium flex items-center justify-center space-x-2"
             >
               <span>Explore Now</span>
-              <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4" />
             </Link>
-          </div>
-        </div>
+          </CardFooter>
+        </Card>
       ))}
     </div>
   );

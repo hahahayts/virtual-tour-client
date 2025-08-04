@@ -19,6 +19,7 @@ export const DestinationSchema = z.object({
   imageUrl_4: z.string().max(2048).nullable(),
   imageUrl_5: z.string().max(2048).nullable(),
   videoUrl: z.string().max(2048).nullable(),
+  three_sixty_imageUrl: z.string().nullable(),
 
   // Coordinates
   latitude: z

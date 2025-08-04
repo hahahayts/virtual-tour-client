@@ -10,7 +10,7 @@ import type z from "zod";
 import { ErrorMessage } from "@/components/form/err-message";
 import { useAuth } from "@/contexts/authtContext";
 import axios from "axios";
-import { API_BASE } from "@/constant";
+import { API_BASE, JWT } from "@/constant";
 import { toast } from "sonner";
 import { useNavigate } from "react-router";
 
@@ -39,6 +39,9 @@ export const Form = () => {
 
     try {
       await axios.post(`${API_BASE}/auth/login`, data, {
+        headers: {
+          Authorization: `Bearer ${JWT}`,
+        },
         withCredentials: true,
       });
 

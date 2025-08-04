@@ -1,5 +1,5 @@
 // auth-context.tsx
-import { API_BASE } from "@/constant";
+import { API_BASE, JWT } from "@/constant";
 import type { AuthContextType, User } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -29,6 +29,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       try {
         const res = await authAxios.get(`${API_BASE}/auth/me`, {
           withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${JWT}`,
+          },
         });
         return res.data;
       } catch (error) {

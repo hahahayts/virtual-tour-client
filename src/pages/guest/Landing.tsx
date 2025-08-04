@@ -3,6 +3,7 @@ import { ArrowRight, Camera, ChevronDown } from "lucide-react";
 import { VideoBackground } from "@/components/video-bg";
 import { heroTexts, quickActions } from "@/components/navbar";
 import { useMetadata } from "@/hooks/use-metadata";
+import { Link } from "react-router";
 
 const LandingPage = () => {
   const [currentText, setCurrentText] = useState(0);
@@ -67,10 +68,13 @@ const LandingPage = () => {
               animationDelay: "1s",
             }}
           >
-            <button className="w-full sm:w-auto group bg-gradient-to-r from-blue-400 via-blue-500 to-teal-500 hover:from-blue-500 hover:via-blue-600 hover:to-teal-600 text-white font-semibold px-6 md:px-8 py-3 md:py-4 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex items-center justify-center space-x-2 shadow-lg">
+            <Link
+              to={"/destinations"}
+              className="w-full sm:w-auto group bg-gradient-to-r from-blue-400 via-blue-500 to-teal-500 hover:from-blue-500 hover:via-blue-600 hover:to-teal-600 text-white font-semibold px-6 md:px-8 py-3 md:py-4 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex items-center justify-center space-x-2 shadow-lg"
+            >
               <span>Explore Now</span>
               <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
+            </Link>
 
             <button className="w-full sm:w-auto group bg-white/15 backdrop-blur-md border border-white/30 hover:bg-white/25 text-white font-semibold px-6 md:px-8 py-3 md:py-4 rounded-full transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:scale-105">
               <Camera className="w-4 h-4 md:w-5 md:h-5 group-hover:scale-110 transition-transform" />

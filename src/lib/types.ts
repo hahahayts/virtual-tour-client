@@ -1,4 +1,7 @@
+import type { AccomodationData } from "@/schema/accommodation";
+import type { LandTransportationSchema } from "@/schema/land-transportation";
 import type { RestaurantDataSchema } from "@/schema/restaurant";
+import type { WaterTransportationDataSchema } from "@/schema/water-transportation";
 import type z from "zod";
 
 export type User = {
@@ -21,3 +24,6 @@ export interface ProtectedRoutesTypes {
 }
 
 export type RestaurantType = z.infer<typeof RestaurantDataSchema>;
+export type WaterTranspoType = z.infer<typeof WaterTransportationDataSchema>;
+export type LandTranspoType = z.infer<typeof LandTransportationSchema>;
+export type AccommodationType = z.infer<typeof AccomodationData>;

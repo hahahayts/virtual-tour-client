@@ -1,4 +1,4 @@
-import { API_BASE } from "@/constant";
+import { API_BASE, JWT } from "@/constant";
 import type { AccommodationSchema } from "@/schema/accommodation";
 import type { destinationSchema } from "@/schema/destination";
 import type { CreateLandTransportationSchema } from "@/schema/land-transportation";
@@ -15,13 +15,21 @@ type FormData =
   | z.infer<typeof CreateLandTransportationSchema>;
 
 export const fetchData = async (url: string) => {
-  const { data } = await axios.get(`${API_BASE}/${url}`);
+  const { data } = await axios.get(`${API_BASE}/${url}`, {
+    headers: {
+      Authorization: `Bearer ${JWT}`,
+    },
+  });
 
   return data;
 };
 
 export const fetchDataById = async (id: string | undefined, url: string) => {
-  const { data } = await axios.get(`${API_BASE}/${url}/${id}`);
+  const { data } = await axios.get(`${API_BASE}/${url}/${id}`, {
+    headers: {
+      Authorization: `Bearer ${JWT}`,
+    },
+  });
 
   return data;
 };
@@ -32,13 +40,21 @@ export const updateData = async (
   url: string
 ) => {
   console.log(id);
-  const data = await axios.patch(`${API_BASE}/${url}/${id}`, formData);
+  const data = await axios.patch(`${API_BASE}/${url}/${id}`, formData, {
+    headers: {
+      Authorization: `Bearer ${JWT}`,
+    },
+  });
 
   return data;
 };
 
 export const deleteDataById = async (id: string | undefined, url: string) => {
-  const { data } = await axios.delete(`${API_BASE}/${url}/${id}`);
+  const { data } = await axios.delete(`${API_BASE}/${url}/${id}`, {
+    headers: {
+      Authorization: `Bearer ${JWT}`,
+    },
+  });
 
   return data;
 };

@@ -1,6 +1,13 @@
 import type { DestinationSchema } from "@/schema/destination";
 import { ArrowRight, Heart, Image, MapPin } from "lucide-react";
 import type z from "zod";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
 
 interface Props {
   filteredDestinations: z.infer<typeof DestinationSchema>[];
@@ -16,16 +23,16 @@ export const ListView = ({
   return (
     <div className="space-y-4">
       {filteredDestinations.map((destination, index) => (
-        <div
+        <Card
           key={destination.id}
-          className="group bg-white/60 backdrop-blur-md border border-white/40 rounded-2xl p-6 hover:shadow-xl transition-all duration-300 cursor-pointer"
+          className="group hover:shadow-xl transition-shadow duration-300 overflow-hidden"
           style={{
             animation: `fadeInUp 0.6s ease-out ${0.5 + index * 0.1}s both`,
           }}
         >
-          <div className="flex flex-col md:flex-row gap-6">
-            {/* Image */}
-            <div className="relative w-full md:w-48 h-32 rounded-xl overflow-hidden flex-shrink-0">
+          <div className="flex flex-col md:flex-row">
+            {/* Image without padding */}
+            <div className="relative w-full md:w-48 h-32 flex-shrink-0 pl-5">
               {destination.imageUrl_1 ? (
                 <img
                   src={destination.imageUrl_1}
@@ -39,12 +46,12 @@ export const ListView = ({
               )}
             </div>
 
-            {/* Content */}
-            <div className="flex-1">
+            {/* Content with padding */}
+            <div className="flex-1 p-6">
               <div className="flex items-start justify-between mb-2">
-                <h3 className="text-xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors">
+                <CardTitle className="text-xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors">
                   {destination.name}
-                </h3>
+                </CardTitle>
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
@@ -64,9 +71,9 @@ export const ListView = ({
                 </button>
               </div>
 
-              <p className="text-gray-600 mb-3 leading-relaxed line-clamp-5">
+              <CardContent className="text-gray-600 mb-3 leading-relaxed line-clamp-5 p-0">
                 {destination.description}
-              </p>
+              </CardContent>
 
               {destination.address && (
                 <div className="flex items-center text-sm text-gray-500 mb-3">
@@ -75,7 +82,7 @@ export const ListView = ({
                 </div>
               )}
 
-              <div className="flex items-center justify-between">
+              <CardFooter className="flex items-center justify-between p-0">
                 <div className="flex flex-wrap gap-2">
                   {destination.website && (
                     <a
@@ -102,10 +109,10 @@ export const ListView = ({
                   <span>Explore</span>
                   <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                 </button>
-              </div>
+              </CardFooter>
             </div>
           </div>
-        </div>
+        </Card>
       ))}
     </div>
   );

@@ -2,7 +2,7 @@ import { useAuth } from "@/contexts/authtContext";
 import { LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button"; // Assuming you're using shadcn/ui or similar
 import axios from "axios";
-import { API_BASE } from "@/constant";
+import { API_BASE, JWT } from "@/constant";
 import { toast } from "sonner";
 
 export const AppSidebarFooter = () => {
@@ -14,6 +14,9 @@ export const AppSidebarFooter = () => {
         `${API_BASE}/auth/logout`,
         {},
         {
+          headers: {
+            Authorization: `Bearer ${JWT}`,
+          },
           withCredentials: true,
         }
       );

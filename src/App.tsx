@@ -22,10 +22,6 @@ import ProtectedRoutes from "./pages/protected-routes";
 import LandingPage from "./pages/guest/Landing";
 import GuestDestination from "./pages/guest/destinations/Page";
 import GuestPage from "./pages/guest/MainPage";
-import GuestHotelPage from "./pages/guest/accommodations/hotels/Page";
-import GuestResortPage from "./pages/guest/accommodations/resort/Page";
-import GuestAppartmentsPage from "./pages/guest/accommodations/appartments/Page";
-import GuestInnPage from "./pages/guest/accommodations/inn/Page";
 import GuestRestaurantPage from "./pages/guest/restaurant/Page";
 import NotFoundPage from "./pages/not-found-page";
 import LandTransporation from "./pages/admin/land-transportations/Page";
@@ -34,6 +30,13 @@ import ViewLandTranspo from "./pages/admin/land-transportations/View";
 import EditLandTransportation from "./pages/admin/land-transportations/Edit";
 import GuestProtectedRoutes from "./pages/guest-protected-routes";
 import DestinationViewPage from "./pages/guest/destinations/View";
+import GuestWaterTransportationPage from "./pages/guest/transportations/water-transportation/Page";
+import GuestLandTransportations from "./pages/guest/transportations/land-transportation/Page";
+import GuestAccommodationPage from "./pages/guest/accommodations/Page";
+import AccommodationView from "./pages/guest/accommodations/View";
+import RestaurantView from "./pages/guest/restaurant/View";
+import WaterTransportationView from "./pages/guest/transportations/water-transportation/View";
+import LandTransportationView from "./pages/guest/transportations/land-transportation/View";
 
 const App = () => {
   return (
@@ -117,11 +120,26 @@ const App = () => {
           <Route path=":id" element={<DestinationViewPage />} />
         </Route>
 
-        <Route path="hotels" element={<GuestHotelPage />} />
-        <Route path="inns" element={<GuestInnPage />} />
-        <Route path="resorts" element={<GuestResortPage />} />
-        <Route path="apartments" element={<GuestAppartmentsPage />} />
-        <Route path="restaurants" element={<GuestRestaurantPage />} />
+        <Route path="accommodations">
+          <Route index element={<GuestAccommodationPage />} />
+          <Route path=":id" element={<AccommodationView />} />
+        </Route>
+
+        <Route path="restaurants">
+          <Route index element={<GuestRestaurantPage />} />
+          <Route path=":id" element={<RestaurantView />} />
+        </Route>
+
+        {/* transportations */}
+        <Route path="land-transportations">
+          <Route index element={<GuestLandTransportations />} />
+          <Route path=":id" element={<LandTransportationView />} />
+        </Route>
+
+        <Route path="water-transportations">
+          <Route index element={<GuestWaterTransportationPage />} />
+          <Route path=":id" element={<WaterTransportationView />} />
+        </Route>
       </Route>
 
       {/* 404 and Catch-all Routes */}

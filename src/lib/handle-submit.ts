@@ -1,4 +1,4 @@
-import { API_BASE } from "@/constant";
+import { API_BASE, JWT } from "@/constant";
 import type { AccommodationSchema } from "@/schema/accommodation";
 import type { destinationSchema } from "@/schema/destination";
 import type { RestaurantSchema } from "@/schema/restaurant";
@@ -37,6 +37,7 @@ export async function handleSubmitForm({
     console.log("Data", data);
     await axios.post(`${API_BASE}/${url}`, data, {
       headers: {
+        Authorization: `Bearer ${JWT}`,
         "Content-Type": "application/json",
       },
     });
