@@ -1,8 +1,7 @@
 import { formatCurrency } from "@/lib/currency";
 import { formatDescription } from "@/lib/formt-description";
 import type { LandTranspoType } from "@/lib/types";
-import { Car, Heart, Phone, Truck, Users } from "lucide-react";
-import { useState } from "react";
+import { Car, Phone, Truck, Users } from "lucide-react";
 import { Link } from "react-router";
 
 interface Props {
@@ -11,16 +10,6 @@ interface Props {
 }
 
 export const LandTransportCard = ({ transport, isListView = false }: Props) => {
-  const [favorites, setFavorites] = useState(new Set<string>());
-
-  const toggleFavorite = (id: string) => {
-    setFavorites((prev) => {
-      const newFavorites = new Set(prev);
-      newFavorites.has(id) ? newFavorites.delete(id) : newFavorites.add(id);
-      return newFavorites;
-    });
-  };
-
   const getVehicleIcon = (vehicleType: string | null) => {
     switch (vehicleType) {
       case "Van":
@@ -40,23 +29,6 @@ export const LandTransportCard = ({ transport, isListView = false }: Props) => {
       }`}
     >
       {/* Favorite Button */}
-      <button
-        onClick={() => toggleFavorite(transport.id)}
-        className="absolute top-3 right-3 z-10 p-2 rounded-full bg-white/90 backdrop-blur-md hover:bg-white transition-all duration-200 shadow-md"
-        aria-label={
-          favorites.has(transport.id)
-            ? "Remove from favorites"
-            : "Add to favorites"
-        }
-      >
-        <Heart
-          className={`w-4 h-4 transition-colors ${
-            favorites.has(transport.id)
-              ? "fill-red-500 text-red-500"
-              : "text-gray-600"
-          }`}
-        />
-      </button>
 
       {/* Image Section */}
       <div
@@ -71,11 +43,6 @@ export const LandTransportCard = ({ transport, isListView = false }: Props) => {
           }
           alt={transport.name}
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-          onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-            const target = e.target as HTMLImageElement;
-            target.src =
-              "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&h=600&fit=crop";
-          }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
         <div className="absolute bottom-2 left-2 text-white">

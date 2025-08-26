@@ -37,6 +37,17 @@ import AccommodationView from "./pages/guest/accommodations/View";
 import RestaurantView from "./pages/guest/restaurant/View";
 import WaterTransportationView from "./pages/guest/transportations/water-transportation/View";
 import LandTransportationView from "./pages/guest/transportations/land-transportation/View";
+import Users from "./pages/admin/users/Page";
+import History from "./pages/admin/history/Page";
+import CreateHistory from "./pages/admin/history/Create";
+import ViewHistory from "./pages/admin/history/View";
+import EditHistory from "./pages/admin/history/Edit";
+import MissionAndVision from "./pages/guest/mission-vision";
+import ViewAbout from "./pages/admin/about/View";
+import EditAbout from "./pages/admin/about/Edit";
+import GuestViewAbout from "./pages/guest/about/Page";
+import CulturalAndHeritage from "./pages/guest/cultural-heritage/Page";
+import CulturalAndHeritageView from "./pages/guest/cultural-heritage/View";
 
 const App = () => {
   return (
@@ -78,6 +89,21 @@ const App = () => {
                   <Route path=":id/edit" element={<EditRestaurant />} />
                 </Route>
 
+                {/* History Routes */}
+                <Route path="history">
+                  <Route index element={<History />} />
+                  <Route path="create" element={<CreateHistory />} />
+                  <Route path=":id" element={<ViewHistory />} />
+                  <Route path=":id/edit" element={<EditHistory />} />
+                </Route>
+
+                {/* About Routes */}
+                <Route path="about">
+                  <Route index path=":id" element={<ViewAbout />} />
+                  <Route path="create" element={<CreateHistory />} />
+                  <Route path=":id/edit" element={<EditAbout />} />
+                </Route>
+
                 {/* Water Transportation Routes */}
                 <Route path="water-transportations">
                   <Route index element={<WaterTransportation />} />
@@ -99,6 +125,14 @@ const App = () => {
                   <Route path=":id" element={<ViewLandTranspo />} />
                   <Route path=":id/edit" element={<EditLandTransportation />} />
                 </Route>
+
+                {/* Users Routes */}
+                <Route path="users">
+                  <Route index element={<Users />} />
+                  <Route path="create" element={<CreateLandTransportation />} />
+                  <Route path=":id" element={<ViewLandTranspo />} />
+                  <Route path=":id/edit" element={<EditLandTransportation />} />
+                </Route>
               </Route>
             </Routes>
           </ProtectedRoutes>
@@ -115,6 +149,9 @@ const App = () => {
         }
       >
         <Route index element={<LandingPage />} />
+        <Route path="mission-vision" element={<MissionAndVision />} />
+        <Route path="about-tubigon" element={<GuestViewAbout />} />
+
         <Route path="destinations">
           <Route index element={<GuestDestination />} />
           <Route path=":id" element={<DestinationViewPage />} />
@@ -139,6 +176,11 @@ const App = () => {
         <Route path="water-transportations">
           <Route index element={<GuestWaterTransportationPage />} />
           <Route path=":id" element={<WaterTransportationView />} />
+        </Route>
+
+        <Route path="cultural-heritage">
+          <Route index element={<CulturalAndHeritage />} />
+          <Route path=":id" element={<CulturalAndHeritageView />} />
         </Route>
       </Route>
 

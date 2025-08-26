@@ -8,51 +8,46 @@ import {
   Mail,
   Globe,
   Facebook,
-  Instagram,
-  Clock,
-  Star,
-  Wifi,
-  Utensils,
-  Wine,
-  Coffee,
   ChevronLeft,
   ChevronRight,
   ArrowLeft,
+  ExternalLink,
+  Star,
 } from "lucide-react";
+import { MapNavigation } from "@/components/map-navigation";
+import { Skeleton } from "@/components/ui/skeleton";
+import type { RestaurantType } from "@/lib/types";
 
 const RestaurantView = () => {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isMapLoaded, setIsMapLoaded] = useState(false);
 
-  const { data, isFetching, error } = useQuery({
+  const { data, isFetching, error } = useQuery<RestaurantType>({
     queryKey: ["restaurant", id],
     queryFn: () => fetchDataById(id, "restaurants"),
     enabled: !!id,
   });
 
-  const getCuisineColor = (cuisine) => {
-    const colors = {
-      ITALIAN: "bg-green-100 text-green-800",
-      MEXICAN: "bg-red-100 text-red-800",
-      JAPANESE: "bg-blue-100 text-blue-800",
-      CHINESE: "bg-yellow-100 text-yellow-800",
-      INDIAN: "bg-orange-100 text-orange-800",
-      AMERICAN: "bg-purple-100 text-purple-800",
-    };
-    return colors[cuisine] || "bg-gray-100 text-gray-800";
+  const images = [
+    data?.imageUrl_1,
+    data?.imageUrl_2,
+    data?.imageUrl_3,
+    data?.imageUrl_4,
+    data?.imageUrl_5,
+  ].filter((url): url is string => !!url);
+
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % images.length);
   };
 
-  const getCuisineIcon = (cuisine) => {
-    const icons = {
-      ITALIAN: "🍝",
-      MEXICAN: "🌮",
-      JAPANESE: "🍣",
-      CHINESE: "🥡",
-      INDIAN: "🍛",
-      AMERICAN: "🍔",
-    };
-    return icons[cuisine] || "🍴";
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  const goToImage = (index: number) => {
+    setCurrentImageIndex(index);
   };
 
   if (isFetching) {
@@ -113,31 +108,6 @@ const RestaurantView = () => {
     );
   }
 
-  const images = [
-    data.imageUrl_1,
-    data.imageUrl_2,
-    data.imageUrl_3,
-    data.imageUrl_4,
-    data.imageUrl_5,
-  ].filter(Boolean);
-
-  const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % images.length);
-  };
-
-  const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
-  };
-
-  const goToImage = (index: number) => {
-    setCurrentImageIndex(index);
-  };
-
-  const formatHours = (hours: number) => {
-    if (!hours) return "Hours not specified";
-    return hours;
-  };
-
   return (
     <div className="min-h-screen bg-gray-50 animate-in fade-in duration-300">
       {/* Hero Section */}
@@ -159,12 +129,11 @@ const RestaurantView = () => {
               alt={`${data.name} - Image ${currentImageIndex + 1}`}
               className="w-full h-full object-cover transition-opacity duration-500"
               onError={(e) => {
-                e.target.parentElement.innerHTML = `
+                const target = e.target as HTMLImageElement;
+                target.parentElement!.innerHTML = `
                   <div class="w-full h-full bg-gradient-to-r from-red-600 to-orange-700 flex items-center justify-center">
                     <div class="text-center text-white">
-                      <div class="text-8xl mb-4">${getCuisineIcon(
-                        data.cuisineType
-                      )}</div>
+                      <div class="text-8xl mb-4">🍽️</div>
                       <p class="text-xl opacity-80">Image failed to load</p>
                     </div>
                   </div>
@@ -215,9 +184,7 @@ const RestaurantView = () => {
         ) : (
           <div className="w-full h-full bg-gradient-to-r from-red-600 to-orange-700 flex items-center justify-center">
             <div className="text-center text-white">
-              <div className="text-8xl mb-4">
-                {getCuisineIcon(data.cuisineType)}
-              </div>
+              <div className="text-8xl mb-4">🍽️</div>
               <p className="text-xl opacity-80">No images available</p>
             </div>
           </div>
@@ -225,20 +192,6 @@ const RestaurantView = () => {
 
         <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
           <div className="max-w-6xl mx-auto">
-            <div className="flex items-center gap-3 mb-2">
-              <span
-                className={`px-3 py-1 rounded-full text-sm font-medium ${getCuisineColor(
-                  data.cuisineType
-                )} bg-white/90 backdrop-blur-sm`}
-              >
-                {getCuisineIcon(data.cuisineType)} {data.cuisineType}
-              </span>
-              {images.length > 1 && (
-                <span className="px-3 py-1 rounded-full text-sm bg-black/30 backdrop-blur-sm">
-                  {currentImageIndex + 1} / {images.length}
-                </span>
-              )}
-            </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-2 drop-shadow-lg">
               {data.name}
             </h1>
@@ -262,8 +215,7 @@ const RestaurantView = () => {
                 About This Restaurant
               </h2>
               <p className="text-gray-600 leading-relaxed text-lg">
-                {data.description ||
-                  "No description available for this restaurant."}
+                {data.description || "No description available."}
               </p>
             </div>
 
@@ -299,58 +251,6 @@ const RestaurantView = () => {
                 </div>
               </div>
             )}
-
-            {/* Menu */}
-            {data.menuUrl && (
-              <div className="bg-white rounded-xl shadow-sm p-6 animate-in fade-in duration-300">
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">Menu</h2>
-                <div className="aspect-video rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center">
-                  <a
-                    href={data.menuUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-center p-6"
-                  >
-                    <Utensils size={48} className="mx-auto mb-4 text-red-500" />
-                    <p className="text-lg font-medium">View Full Menu</p>
-                    <p className="text-sm text-gray-500 mt-1">(PDF Document)</p>
-                  </a>
-                </div>
-              </div>
-            )}
-
-            {/* Features */}
-            <div className="bg-white rounded-xl shadow-sm p-6 animate-in fade-in duration-300">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">
-                Features
-              </h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {data.hasWifi && (
-                  <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                    <Wifi className="text-red-600" size={20} />
-                    <span className="text-gray-700">Free WiFi</span>
-                  </div>
-                )}
-                {data.hasOutdoorSeating && (
-                  <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                    <Utensils className="text-red-600" size={20} />
-                    <span className="text-gray-700">Outdoor Seating</span>
-                  </div>
-                )}
-                {data.hasAlcohol && (
-                  <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                    <Wine className="text-red-600" size={20} />
-                    <span className="text-gray-700">Alcohol Served</span>
-                  </div>
-                )}
-                {data.hasCoffee && (
-                  <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                    <Coffee className="text-red-600" size={20} />
-                    <span className="text-gray-700">Coffee</span>
-                  </div>
-                )}
-              </div>
-            </div>
           </div>
 
           {/* Sidebar */}
@@ -358,7 +258,7 @@ const RestaurantView = () => {
             {/* Contact Information */}
             <div className="bg-white rounded-xl shadow-sm p-6 animate-in fade-in duration-300">
               <h3 className="text-xl font-bold text-gray-800 mb-4">
-                Contact & Hours
+                Contact Information
               </h3>
               <div className="space-y-4">
                 {data.phone && (
@@ -405,20 +305,49 @@ const RestaurantView = () => {
                     </span>
                   </a>
                 )}
-                {data.hours && (
-                  <div className="flex items-start gap-3 p-3 rounded-lg">
-                    <Clock className="text-red-600 mt-1" size={20} />
-                    <div>
-                      <p className="font-medium text-gray-800">Hours</p>
-                      <p className="text-gray-600">{formatHours(data.hours)}</p>
-                    </div>
-                  </div>
-                )}
               </div>
             </div>
 
+            {/* Map and location */}
+            {data.latitude && data.longitude && (
+              <div className="bg-white rounded-xl shadow-sm p-6">
+                <h3 className="text-xl font-bold text-gray-800 mb-4">
+                  Location
+                </h3>
+                <div className="aspect-video rounded-lg overflow-hidden bg-gray-200 relative">
+                  {!isMapLoaded && (
+                    <Skeleton className="absolute inset-0 w-full h-full" />
+                  )}
+                  <MapNavigation
+                    destination={{
+                      latitude: data.latitude,
+                      longitude: data.longitude,
+                      name: data.name,
+                    }}
+                  />
+                  <div className="absolute bottom-4 right-4">
+                    <a
+                      href={`https://www.google.com/maps?q=${data.latitude},${data.longitude}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors flex items-center justify-center"
+                      title="Open in Google Maps"
+                    >
+                      <ExternalLink className="h-4 w-4 text-gray-700" />
+                    </a>
+                  </div>
+                </div>
+                {data.address && (
+                  <p className="mt-3 text-gray-600 flex items-start gap-2">
+                    <MapPin className="h-5 w-5 flex-shrink-0 mt-0.5 text-gray-400" />
+                    <span>{data.address}</span>
+                  </p>
+                )}
+              </div>
+            )}
+
             {/* Social Media */}
-            {(data.facebook || data.instagram) && (
+            {data.facebook && (
               <div className="bg-white rounded-xl shadow-sm p-6 animate-in fade-in duration-300">
                 <h3 className="text-xl font-bold text-gray-800 mb-4">
                   Social Media
@@ -437,22 +366,6 @@ const RestaurantView = () => {
                       />
                       <span className="text-gray-700 group-hover:text-gray-800">
                         Facebook
-                      </span>
-                    </a>
-                  )}
-                  {data.instagram && (
-                    <a
-                      href={data.instagram}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group"
-                    >
-                      <Instagram
-                        className="text-red-600 group-hover:text-red-700"
-                        size={20}
-                      />
-                      <span className="text-gray-700 group-hover:text-gray-800">
-                        Instagram
                       </span>
                     </a>
                   )}
@@ -477,25 +390,6 @@ const RestaurantView = () => {
                 Leave a Review
               </button>
             </div>
-
-            {/* Dietary Options */}
-            {data.dietaryOptions && data.dietaryOptions.length > 0 && (
-              <div className="bg-white rounded-xl shadow-sm p-6 animate-in fade-in duration-300">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">
-                  Dietary Options
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {data.dietaryOptions.map((option) => (
-                    <span
-                      key={option}
-                      className="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm"
-                    >
-                      {option}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
         </div>
       </div>

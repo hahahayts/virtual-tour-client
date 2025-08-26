@@ -10,6 +10,7 @@ import {
   Facebook,
   Camera,
   Video,
+  Navigation,
 } from "lucide-react";
 
 import MDEditor from "@uiw/react-md-editor";
@@ -48,6 +49,7 @@ const EditDestination = () => {
     defaultValues: {
       name: "",
       description: "",
+      transpo_info: "",
       address: "",
       latitude: null,
       longitude: null,
@@ -95,6 +97,7 @@ const EditDestination = () => {
       reset({
         name: data.name || "",
         description: data.description || "",
+        transpo_info: data.transpo_info || "",
         address: data.address || "",
         latitude: data.latitude || null,
         longitude: data.longitude || null,
@@ -240,6 +243,38 @@ const EditDestination = () => {
                   <ErrorMessage message={errors.longitude.message} />
                 )}
               </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* How to get there*/}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-lg">
+              <Navigation className="h-5 w-5" />
+              Transportation Information
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="transfo_info" className="text-sm font-medium">
+                How to Reach
+              </Label>
+              <Controller
+                name="transpo_info"
+                control={control}
+                defaultValue=""
+                render={({ field }) => (
+                  <MDEditor
+                    value={field.value}
+                    onChange={(value = "") => field.onChange(value)}
+                    height={300}
+                  />
+                )}
+              />
+              {errors.transpo_info && (
+                <ErrorMessage message={errors.transpo_info.message} />
+              )}
             </div>
           </CardContent>
         </Card>

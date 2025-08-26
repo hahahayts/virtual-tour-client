@@ -8,6 +8,7 @@ import {
   MapPin,
   Phone,
 } from "lucide-react";
+import { Link } from "react-router";
 
 interface Props {
   restaurant: RestaurantType;
@@ -121,9 +122,12 @@ export const RestaurantCard = ({
         )}
       </div>
 
-      <button className="w-full bg-gradient-to-r from-blue-500 to-teal-500 text-white py-2 rounded-lg hover:from-blue-600 hover:to-teal-600 transition-colors">
+      <Link
+        to={`/restaurants/${restaurant.id}`}
+        className="w-full bg-gradient-to-r from-blue-500 to-teal-500 text-white py-2 rounded-lg hover:from-blue-600 hover:to-teal-600 transition-colors"
+      >
         View Details
-      </button>
+      </Link>
     </div>
   </div>
 );

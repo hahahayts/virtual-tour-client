@@ -1,9 +1,7 @@
 import {
   ArrowRight,
-  Heart,
   Image,
   MapPin,
-  Share2,
   Phone,
   Globe,
   Mail,
@@ -22,15 +20,12 @@ import { Link } from "react-router";
 
 interface Props {
   filteredRestaurants: RestaurantType[];
-  toggleFavorite: (id: string) => void;
-  favorites: Set<unknown>;
   getImageCount?: (restaurant: RestaurantType) => number;
 }
 
 export const GridListRestaurant = ({
   filteredRestaurants,
-  toggleFavorite,
-  favorites,
+
   getImageCount = () => 0,
 }: Props) => {
   return (
@@ -71,30 +66,6 @@ export const GridListRestaurant = ({
                 <span>{getImageCount(restaurant)}</span>
               </div>
             )}
-
-            {/* Action Buttons */}
-            <div className="absolute top-4 right-4 flex space-x-2">
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  toggleFavorite(restaurant.id);
-                }}
-                className={`p-2 rounded-full backdrop-blur-md border border-white/30 ${
-                  favorites.has(restaurant.id)
-                    ? "bg-red-500 text-white"
-                    : "bg-white/20 text-white"
-                }`}
-              >
-                <Heart
-                  className={`w-4 h-4 ${
-                    favorites.has(restaurant.id) ? "fill-current" : ""
-                  }`}
-                />
-              </button>
-              <button className="p-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white">
-                <Share2 className="w-4 h-4" />
-              </button>
-            </div>
           </div>
 
           {/* Card Content */}

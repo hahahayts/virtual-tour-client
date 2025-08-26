@@ -1,5 +1,5 @@
 import type { DestinationSchema } from "@/schema/destination";
-import { ArrowRight, Heart, Image, MapPin, Share2 } from "lucide-react";
+import { ArrowRight, Image, MapPin } from "lucide-react";
 import { Link } from "react-router";
 import type z from "zod";
 import {
@@ -13,15 +13,9 @@ import {
 
 interface Props {
   filteredDestinations: z.infer<typeof DestinationSchema>[];
-  toggleFavorite: (id: string) => void;
-  favorites: Set<unknown>;
 }
 
-export const GridListDestination = ({
-  filteredDestinations,
-  toggleFavorite,
-  favorites,
-}: Props) => {
+export const GridListDestination = ({ filteredDestinations }: Props) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {filteredDestinations.map((destination, index) => (
@@ -52,29 +46,6 @@ export const GridListDestination = ({
                 </div>
               </div>
             )}
-            {/* Action Buttons */}
-            <div className="absolute top-4 right-4 flex space-x-2">
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  toggleFavorite(destination.id);
-                }}
-                className={`p-2 rounded-full backdrop-blur-md border border-white/30 ${
-                  favorites.has(destination.id)
-                    ? "bg-red-500 text-white"
-                    : "bg-white/20 text-white"
-                }`}
-              >
-                <Heart
-                  className={`w-4 h-4 ${
-                    favorites.has(destination.id) ? "fill-current" : ""
-                  }`}
-                />
-              </button>
-              <button className="p-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white">
-                <Share2 className="w-4 h-4" />
-              </button>
-            </div>
           </div>
 
           {/* Rest of the card content remains the same */}

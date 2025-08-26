@@ -1,6 +1,5 @@
 import {
   ArrowRight,
-  Heart,
   Image,
   MapPin,
   Phone,
@@ -9,25 +8,17 @@ import {
   Facebook,
 } from "lucide-react";
 import type { RestaurantType } from "@/lib/types";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
+import { Card, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
+import { Link } from "react-router";
 
 interface Props {
   filteredRestaurants: RestaurantType[];
-  toggleFavorite: (id: string) => void;
-  favorites: Set<unknown>;
   getImageCount?: (restaurant: RestaurantType) => number;
 }
 
 export const RestaurantListView = ({
   filteredRestaurants,
-  toggleFavorite,
-  favorites,
+
   getImageCount = () => 0,
 }: Props) => {
   return (
@@ -68,23 +59,6 @@ export const RestaurantListView = ({
                 <CardTitle className="text-xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors">
                   {restaurant.name}
                 </CardTitle>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    toggleFavorite(restaurant.id);
-                  }}
-                  className={`p-2 rounded-full transition-all duration-300 ${
-                    favorites.has(restaurant.id)
-                      ? "bg-red-100 text-red-500"
-                      : "bg-gray-100 text-gray-400 hover:bg-red-100 hover:text-red-500"
-                  }`}
-                >
-                  <Heart
-                    className={`w-4 h-4 ${
-                      favorites.has(restaurant.id) ? "fill-current" : ""
-                    }`}
-                  />
-                </button>
               </div>
 
               <CardContent className="text-gray-600 mb-3 leading-relaxed line-clamp-3 p-0">
@@ -140,10 +114,13 @@ export const RestaurantListView = ({
                     </a>
                   )}
                 </div>
-                <button className="bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white px-6 py-2 rounded-lg font-medium transition-all duration-300 hover:shadow-lg group/btn flex items-center space-x-2">
-                  <span>View Menu</span>
+                <Link
+                  to={`/restaurants/${restaurant.id}`}
+                  className="bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white px-6 py-2 rounded-lg font-medium transition-all duration-300 hover:shadow-lg group/btn flex items-center space-x-2"
+                >
+                  <span>View Details</span>
                   <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                </button>
+                </Link>
               </CardFooter>
             </div>
           </div>

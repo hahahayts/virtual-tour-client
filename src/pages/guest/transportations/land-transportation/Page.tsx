@@ -6,6 +6,8 @@ import { LandTransportCard } from "@/components/guest/card/land-transpo";
 import { fetchData } from "@/db";
 import type { LandTranspoType } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
+import { Error } from "@/components/guest/error";
+import { Pending } from "@/components/guest/pending";
 
 const cleanSearchTerm = (term: string) =>
   term.replace(/[^a-zA-Z0-9\s\-.,]/g, "");
@@ -43,39 +45,12 @@ const GuestLandTransportations = () => {
     });
   }, [searchTerm, selectedVehicleType, data]);
 
-  const SkeletonCard = ({ isListView = false }: { isListView?: boolean }) => (
-    <div
-      className={`bg-white rounded-2xl border border-gray-200 shadow-md overflow-hidden ${
-        isListView ? "flex gap-4 p-4" : ""
-      }`}
-    >
-      <div
-        className={`${
-          isListView ? "w-32 h-24 flex-shrink-0" : "w-full h-48"
-        } bg-gray-200 animate-pulse ${
-          isListView ? "rounded-xl" : "rounded-t-2xl"
-        }`}
-      />
-      <div className={`${isListView ? "flex-1 space-y-2" : "p-4 space-y-3"}`}>
-        <div className="h-4 bg-gray-200 rounded animate-pulse" />
-        <div className="h-3 bg-gray-200 rounded animate-pulse w-3/4" />
-        <div className="h-3 bg-gray-200 rounded animate-pulse w-1/2" />
-        <div className="h-8 bg-gray-200 rounded animate-pulse" />
-      </div>
-    </div>
-  );
+  if (isPending) {
+    return <Pending />;
+  }
 
   if (isError) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center p-8 bg-white rounded-lg shadow-md">
-          <h2 className="text-xl font-bold text-red-600 mb-2">
-            Error loading data
-          </h2>
-          <p className="text-gray-600">Please try again later</p>
-        </div>
-      </div>
-    );
+    return <Error name="Land Transportations" />;
   }
 
   return (
@@ -88,6 +63,7 @@ const GuestLandTransportations = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <SearchAndFilterBar
+          name="land transportations"
           handleSearch={handleSearch}
           searchTerm={searchTerm}
           setViewMode={setViewMode}
@@ -120,19 +96,7 @@ const GuestLandTransportations = () => {
       </div>
 
       <div className="px-4 pb-12">
-        {isPending ? (
-          <div
-            className={`max-w-6xl mx-auto ${
-              viewMode === "grid"
-                ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-                : "space-y-4"
-            }`}
-          >
-            {[...Array(6)].map((_, index) => (
-              <SkeletonCard key={index} isListView={viewMode === "list"} />
-            ))}
-          </div>
-        ) : filteredTransports.length === 0 ? (
+        {filteredTransports.length === 0 ? (
           <div className="text-center py-12">
             <div className="bg-white rounded-2xl border border-gray-200 shadow-md p-8 max-w-md mx-auto">
               <Car className="w-16 h-16 text-gray-400 mx-auto mb-4" />

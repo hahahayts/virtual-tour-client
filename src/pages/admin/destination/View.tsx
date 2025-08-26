@@ -1,6 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router";
-import { Mail, Phone, Globe, Facebook, MapPin, Calendar } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  Globe,
+  Facebook,
+  MapPin,
+  Calendar,
+  Navigation,
+} from "lucide-react";
 import { ViewDestinationSkeleton } from "@/components/view-skeleton";
 import { ErrorView } from "@/components/error-view";
 import { NotFoundView } from "@/components/not-found";
@@ -10,6 +18,8 @@ import { ViewPageHeader } from "@/components/view-page-header";
 import { useEffect, useState } from "react";
 import { GalleryImages } from "@/components/gallery-images";
 import ThreeSixtyViewer from "@/components/three-sixty-image";
+import { MapNavigation } from "@/components/map-navigation";
+import ReactMarkdown from "react-markdown";
 
 const View = () => {
   const { id } = useParams();
@@ -77,7 +87,7 @@ const View = () => {
 
           {/* 360° Image */}
           {data.three_sixty_imageUrl && (
-            <div className="mt-6 ">
+            <div className="mt-6">
               <h3 className="text-lg font-semibold mb-2">360° View</h3>
               <div className="relative w-full h-[400px] rounded-lg overflow-hidden shadow">
                 <ThreeSixtyViewer
@@ -90,6 +100,22 @@ const View = () => {
                       color: "#3b82f6",
                     },
                   ]}
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Map Integration */}
+          {data.latitude && data.longitude && (
+            <div className="mt-6">
+              <h3 className="text-lg font-semibold mb-2">Map View</h3>
+              <div className="relative w-full h-[400px] rounded-lg overflow-hidden shadow">
+                <MapNavigation
+                  destination={{
+                    latitude: data.latitude,
+                    longitude: data.longitude,
+                    name: data.name,
+                  }}
                 />
               </div>
             </div>
@@ -113,93 +139,116 @@ const View = () => {
           {/* Description */}
           <div>
             <h2 className="text-xl font-semibold mb-3">Description</h2>
-            <p className="text-muted-foreground leading-relaxed">
-              {data.description}
-            </p>
-          </div>
-
-          {/* Contact Information */}
-          <div>
-            <h2 className="text-xl font-semibold mb-3">Contact Information</h2>
-            <div className="space-y-3">
-              {data.email && (
-                <div className="flex items-center gap-3">
-                  <Mail className="w-4 h-4 text-muted-foreground" />
-                  <a
-                    href={`mailto:${data.email}`}
-                    className="text-primary hover:underline"
-                  >
-                    {data.email}
-                  </a>
-                </div>
-              )}
-
-              {data.phone && (
-                <div className="flex items-center gap-3">
-                  <Phone className="w-4 h-4 text-muted-foreground" />
-                  <a
-                    href={`tel:${data.phone}`}
-                    className="text-primary hover:underline"
-                  >
-                    {data.phone}
-                  </a>
-                </div>
-              )}
-
-              {data.website && (
-                <div className="flex items-center gap-3">
-                  <Globe className="w-4 h-4 text-muted-foreground" />
-                  <a
-                    href={data.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:underline"
-                  >
-                    {data.website}
-                  </a>
-                </div>
-              )}
-
-              {data.facebook && (
-                <div className="flex items-center gap-3">
-                  <Facebook className="w-4 h-4 text-muted-foreground" />
-                  <a
-                    href={data.facebook}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:underline"
-                  >
-                    Facebook Page
-                  </a>
-                </div>
-              )}
+            <div className="prose prose-sm max-w-none text-muted-foreground">
+              <ReactMarkdown>{data.description}</ReactMarkdown>
             </div>
           </div>
 
+          {/* Transportation Information */}
+          {data.transpo_info && (
+            <div>
+              <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
+                <Navigation className="w-5 h-5" />
+                Getting There
+              </h2>
+              <div className="prose prose-sm max-w-none text-muted-foreground bg-muted/30 rounded-lg p-4">
+                <ReactMarkdown>{data.transpo_info}</ReactMarkdown>
+              </div>
+            </div>
+          )}
+
+          {/* Contact Information */}
+          {(data.email || data.phone || data.website || data.facebook) && (
+            <div>
+              <h2 className="text-xl font-semibold mb-3">
+                Contact Information
+              </h2>
+              <div className="space-y-3">
+                {data.email && (
+                  <div className="flex items-center gap-3">
+                    <Mail className="w-4 h-4 text-muted-foreground" />
+                    <a
+                      href={`mailto:${data.email}`}
+                      className="text-primary hover:underline"
+                    >
+                      {data.email}
+                    </a>
+                  </div>
+                )}
+
+                {data.phone && (
+                  <div className="flex items-center gap-3">
+                    <Phone className="w-4 h-4 text-muted-foreground" />
+                    <a
+                      href={`tel:${data.phone}`}
+                      className="text-primary hover:underline"
+                    >
+                      {data.phone}
+                    </a>
+                  </div>
+                )}
+
+                {data.website && (
+                  <div className="flex items-center gap-3">
+                    <Globe className="w-4 h-4 text-muted-foreground" />
+                    <a
+                      href={data.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary hover:underline"
+                    >
+                      {data.website}
+                    </a>
+                  </div>
+                )}
+
+                {data.facebook && (
+                  <div className="flex items-center gap-3">
+                    <Facebook className="w-4 h-4 text-muted-foreground" />
+                    <a
+                      href={data.facebook}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary hover:underline"
+                    >
+                      Facebook Page
+                    </a>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
           {/* Location */}
-          <div>
-            <h2 className="text-xl font-semibold mb-3">Location</h2>
-            <div className="space-y-2">
-              <div className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-muted-foreground mt-0.5" />
-                <div>
-                  <p className="text-sm">{data.address}</p>
-                  <p className="text-xs text-muted-foreground">
-                    {data.latitude}, {data.longitude}
-                  </p>
+          {(data.address || (data.latitude && data.longitude)) && (
+            <div>
+              <h2 className="text-xl font-semibold mb-3">Location</h2>
+              <div className="space-y-2">
+                <div className="flex items-start gap-3">
+                  <MapPin className="w-4 h-4 text-muted-foreground mt-0.5" />
+                  <div>
+                    {data.address && <p className="text-sm">{data.address}</p>}
+                    {data.latitude && data.longitude && (
+                      <p className="text-xs text-muted-foreground">
+                        {data.latitude}, {data.longitude}
+                      </p>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
 
           {/* Statistics */}
-          <div>
-            <h2 className="text-xl font-semibold mb-3">Statistics</h2>
-            <div className="bg-muted/50 rounded-lg p-4">
-              <p className="text-sm text-muted-foreground">View Count</p>
-              <p className="text-2xl font-bold">{data.count}</p>
+          {data.count !== undefined && (
+            <div>
+              <h2 className="text-xl font-semibold mb-3">Statistics</h2>
+              <div className="bg-muted/50 rounded-lg p-4">
+                <p className="text-sm text-muted-foreground">View Count</p>
+                <p className="text-2xl font-bold">{data.count}</p>
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Timestamps */}
           <div>

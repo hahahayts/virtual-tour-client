@@ -5,6 +5,7 @@ export const DestinationSchema = z.object({
   name: z.string().min(1).max(255),
   description: z.string().min(1).max(10000),
   address: z.string().max(500).nullable(),
+  transpo_info: z.string().max(10000),
 
   // Contact Information
   email: z.string().max(320).nullable(),
@@ -52,6 +53,7 @@ export const destinationSchema = z.object({
   name: z.string().min(1, "Name is required.").max(255),
   description: z.string().min(1, "Description is required").max(10000),
   address: z.string().max(500).nullable(),
+  transpo_info: z.string().max(10000),
   email: z.string().max(320).nullable(),
   phone: z.string().max(20).nullable(),
   website: z.string().max(2048).nullable(),

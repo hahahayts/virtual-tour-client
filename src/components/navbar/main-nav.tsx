@@ -6,6 +6,8 @@ export const MainNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showAccommodationSubmenu, setShowAccommodationSubmenu] =
     useState(false);
+  const [showTransportationSubmenu, setShowTransportationSubmenu] =
+    useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -20,6 +22,8 @@ export const MainNavbar = () => {
           setShowAccommodationSubmenu={setShowAccommodationSubmenu}
           toggleMenu={toggleMenu}
           showAccommodationSubmenu={showAccommodationSubmenu}
+          setShowTransportationSubmenu={setShowTransportationSubmenu}
+          showTransportationSubmenu={showTransportationSubmenu}
         />
       )}
     </>

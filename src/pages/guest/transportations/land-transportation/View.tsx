@@ -4,7 +4,6 @@ import { useParams, useNavigate } from "react-router";
 import { useState } from "react";
 import {
   Calendar,
-  Star,
   Car,
   ChevronLeft,
   ChevronRight,
@@ -127,16 +126,6 @@ const LandTransportationView = () => {
               src={images[currentImageIndex]}
               alt={`${data.name} - Image ${currentImageIndex + 1}`}
               className="w-full h-full object-cover transition-opacity duration-500"
-              onError={(e) => {
-                e.target.parentElement.innerHTML = `
-                  <div class="w-full h-full bg-gradient-to-r from-blue-600 to-amber-500 flex items-center justify-center">
-                    <div class="text-center text-white">
-                      <div class="text-8xl mb-4">🚗</div>
-                      <p class="text-xl opacity-80">Image failed to load</p>
-                    </div>
-                  </div>
-                `;
-              }}
             />
 
             {/* Navigation arrows */}
@@ -372,26 +361,6 @@ const LandTransportationView = () => {
                   </div>
                 )}
               </div>
-            </div>
-
-            {/* Booking CTA */}
-            <div className="bg-gradient-to-r from-blue-600 to-amber-500 rounded-xl shadow-sm p-6 text-white animate-in fade-in duration-300">
-              <div className="flex items-center gap-2 mb-2">
-                {[...Array(4)].map((_, i) => (
-                  <Star key={i} className="text-yellow-300" size={20} />
-                ))}
-                <Star className="text-yellow-300/50" size={20} />
-              </div>
-              <div className="flex items-center gap-2 mb-2">
-                <Ticket className="text-white" size={24} />
-                <h3 className="text-xl font-bold">Ready to Book?</h3>
-              </div>
-              <p className="mb-4 opacity-90 flex items-center gap-2">
-                <Car size={18} /> Reserve your vehicle today
-              </p>
-              <button className="w-full bg-white text-amber-600 font-semibold py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors flex items-center justify-center gap-2">
-                <CreditCard size={18} /> Book Now
-              </button>
             </div>
 
             {/* Additional Information */}

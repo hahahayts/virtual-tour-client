@@ -17,12 +17,10 @@ import { useMetadata } from "@/hooks/use-metadata";
 const GuestDestination = () => {
   const [viewMode, setViewMode] = useState<string>("grid");
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [favorites, setFavorites] = useState(new Set());
 
   useMetadata({
     title: "Discover Tubigon",
     description: "The beauty of Tubigon, Bohol",
-    
   });
 
   const { data, isPending, error } = useQuery({
@@ -55,16 +53,6 @@ const GuestDestination = () => {
     setSearchTerm(cleanTerm);
   };
 
-  const toggleFavorite = (id: string) => {
-    const newFavorites = new Set(favorites);
-    if (newFavorites.has(id)) {
-      newFavorites.delete(id);
-    } else {
-      newFavorites.add(id);
-    }
-    setFavorites(newFavorites);
-  };
-
   if (isPending) {
     return <Pending />;
   }
@@ -88,12 +76,13 @@ const GuestDestination = () => {
       <Header
         title="Discover"
         description=" Explore breathtaking destinations and create unforgettable
-              memories in beautiful Bohol"
+              memories in Tubigon, Bohol"
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Search and Filter Bar */}
         <SearchAndFilterBar
+          name="destinations"
           searchTerm={searchTerm}
           handleSearch={handleSearch}
           setViewMode={setViewMode}
@@ -118,18 +107,10 @@ const GuestDestination = () => {
 
         {/* Destinations Grid/List */}
         {viewMode === "grid" ? (
-          <GridListDestination
-            favorites={favorites}
-            filteredDestinations={filteredDestinations}
-            toggleFavorite={toggleFavorite}
-          />
+          <GridListDestination filteredDestinations={filteredDestinations} />
         ) : (
           /* List View */
-          <ListView
-            favorites={favorites}
-            filteredDestinations={filteredDestinations}
-            toggleFavorite={toggleFavorite}
-          />
+          <ListView filteredDestinations={filteredDestinations} />
         )}
 
         {/* No Results */}

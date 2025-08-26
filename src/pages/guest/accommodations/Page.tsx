@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Search, Grid3X3, List, Loader2 } from "lucide-react";
+import { Search, Grid3X3, List } from "lucide-react";
 import { fetchData } from "@/db";
 import { useQuery } from "@tanstack/react-query";
 import type { AccommodationType } from "@/lib/types";
@@ -7,6 +7,7 @@ import { Header } from "@/components/guest/header";
 import { AccommodationCard } from "./components/card";
 import { Error } from "./components/error";
 import { NoResults } from "./components/no-result";
+import { Pending } from "@/components/guest/pending";
 
 const GuestAccommodationPage = () => {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
@@ -67,11 +68,7 @@ const GuestAccommodationPage = () => {
   }
 
   if (isPending) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <Loader2 className="w-12 h-12 text-blue-500 animate-spin" />
-      </div>
-    );
+    return <Pending />;
   }
 
   return (
@@ -188,8 +185,6 @@ const GuestAccommodationPage = () => {
                   <AccommodationCard
                     accommodation={accommodation}
                     viewMode={viewMode}
-                    isFavorite={favorites.has(accommodation.id)}
-                    toggleFavorite={toggleFavorite}
                     getTypeColor={getTypeColor}
                   />
                 </div>
@@ -212,8 +207,6 @@ const GuestAccommodationPage = () => {
                   <AccommodationCard
                     accommodation={accommodation}
                     viewMode={viewMode}
-                    isFavorite={favorites.has(accommodation.id)}
-                    toggleFavorite={toggleFavorite}
                     getTypeColor={getTypeColor}
                   />
                 </div>

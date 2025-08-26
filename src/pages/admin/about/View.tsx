@@ -1,0 +1,115 @@
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router";
+import { Calendar } from "lucide-react";
+import { ViewDestinationSkeleton } from "@/components/view-skeleton";
+import { ErrorView } from "@/components/error-view";
+import { NotFoundView } from "@/components/not-found";
+import { formatDate } from "@/lib/date-formatter";
+import { fetchDataById } from "@/db";
+import { ViewPageHeader } from "@/components/view-page-header";
+import { useEffect, useState } from "react";
+import { GalleryImages } from "@/components/gallery-images";
+
+const ViewAbout = () => {
+  const { id } = useParams();
+  const { data, isFetching, error } = useQuery({
+    queryKey: ["about", id],
+    queryFn: () => fetchDataById("1", "about"),
+    enabled: !!id,
+  });
+
+  const [currentImage, setCurrentImage] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (data) {
+      const firstImage =
+        data.imageUrl_1 || data.imageUrl_2 || data.imageUrl_3 || null;
+      setCurrentImage(firstImage);
+    }
+  }, [data]);
+
+  if (isFetching) {
+    return <ViewDestinationSkeleton />;
+  }
+
+  if (error) {
+    return <ErrorView name="About" url="about" />;
+  }
+
+  if (!data) {
+    return <NotFoundView name="About" url="about" />;
+  }
+
+  const availableImages = [
+    data.imageUrl_1,
+    data.imageUrl_2,
+    data.imageUrl_3,
+  ].filter(Boolean) as string[];
+
+  return (
+    <div className="p-6 max-w-6xl mx-auto">
+      {/* Header */}
+      <ViewPageHeader
+        name={data.name}
+        itemName="About"
+        id={data.id}
+        url="about"
+      />
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Images Section */}
+        <div className="lg:col-span-2">
+          <h2 className="text-xl font-semibold mb-4">Images</h2>
+
+          {availableImages.length > 0 ? (
+            <GalleryImages
+              availableImages={availableImages}
+              currentImage={currentImage}
+              name={data.name}
+              setCurrentImage={setCurrentImage}
+            />
+          ) : (
+            <div className="bg-muted rounded-lg h-64 flex items-center justify-center">
+              <p className="text-muted-foreground">No images available</p>
+            </div>
+          )}
+        </div>
+
+        {/* Details Section */}
+        <div className="space-y-6">
+          {/* Description */}
+          <div>
+            <h2 className="text-xl font-semibold mb-3">Description</h2>
+            <p className="text-muted-foreground leading-relaxed">
+              {data.description}
+            </p>
+          </div>
+
+          {/* Timestamps */}
+          <div>
+            <h2 className="text-xl font-semibold mb-3">Details</h2>
+            <div className="space-y-2 text-sm">
+              <div className="flex items-center gap-2">
+                <Calendar className="w-4 h-4 text-muted-foreground" />
+                <div>
+                  <p className="text-muted-foreground">Created</p>
+                  <p>{formatDate(data.createdAt)}</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <Calendar className="w-4 h-4 text-muted-foreground" />
+                <div>
+                  <p className="text-muted-foreground">Last Updated</p>
+                  <p>{formatDate(data.updatedAt)}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ViewAbout;

@@ -16,7 +16,6 @@ import { useMetadata } from "@/hooks/use-metadata";
 const GuestRestaurantPage = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [viewMode, setViewMode] = useState("grid");
-  const [favorites, setFavorites] = useState<Set<string>>(new Set());
 
   const { data, isPending, error } = useQuery({
     queryKey: ["restaurants"],
@@ -45,24 +44,18 @@ const GuestRestaurantPage = () => {
     });
   }, [data, searchTerm]);
 
-  const toggleFavorite = (id: string) => {
-    const newFavorites = new Set(favorites);
-    newFavorites.has(id) ? newFavorites.delete(id) : newFavorites.add(id);
-    setFavorites(newFavorites);
-  };
-
   const handleSearch = (term: string) => {
     const cleanTerm = term.replace(/[^a-zA-Z0-9\s\-.,]/g, "");
     setSearchTerm(cleanTerm);
   };
 
-  const getImageCount = (restaurant: RestaurantType) => {
-    let count = 0;
-    if (restaurant.imageUrl_1) count++;
-    if (restaurant.imageUrl_2) count++;
-    if (restaurant.imageUrl_3) count++;
-    return count;
-  };
+  // const getImageCount = (restaurant: RestaurantType) => {
+  //   let count = 0;
+  //   if (restaurant.imageUrl_1) count++;
+  //   if (restaurant.imageUrl_2) count++;
+  //   if (restaurant.imageUrl_3) count++;
+  //   return count;
+  // };
 
   if (isPending) {
     return <Pending />;
@@ -93,6 +86,7 @@ const GuestRestaurantPage = () => {
       <main className="container mx-auto px-4 py-8">
         {/* Search and Filters */}
         <SearchAndFilterBar
+          name="restaurants"
           searchTerm={searchTerm}
           handleSearch={handleSearch}
           setViewMode={setViewMode}
@@ -110,17 +104,9 @@ const GuestRestaurantPage = () => {
 
         {/* Restaurants Display */}
         {viewMode === "grid" ? (
-          <GridListRestaurant
-            favorites={favorites}
-            filteredRestaurants={filteredRestaurants}
-            toggleFavorite={toggleFavorite}
-          />
+          <GridListRestaurant filteredRestaurants={filteredRestaurants} />
         ) : (
-          <RestaurantListView
-            favorites={favorites}
-            filteredRestaurants={filteredRestaurants}
-            toggleFavorite={toggleFavorite}
-          />
+          <RestaurantListView filteredRestaurants={filteredRestaurants} />
         )}
 
         {/* Empty State */}

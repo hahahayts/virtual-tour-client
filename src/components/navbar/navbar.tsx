@@ -4,6 +4,7 @@ import {
   ChevronDown,
   Compass,
   Globe,
+  Info,
   MapPin,
   Menu,
   UtensilsCrossed,
@@ -11,7 +12,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router";
 import { LinkNavigation } from "./links";
-import { transportationTypes } from ".";
+import { aboutItems, transportationTypes } from ".";
 
 interface Props {
   toggleMenu: () => void;
@@ -68,6 +69,17 @@ export const Navbar = ({ isMenuOpen, toggleMenu }: Props) => {
 
           {/* Desktop accommodation submenu */}
           <LinkNavigation links={transportationTypes} />
+        </div>
+        {/* About */}
+        <div className="relative group cursor-pointer ">
+          <span className="flex items-center space-x-2 text-white/90 hover:text-yellow-300 transition-all duration-300 hover:scale-105">
+            <Info className="w-4 h-4 group-hover:scale-110 transition-transform" />
+            <span>About</span>
+            <ChevronDown className="w-3 h-3 group-hover:rotate-180 transition-transform" />
+          </span>
+
+          {/* Desktop accommodation submenu */}
+          <LinkNavigation links={aboutItems} />
         </div>
       </div>
 

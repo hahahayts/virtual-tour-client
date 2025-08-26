@@ -6,7 +6,7 @@ export const LandTransportationSchema = z.object({
   description: z.string().max(10000),
 
   vehicleType: z.string().min(1).max(50).nullable(),
-  capacity: z.number().int().nonnegative().nullable(),
+  capacity: z.number().nonnegative().nullable(),
   operator: z.string().max(100).nullable(),
   contactNumber: z.string().max(20).nullable(),
 
@@ -30,7 +30,7 @@ export const CreateLandTransportationSchema = z.object({
   description: z.string().max(10000),
 
   vehicleType: z.string().min(1, "Vehicle type is required").max(50).nullable(),
-  capacity: z.number().int().nonnegative().nullable(),
+  capacity: z.number().nonnegative().nullable(),
   operator: z.string().max(100).nullable(),
   contactNumber: z.string().max(20).nullable(),
 

@@ -5,13 +5,16 @@ import {
   Car,
   Compass,
   Home,
+  Info,
+  Landmark,
   Ship,
+  Target,
   TreePine,
   UtensilsCrossed,
 } from "lucide-react";
 
 export const heroTexts = [
-  "Discover Paradise in Bohol",
+  "Discover Paradise in Tubigon, Bohol",
   "Experience Natural Wonders",
   "Create Unforgettable Memories",
 ];
@@ -49,7 +52,32 @@ export const quickActions = [
   { icon: UtensilsCrossed, title: "Local Food", desc: "Taste Bohol" },
 ];
 
+export const aboutItems = [
+  {
+    name: "About Tubigon",
+    url: "about-tubigon",
+    icon: Info, // Location-based icon
+    desc: "All about Tubigon",
+  },
+  {
+    name: "Mission and Vision",
+    url: "mission-vision",
+    icon: Target, // Represents goals and objectives
+    desc: "The mission and vision",
+  },
+  {
+    name: "Cultural and Heritage",
+    url: "cultural-heritage",
+    icon: Landmark, // Represents history and heritage
+    desc: "The beautiful cultural and heritage",
+  },
+];
+
 type AccommodationTypes = typeof accommodationTypes;
 type TransportationTypes = typeof transportationTypes;
+type AboutTypes = typeof aboutItems;
 
-export type LinkNavigationType = AccommodationTypes | TransportationTypes;
+export type LinkNavigationType =
+  | AccommodationTypes
+  | TransportationTypes
+  | AboutTypes;

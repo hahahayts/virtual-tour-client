@@ -90,7 +90,7 @@ const LandTransportation = () => {
                     <TableCell>
                       {transportation.capacity
                         ? `${transportation.capacity} persons`
-                        : "-"}
+                        : "1 person"}
                     </TableCell>
                     <TableCell>{transportation.operator || "-"}</TableCell>
                     <TableCell>{transportation.contactNumber || "-"}</TableCell>

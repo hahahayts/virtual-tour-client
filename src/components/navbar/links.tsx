@@ -15,7 +15,7 @@ export const LinkNavigation = ({ links }: Props) => {
             to={`/${type.url.toLowerCase()}`}
             className="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors group/item"
           >
-            <type.icon className="w-4 h-4 text-blue-600 group-hover/item:scale-110 transition-transform" />
+            <type.icon className="w-6 h-6 text-blue-600 group-hover/item:scale-110 transition-transform" />
             <div>
               <div className="text-sm font-medium text-gray-800">
                 {type.name}

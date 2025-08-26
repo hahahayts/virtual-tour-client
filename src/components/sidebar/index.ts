@@ -1,7 +1,9 @@
 import {
   BarChart3,
   Car,
+  Clock,
   Hotel,
+  Info,
   LayoutDashboard,
   MapPin,
   Settings,
@@ -49,6 +51,18 @@ export const mainItems = [
     title: "Restaurants",
     url: "restaurants",
     icon: Utensils,
+    badge: null,
+  },
+  {
+    title: "Cultural and Heritage",
+    url: "history",
+    icon: Clock,
+    badge: null,
+  },
+  {
+    title: "About Tubigon",
+    url: "about/cme6b9g3k00007k388asgnndz",
+    icon: Info,
     badge: null,
   },
 ];

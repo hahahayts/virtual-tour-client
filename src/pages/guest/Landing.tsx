@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { ArrowRight, Camera, ChevronDown } from "lucide-react";
+import {  ChevronDown } from "lucide-react";
 import { VideoBackground } from "@/components/video-bg";
 import { heroTexts, quickActions } from "@/components/navbar";
 import { useMetadata } from "@/hooks/use-metadata";
-import { Link } from "react-router";
+
+import ExploreButton from "./explore-btn";
 
 const LandingPage = () => {
   const [currentText, setCurrentText] = useState(0);
@@ -21,12 +22,7 @@ const LandingPage = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const stats = [
-    { number: "50+", label: "Destinations" },
-    { number: "200+", label: "Accommodations" },
-    { number: "10K+", label: "Happy Visitors" },
-    { number: "4.8", label: "Average Rating" },
-  ];
+
 
   return (
     <div className="relative h-screen overflow-hidden">
@@ -68,46 +64,12 @@ const LandingPage = () => {
               animationDelay: "1s",
             }}
           >
-            <Link
-              to={"/destinations"}
-              className="w-full sm:w-auto group bg-gradient-to-r from-blue-400 via-blue-500 to-teal-500 hover:from-blue-500 hover:via-blue-600 hover:to-teal-600 text-white font-semibold px-6 md:px-8 py-3 md:py-4 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex items-center justify-center space-x-2 shadow-lg"
-            >
-              <span>Explore Now</span>
-              <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
-
-            <button className="w-full sm:w-auto group bg-white/15 backdrop-blur-md border border-white/30 hover:bg-white/25 text-white font-semibold px-6 md:px-8 py-3 md:py-4 rounded-full transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:scale-105">
-              <Camera className="w-4 h-4 md:w-5 md:h-5 group-hover:scale-110 transition-transform" />
-              <span>Virtual Tour</span>
-            </button>
-          </div>
-
-          {/* Quick Stats */}
-          <div
-            className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 max-w-2xl mx-auto opacity-80 px-4"
-            style={{
-              animation: `fadeInUp 1s ease-out forwards`,
-              animationDelay: "1.4s",
-            }}
-          >
-            {stats.map((stat, index) => (
-              <div
-                key={index}
-                className="text-center bg-gradient-to-br from-blue-500/15 to-teal-500/15 backdrop-blur-md border border-white/20 rounded-xl p-3 md:p-4 hover:from-blue-500/25 hover:to-teal-500/25 transition-all duration-300 hover:scale-105 shadow-lg"
-              >
-                <div className="text-xl md:text-2xl lg:text-3xl font-bold text-yellow-300 drop-shadow-sm">
-                  {stat.number}
-                </div>
-                <div className="text-xs md:text-sm text-white/80">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
+            <ExploreButton />
           </div>
         </div>
 
         {/* Quick Actions - Enhanced for mobile */}
-        <div className="absolute bottom-16 sm:bottom-8 left-1/2 transform -translate-x-1/2 w-full max-w-4xl px-4 md:px-6">
+        <div className="absolute bottom-16 sm:bottom-8 left-1/2 transform -translate-x-1/2 w-full max-w-4xl px-4 md:px-6 ">
           <div
             className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 opacity-0"
             style={{

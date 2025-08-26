@@ -1,18 +1,16 @@
 import type { AccommodationType } from "@/lib/types";
-import { Building, Eye, Heart, MapPin, Phone } from "lucide-react";
+import { Building, Eye, MapPin, Phone } from "lucide-react";
 import { Link } from "react-router";
 
 export const AccommodationCard = ({
   accommodation,
   viewMode,
-  isFavorite,
-  toggleFavorite,
+
   getTypeColor,
 }: {
   accommodation: AccommodationType;
   viewMode: "grid" | "list";
-  isFavorite: boolean;
-  toggleFavorite: (id: string) => void;
+
   getTypeColor: (type: string) => string;
 }) => {
   return viewMode === "grid" ? (
@@ -30,16 +28,6 @@ export const AccommodationCard = ({
             <Building className="w-12 h-12 text-gray-400" />
           </div>
         )}
-        <button
-          onClick={() => toggleFavorite(accommodation.id)}
-          className="absolute top-3 right-3 p-2 rounded-full bg-white/80 hover:bg-white transition-colors"
-        >
-          <Heart
-            className={`w-5 h-5 ${
-              isFavorite ? "fill-red-500 text-red-500" : "text-gray-400"
-            }`}
-          />
-        </button>
       </div>
 
       {/* Content */}
@@ -138,18 +126,6 @@ export const AccommodationCard = ({
 
           <div className="flex justify-between items-center">
             <div className="flex space-x-2">
-              <button
-                onClick={() => toggleFavorite(accommodation.id)}
-                className={`p-2 rounded-lg ${
-                  isFavorite
-                    ? "bg-red-100 text-red-500"
-                    : "bg-gray-100 text-gray-500"
-                }`}
-              >
-                <Heart
-                  className={`w-5 h-5 ${isFavorite ? "fill-current" : ""}`}
-                />
-              </button>
               {accommodation.phone && (
                 <a
                   href={`tel:${accommodation.phone}`}
@@ -159,10 +135,13 @@ export const AccommodationCard = ({
                 </a>
               )}
             </div>
-            <button className="flex items-center space-x-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">
+            <Link
+              to={`/accommodations/${accommodation.id}`}
+              className="flex items-center space-x-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg"
+            >
               <Eye className="w-4 h-4" />
               <span>View Details</span>
-            </button>
+            </Link>
           </div>
         </div>
       </div>

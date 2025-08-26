@@ -1,6 +1,7 @@
 import { API_BASE, JWT } from "@/constant";
 import type { AccommodationSchema } from "@/schema/accommodation";
 import type { destinationSchema } from "@/schema/destination";
+import type { HistoryCreateSchema } from "@/schema/history";
 import type { CreateLandTransportationSchema } from "@/schema/land-transportation";
 import type { RestaurantSchema } from "@/schema/restaurant";
 import type { WaterTransportationSchema } from "@/schema/water-transportation";
@@ -12,7 +13,8 @@ type FormData =
   | z.infer<typeof AccommodationSchema>
   | z.infer<typeof RestaurantSchema>
   | z.infer<typeof WaterTransportationSchema>
-  | z.infer<typeof CreateLandTransportationSchema>;
+  | z.infer<typeof CreateLandTransportationSchema>
+  | z.infer<typeof HistoryCreateSchema>;
 
 export const fetchData = async (url: string) => {
   const { data } = await axios.get(`${API_BASE}/${url}`, {

@@ -16,6 +16,8 @@ export const RestaurantDataSchema = z.object({
   imageUrl_1: z.string().max(2048).nullable(),
   imageUrl_2: z.string().max(2048).nullable(),
   imageUrl_3: z.string().max(2048).nullable(),
+  imageUrl_4: z.string().max(2048).nullable(),
+  imageUrl_5: z.string().max(2048).nullable(),
 
   // Coordinates
   latitude: z

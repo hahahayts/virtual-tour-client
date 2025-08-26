@@ -9,6 +9,7 @@ import axios from "axios";
 import type { NavigateFunction } from "react-router";
 import type { WaterTransportationSchema } from "@/schema/water-transportation";
 import type { CreateLandTransportationSchema } from "@/schema/land-transportation";
+import type { HistoryCreateSchema } from "@/schema/history";
 
 interface Args {
   data: z.infer<
@@ -17,6 +18,7 @@ interface Args {
     | typeof RestaurantSchema
     | typeof WaterTransportationSchema
     | typeof CreateLandTransportationSchema
+    | typeof HistoryCreateSchema
   >;
   name: string;
   url: string;
