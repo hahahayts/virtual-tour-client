@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
-import {  ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { VideoBackground } from "@/components/video-bg";
 import { heroTexts, quickActions } from "@/components/navbar";
 import { useMetadata } from "@/hooks/use-metadata";
 
 import ExploreButton from "./explore-btn";
+import axios from "axios";
+import { API_BASE } from "@/constant";
 
 const LandingPage = () => {
   const [currentText, setCurrentText] = useState(0);
@@ -16,13 +18,14 @@ const LandingPage = () => {
   });
 
   useEffect(() => {
+    axios.get(`${API_BASE}/get-mac-address`);
+
     const interval = setInterval(() => {
       setCurrentText((prev) => (prev + 1) % heroTexts.length);
     }, 3000);
+
     return () => clearInterval(interval);
   }, []);
-
-
 
   return (
     <div className="relative h-screen overflow-hidden">

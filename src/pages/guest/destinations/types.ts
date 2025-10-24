@@ -1,7 +1,7 @@
 import type { DestinationSchema } from "@/schema/destination";
 import type z from "zod";
 
-export type MediaType = "gallery" | "360";
+export type MediaType = "gallery" | "360" | "video";
 
 export type Destination = z.infer<typeof DestinationSchema>;
 

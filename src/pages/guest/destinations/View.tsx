@@ -23,6 +23,7 @@ import {
   Clock,
   MapPin,
   Route,
+  Video,
 } from "lucide-react";
 import type { Destination, MediaType } from "./types";
 import { ImageGalleryItem } from "./components/image-gallery";
@@ -31,6 +32,9 @@ import { MediaControlButton } from "./components/media-control-button";
 import { ViewHeader } from "./components/header";
 import { MapNavigation } from "@/components/map-navigation";
 import ReactMarkdown from "react-markdown";
+import { RatingForm } from "./components/rating-form";
+import { RatingsPreview } from "./components/rating-preview";
+import { VideoPlayer } from "./components/video-player";
 
 // --- Main Component ---
 const DestinationView: React.FC = () => {
@@ -40,7 +44,6 @@ const DestinationView: React.FC = () => {
   // State with proper typing
   const [activeMediaType, setActiveMediaType] = useState<MediaType>("gallery");
   const [activeImageIndex, setActiveImageIndex] = useState<number>(0);
-  // const [isFavorite, setIsFavorite] = useState<boolean>(false);
   const [isImageLoading, setIsImageLoading] = useState<boolean>(true);
 
   // Query with proper error handling
@@ -112,7 +115,6 @@ const DestinationView: React.FC = () => {
     navigate(-1);
   }, [navigate]);
 
- 
   const handleShare = useCallback((): void => {
     // Analytics or other side effects could go here
     console.log("Destination shared:", destination?.name);
@@ -150,9 +152,7 @@ const DestinationView: React.FC = () => {
       {/* Enhanced Header */}
       <ViewHeader
         handleBackClick={handleBackClick}
-
         handleShare={handleShare}
-      
         name={destination.name}
       />
 
@@ -211,6 +211,10 @@ const DestinationView: React.FC = () => {
             {activeMediaType === "360" && destination.three_sixty_imageUrl && (
               <ThreeSixtyViewer imageUrl={destination.three_sixty_imageUrl} />
             )}
+
+            {activeMediaType === "video" && destination.videoUrl && (
+              <VideoPlayer link={destination.videoUrl} className="h-full" />
+            )}
           </div>
 
           {/* Enhanced Media Controls */}
@@ -229,6 +233,14 @@ const DestinationView: React.FC = () => {
                 onClick={() => handleMediaTypeChange("gallery")}
                 icon={ImageIcon}
                 label={`Gallery (${images.length})`}
+              />
+            )}
+            {destination.videoUrl && (
+              <MediaControlButton
+                isActive={activeMediaType === "video"}
+                onClick={() => handleMediaTypeChange("video")}
+                icon={Video}
+                label="Video"
               />
             )}
           </div>
@@ -387,6 +399,12 @@ const DestinationView: React.FC = () => {
             </div>
           </div>
         </section>
+
+        {/* Ratings Preview Section */}
+        <RatingsPreview destinationId={destination.id} />
+
+        {/* Rating Form Section */}
+        <RatingForm destinationId={destination.id} />
 
         {/* Enhanced Image Gallery */}
         {images.length > 1 && (

@@ -23,6 +23,7 @@ export const fetchData = async (url: string) => {
     },
   });
 
+  console.log(data);
   return data;
 };
 
