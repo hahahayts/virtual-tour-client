@@ -48,6 +48,7 @@ import EditAbout from "./pages/admin/about/Edit";
 import GuestViewAbout from "./pages/guest/about/Page";
 import CulturalAndHeritage from "./pages/guest/cultural-heritage/Page";
 import CulturalAndHeritageView from "./pages/guest/cultural-heritage/View";
+import View from "./pages/admin/comments/View";
 
 const App = () => {
   return (
@@ -126,12 +127,17 @@ const App = () => {
                   <Route path=":id/edit" element={<EditLandTransportation />} />
                 </Route>
 
-                {/* Users Routes */}
+                {/* User Management Routes */}
                 <Route path="users">
                   <Route index element={<Users />} />
                   <Route path="create" element={<CreateLandTransportation />} />
                   <Route path=":id" element={<ViewLandTranspo />} />
                   <Route path=":id/edit" element={<EditLandTransportation />} />
+                </Route>
+
+                {/* Comment Management Route */}
+                <Route path="comments">
+                  <Route index element={<View />} />
                 </Route>
               </Route>
             </Routes>

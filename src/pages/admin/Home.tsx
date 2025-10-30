@@ -1,6 +1,7 @@
 import { fetchData } from "@/db";
 import { useQuery } from "@tanstack/react-query";
 import { MapPin, Building, Utensils, Ship, Car, History } from "lucide-react";
+import { ChartBarDefault } from "./chart";
 
 const Home = () => {
   const { data, isFetching, error } = useQuery({
@@ -146,6 +147,9 @@ const Home = () => {
           icon={History}
           color="#EC4899"
         />
+      </div>
+      <div className="mt-5">
+        <ChartBarDefault />
       </div>
     </div>
   );

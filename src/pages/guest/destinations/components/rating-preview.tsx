@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Loader2, MessageSquare } from "lucide-react";
+import { Loader2, MessageSquare, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface Review {
@@ -116,13 +116,22 @@ export const RatingsPreview: React.FC<RatingsPreviewProps> = ({
                 key={review.id}
                 className="bg-gradient-to-br from-gray-50 to-slate-50 rounded-xl p-4 sm:p-6 border border-gray-200/50"
               >
-                <div className="flex items-center gap-4 mb-3">
-                  <div className="w-10 h-10 bg-gradient-to-r from-sky-500 to-blue-600 rounded-full flex items-center justify-center text-white font-semibold">
+                <div className="flex items-start gap-4 mb-3">
+                  <div className="w-10 h-10 bg-gradient-to-r from-sky-500 to-blue-600 rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0">
                     A
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-800">Anonymous</h4>
-                    <span className="text-xs text-gray-500 ml-1">
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between mb-1">
+                      <h4 className="font-semibold text-gray-800">Anonymous</h4>
+                      <div className="flex items-center gap-1">
+                        <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                        <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                        <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                        <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                        <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                      </div>
+                    </div>
+                    <span className="text-xs text-gray-500">
                       {formatDate(review.createdAt)}
                     </span>
                   </div>
@@ -141,16 +150,6 @@ export const RatingsPreview: React.FC<RatingsPreviewProps> = ({
               </p>
             </div>
           )}
-        </div>
-
-        {/* Button */}
-        <div className="text-center mt-6">
-          <Button
-            onClick={scrollToRatingForm}
-            className="bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white px-8 py-2.5 rounded-xl font-semibold shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40 transition-all duration-300"
-          >
-            Add Your Comment
-          </Button>
         </div>
       </div>
     </section>

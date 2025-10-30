@@ -6,6 +6,7 @@ import {
   Info,
   LayoutDashboard,
   MapPin,
+  MessageSquare,
   Settings,
   Ship,
   Users,
@@ -91,6 +92,12 @@ export const managementItems = [
     title: "User Management",
     url: "users",
     icon: Users,
+    badge: null,
+  },
+  {
+    title: "Comments",
+    url: "comments",
+    icon: MessageSquare,
     badge: null,
   },
   {
