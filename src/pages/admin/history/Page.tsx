@@ -33,7 +33,7 @@ const History = () => {
 
   return (
     <div className="p-6">
-      <PageHeader name="Historie" url="history" />
+      <PageHeader name="Cultural and Heritage" url="history" />
 
       {!data || data.length === 0 ? (
         <div className="text-muted-foreground">

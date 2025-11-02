@@ -3,6 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { Star, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import axios from "axios";
 
 interface RatingFormProps {
   destinationId: string;
@@ -15,21 +16,35 @@ export const RatingForm: React.FC<RatingFormProps> = ({ destinationId }) => {
 
   const mutation = useMutation({
     mutationFn: async () => {
-      // Replace with your POST API endpoint
-      const res = await fetch(`/api/ratings`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ destinationId, rating, comment }),
-      });
-      if (!res.ok) throw new Error("Failed to submit rating");
-      return res.json();
+      try {
+        const res = await axios.post("http://localhost:3000/api/ratings", {
+          score: rating,
+          comment,
+          destinationId,
+        });
+
+        return res.data;
+      } catch (error: any) {
+        // Handle and extract backend message
+        const message =
+          error.response?.data?.message ||
+          "Something went wrong, please try again.";
+        throw new Error(message);
+      }
     },
+
     onSuccess: () => {
-      toast.success("Thank you for your feedback!");
+      toast.success(
+        "Thank you for your feedback! It will be reviewed first before being displayed.",
+        { richColors: true }
+      );
       setRating(0);
       setComment("");
     },
-    onError: () => toast.error("Something went wrong, please try again."),
+
+    onError: (error: any) => {
+      toast.error(error.message, { richColors: true });
+    },
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -38,6 +53,7 @@ export const RatingForm: React.FC<RatingFormProps> = ({ destinationId }) => {
       toast.error("Please select a star rating!");
       return;
     }
+
     mutation.mutate();
   };
 

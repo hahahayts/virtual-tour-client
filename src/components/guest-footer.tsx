@@ -2,7 +2,6 @@ import {
   MapPin,
   Phone,
   Mail,
-  Clock,
   Facebook,
   Instagram,
   Twitter,
@@ -10,6 +9,7 @@ import {
   Heart,
   Shield,
 } from "lucide-react";
+import { Link } from "react-router";
 
 export const GuestFooter = () => {
   return (
@@ -130,18 +130,18 @@ export const GuestFooter = () => {
 
             {/* Legal Links */}
             <div className="flex items-center space-x-6 text-sm">
-              <a
-                href="#privacy"
+              <Link
+                to="privacy-policy"
                 className="text-gray-400 hover:text-white transition-colors"
               >
                 Privacy Policy
-              </a>
-              <a
-                href="#terms"
+              </Link>
+              <Link
+                to="terms-of-service"
                 className="text-gray-400 hover:text-white transition-colors"
               >
-                Terms of Service
-              </a>
+                Terms and Conditions
+              </Link>
               <div className="flex items-center space-x-2 text-gray-400">
                 <Shield className="w-4 h-4" />
                 <span>Secure & Safe</span>

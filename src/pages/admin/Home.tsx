@@ -36,16 +36,8 @@ const Home = () => {
   }
 
   // Default growth percentages (since API doesn't provide growth data)
-  const defaultGrowthRates = {
-    destinations: 8.5,
-    accommodations: 12.3,
-    restaurants: 15.7,
-    waterTransport: 5.2,
-    landTransport: 9.8,
-    history: 7.1,
-  };
 
-  const MetricCard = ({ title, value, growth, icon: Icon, color }: any) => (
+  const MetricCard = ({ title, value, icon: Icon, color }: any) => (
     <div
       className="bg-card rounded-lg shadow-md p-6 border-l-4 hover:shadow-lg transition-shadow border border-border"
       style={{ borderLeftColor: color }}
@@ -56,23 +48,6 @@ const Home = () => {
           <p className="text-3xl font-bold text-card-foreground">
             {value?.toLocaleString() || 0}
           </p>
-          <div className="flex items-center mt-3">
-            <div
-              className={`flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                growth >= 0
-                  ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400"
-                  : "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400"
-              }`}
-            >
-              <span>
-                {growth >= 0 ? "+" : ""}
-                {growth}%
-              </span>
-            </div>
-            <span className="text-sm text-muted-foreground ml-2">
-              vs last month
-            </span>
-          </div>
         </div>
         <div
           className="p-4 rounded-full"
@@ -90,7 +65,7 @@ const Home = () => {
       <div className="flex justify-between items-center mb-8">
         <div>
           <h1 className="text-3xl font-bold text-foreground">
-            Tourism Dashboard
+            Admin Dashboard
           </h1>
           <p className="text-muted-foreground mt-1">
             Monitor your tourism platform metrics
@@ -103,7 +78,6 @@ const Home = () => {
         <MetricCard
           title="Total Destinations"
           value={data?.destinations}
-          growth={defaultGrowthRates.destinations}
           icon={MapPin}
           color="#3B82F6"
         />
@@ -111,7 +85,6 @@ const Home = () => {
         <MetricCard
           title="Total Accommodations"
           value={data?.accommodations}
-          growth={defaultGrowthRates.accommodations}
           icon={Building}
           color="#10B981"
         />
@@ -119,7 +92,6 @@ const Home = () => {
         <MetricCard
           title="Total Restaurants"
           value={data?.restaurnant} // Note: API returns "restaurnant" (typo in API)
-          growth={defaultGrowthRates.restaurants}
           icon={Utensils}
           color="#F59E0B"
         />
@@ -127,7 +99,6 @@ const Home = () => {
         <MetricCard
           title="Water Transportations"
           value={data?.water_transportation}
-          growth={defaultGrowthRates.waterTransport}
           icon={Ship}
           color="#06B6D4"
         />
@@ -135,7 +106,6 @@ const Home = () => {
         <MetricCard
           title="Land Transportations"
           value={data?.land_transportation}
-          growth={defaultGrowthRates.landTransport}
           icon={Car}
           color="#8B5CF6"
         />
@@ -143,7 +113,6 @@ const Home = () => {
         <MetricCard
           title="Historical Records"
           value={data?.history}
-          growth={defaultGrowthRates.history}
           icon={History}
           color="#EC4899"
         />

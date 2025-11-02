@@ -66,6 +66,12 @@ export const mainItems = [
     icon: Info,
     badge: null,
   },
+  {
+    title: "Comments",
+    url: "comments",
+    icon: MessageSquare,
+    badge: null,
+  },
 ];
 
 type MainItemsType = typeof mainItems;
@@ -87,33 +93,29 @@ export const transportationItems = [
 
 type TransportationType = typeof transportationItems;
 
-export const managementItems = [
-  {
-    title: "User Management",
-    url: "users",
-    icon: Users,
-    badge: null,
-  },
-  {
-    title: "Comments",
-    url: "comments",
-    icon: MessageSquare,
-    badge: null,
-  },
-  {
-    title: "Analytics",
-    url: "analytics",
-    icon: BarChart3,
-    badge: null,
-  },
-  {
-    title: "Settings",
-    url: "settings",
-    icon: Settings,
-    badge: null,
-  },
-];
+// export const managementItems = [
+//   {
+//     title: "User Management",
+//     url: "users",
+//     icon: Users,
+//     badge: null,
+//   },
+//   {
+//     title: "Comments",
+//     url: "comments",
+//     icon: MessageSquare,
+//     badge: null,
+//   },
 
-type ManagementItems = typeof managementItems;
+//   {
+//     title: "Settings",
+//     url: "settings",
+//     icon: Settings,
+//     badge: null,
+//   },
+// ];
 
-export type ItemsType = MainItemsType | TransportationType | ManagementItems;
+// type ManagementItems = typeof managementItems;
+
+// export type ItemsType = MainItemsType | TransportationType | ManagementItems;
+export type ItemsType = MainItemsType | TransportationType;

@@ -1,4 +1,4 @@
-  import { TableSkeleton } from "@/components/table-skeleton";
+import { TableSkeleton } from "@/components/table-skeleton";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router";
 import {
@@ -33,7 +33,9 @@ const Users = () => {
 
   return (
     <div className="p-6">
-      <PageHeader name="User" url="users" />
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-2xl font-semibold">Users Management</h1>
+      </div>
 
       {!data || data.length === 0 ? (
         <div className="text-muted-foreground">

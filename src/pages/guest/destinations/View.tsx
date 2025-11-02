@@ -19,8 +19,6 @@ import {
   Facebook,
   Image as ImageIcon,
   Rotate3d,
-  Star,
-  Clock,
   MapPin,
   Route,
   Video,
@@ -268,16 +266,6 @@ const DestinationView: React.FC = () => {
                 <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent mb-4 leading-tight">
                   {destination.name}
                 </h1>
-                <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-sm text-gray-600 mb-6">
-                  <div className="flex items-center gap-1">
-                    <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                    <span className="font-medium">4.8 (124 reviews)</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <Clock className="w-4 h-4 text-gray-500" />
-                    <span>Updated recently</span>
-                  </div>
-                </div>
               </div>
 
               <div

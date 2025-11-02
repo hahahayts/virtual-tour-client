@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Car, Shield, Building2 } from "lucide-react";
+import { Car, Building2 } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -11,11 +11,7 @@ import {
   SidebarMenu,
 } from "../ui/sidebar";
 import { AppSidebarFooter } from "./app-sidebar-footer";
-import {
-  mainItems,
-  managementItems,
-  transportationItems,
-} from "@/components/sidebar";
+import { mainItems, transportationItems } from "@/components/sidebar";
 import { CollapsibleGroup } from "./collapsible";
 import { SidebarMenuItemWithBadge } from "./item-badge";
 import { useLocation } from "react-router";
@@ -23,7 +19,7 @@ import { useLocation } from "react-router";
 export function AppSidebar() {
   const { pathname } = useLocation();
   const [isTransportCollapsed, setIsTransportCollapsed] = useState(false);
-  const [isManagementCollapsed, setIsManagementCollapsed] = useState(false);
+  // const [isManagementCollapsed, setIsManagementCollapsed] = useState(false);
 
   console.log("pathname", pathname.split("/"));
 
@@ -39,7 +35,7 @@ export function AppSidebar() {
           </div>
           <div>
             <h1 className="text-xl font-bold text-sidebar-foreground">
-              Tourism Admin
+              Admin Panel
             </h1>
             <p className="text-xs text-sidebar-foreground/60">
               Management Portal
@@ -77,13 +73,13 @@ export function AppSidebar() {
         />
 
         {/* Management Section */}
-        <CollapsibleGroup
+        {/* <CollapsibleGroup
           title="Management"
           items={managementItems}
           isCollapsed={isManagementCollapsed}
           setIsCollapsed={setIsManagementCollapsed}
           icon={Shield}
-        />
+        /> */}
       </SidebarContent>
 
       <SidebarFooter className="border-t border-sidebar-border bg-sidebar">

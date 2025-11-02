@@ -49,6 +49,9 @@ import GuestViewAbout from "./pages/guest/about/Page";
 import CulturalAndHeritage from "./pages/guest/cultural-heritage/Page";
 import CulturalAndHeritageView from "./pages/guest/cultural-heritage/View";
 import View from "./pages/admin/comments/View";
+import SettingsPage from "./pages/admin/settings/page";
+import TermsOfService from "./pages/guest/terms of service/page";
+import PrivacyPolicy from "./pages/guest/privacy policy/page";
 
 const App = () => {
   return (
@@ -130,14 +133,16 @@ const App = () => {
                 {/* User Management Routes */}
                 <Route path="users">
                   <Route index element={<Users />} />
-                  <Route path="create" element={<CreateLandTransportation />} />
-                  <Route path=":id" element={<ViewLandTranspo />} />
-                  <Route path=":id/edit" element={<EditLandTransportation />} />
                 </Route>
 
                 {/* Comment Management Route */}
                 <Route path="comments">
                   <Route index element={<View />} />
+                </Route>
+
+                {/* SettingsRoute */}
+                <Route path="settings">
+                  <Route index element={<SettingsPage />} />
                 </Route>
               </Route>
             </Routes>
@@ -188,6 +193,9 @@ const App = () => {
           <Route index element={<CulturalAndHeritage />} />
           <Route path=":id" element={<CulturalAndHeritageView />} />
         </Route>
+
+        <Route path="terms-of-service" element={<TermsOfService />} />
+        <Route path="privacy-policy" element={<PrivacyPolicy />} />
       </Route>
 
       {/* 404 and Catch-all Routes */}

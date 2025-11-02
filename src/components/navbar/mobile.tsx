@@ -231,7 +231,7 @@ export const MobileNav = ({
 
         {/* Fixed Mobile Menu Footer */}
         <div className="flex-shrink-0 border-t border-white/20 bg-gradient-to-r from-blue-900/90 to-teal-800/90 backdrop-blur-md animate-in slide-in-from-bottom duration-700 delay-400">
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </div>
     </div>

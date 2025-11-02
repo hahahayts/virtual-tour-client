@@ -19,6 +19,13 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Booking } from "./components/booking";
 import { MetaData } from "./components/meta-data";
 import { ContactInfo } from "./components/contact-info";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 const AccommodationView = () => {
   const { id } = useParams<{ id: string }>();
@@ -200,117 +207,125 @@ const AccommodationView = () => {
           {/* Left Column - Main Content */}
           <div className="lg:col-span-2 space-y-6">
             {/* Description with read more/less */}
-            <div className="bg-white rounded-xl shadow-sm p-6">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">
-                About This {data.type}
-              </h2>
-              <div
-                ref={descriptionRef}
-                className={`text-gray-600 leading-relaxed ${
-                  !showFullDescription ? "line-clamp-5" : ""
-                }`}
-              >
-                {data.description ||
-                  "No description available for this accommodation."}
-              </div>
-              {isDescriptionClamped && (
-                <button
-                  onClick={() => setShowFullDescription(!showFullDescription)}
-                  className="text-blue-600 hover:text-blue-800 mt-2 text-sm font-medium"
+            <Card>
+              <CardHeader>
+                <CardTitle>About This {data.type}</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div
+                  ref={descriptionRef}
+                  className={`text-gray-600 leading-relaxed ${
+                    !showFullDescription ? "line-clamp-5" : ""
+                  }`}
                 >
-                  {showFullDescription ? "Show less" : "Read more"}
-                </button>
-              )}
-            </div>
+                  {data.description ||
+                    "No description available for this accommodation."}
+                </div>
+                {isDescriptionClamped && (
+                  <button
+                    onClick={() => setShowFullDescription(!showFullDescription)}
+                    className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                  >
+                    {showFullDescription ? "Show less" : "Read more"}
+                  </button>
+                )}
+              </CardContent>
+            </Card>
 
             {/* Image Gallery */}
             {images.length > 1 && (
-              <div className="bg-white rounded-xl shadow-sm p-6">
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">
-                  Photo Gallery
-                </h2>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {images.map((image, index) => (
-                    <div
-                      key={index}
-                      className={`relative aspect-square rounded-lg overflow-hidden cursor-pointer border-2 transition-all ${
-                        index === currentImageIndex
-                          ? "border-blue-500"
-                          : "border-transparent hover:border-gray-300"
-                      }`}
-                      onClick={() => goToImage(index)}
-                    >
-                      <img
-                        src={image}
-                        alt={`${data.name} - Image ${index + 1}`}
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                      />
-                      {index === currentImageIndex && (
-                        <div className="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded text-xs font-medium">
-                          Current
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <Card>
+                <CardHeader>
+                  <CardTitle>Photo Gallery</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    {images.map((image, index) => (
+                      <div
+                        key={index}
+                        className={`relative aspect-square rounded-lg overflow-hidden cursor-pointer border-2 transition-all ${
+                          index === currentImageIndex
+                            ? "border-blue-500"
+                            : "border-transparent hover:border-gray-300"
+                        }`}
+                        onClick={() => goToImage(index)}
+                      >
+                        <img
+                          src={image}
+                          alt={`${data.name} - Image ${index + 1}`}
+                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                        />
+                        {index === currentImageIndex && (
+                          <div className="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded text-xs font-medium">
+                            Current
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
             )}
 
             {/* Video */}
             {data.videoUrl && (
-              <div className="bg-white rounded-xl shadow-sm p-6">
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">
-                  Virtual Tour
-                </h2>
-                <div className="aspect-video rounded-lg overflow-hidden bg-gray-100">
-                  <iframe
-                    src={data.videoUrl}
-                    className="w-full h-full"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    title={`${data.name} Virtual Tour`}
-                  ></iframe>
-                </div>
-              </div>
+              <Card>
+                <CardHeader>
+                  <CardTitle>Virtual Tour</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="aspect-video rounded-lg overflow-hidden bg-gray-100">
+                    <iframe
+                      src={data.videoUrl}
+                      className="w-full h-full"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      title={`${data.name} Virtual Tour`}
+                    ></iframe>
+                  </div>
+                </CardContent>
+              </Card>
             )}
 
             {/* Location - Mobile */}
             {data.latitude && data.longitude && (
-              <div className="lg:hidden bg-white rounded-xl shadow-sm p-6">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">
-                  Location
-                </h3>
-                <div className="aspect-video rounded-lg overflow-hidden bg-gray-200 relative">
-                  {!isMapLoaded && (
-                    <Skeleton className="absolute inset-0 w-full h-full" />
-                  )}
-                  <MapNavigation
-                    destination={{
-                      latitude: data.latitude,
-                      longitude: data.longitude,
-                      name: data.name,
-                    }}
-                  />
-                  <div className="absolute bottom-4 right-4">
-                    <a
-                      href={`https://www.google.com/maps?q=${data.latitude},${data.longitude}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors flex items-center justify-center"
-                      title="Open in Google Maps"
-                    >
-                      <ExternalLink className="h-4 w-4 text-gray-700" />
-                    </a>
+              <Card className="lg:hidden">
+                <CardHeader>
+                  <CardTitle>Location</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="aspect-video rounded-lg overflow-hidden bg-gray-200 relative">
+                    {!isMapLoaded && (
+                      <Skeleton className="absolute inset-0 w-full h-full" />
+                    )}
+                    <MapNavigation
+                      destination={{
+                        latitude: data.latitude,
+                        longitude: data.longitude,
+                        name: data.name,
+                      }}
+                    />
+                    <div className="absolute bottom-4 right-4">
+                      <a
+                        href={`https://www.google.com/maps?q=${data.latitude},${data.longitude}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors flex items-center justify-center"
+                        title="Open in Google Maps"
+                      >
+                        <ExternalLink className="h-4 w-4 text-gray-700" />
+                      </a>
+                    </div>
                   </div>
-                </div>
-                {data.address && (
-                  <p className="mt-3 text-gray-600 flex items-start gap-2">
-                    <MapPin className="h-5 w-5 flex-shrink-0 mt-0.5 text-gray-400" />
-                    <span>{data.address}</span>
-                  </p>
-                )}
-              </div>
+                  {data.address && (
+                    <p className="text-gray-600 flex items-start gap-2">
+                      <MapPin className="h-5 w-5 flex-shrink-0 mt-0.5 text-gray-400" />
+                      <span>{data.address}</span>
+                    </p>
+                  )}
+                </CardContent>
+              </Card>
             )}
           </div>
 
@@ -323,54 +338,59 @@ const AccommodationView = () => {
               facebook={data.facebook}
               website={data.website}
             />
+
             {/* Location - Desktop */}
             {data.latitude && data.longitude && (
-              <div className="hidden lg:block bg-white rounded-xl shadow-sm p-6">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">
-                  Location
-                </h3>
-                <div className="aspect-square rounded-lg overflow-hidden bg-gray-200 relative">
-                  {!isMapLoaded && (
-                    <Skeleton className="absolute inset-0 w-full h-full" />
+              <Card className="hidden lg:block">
+                <CardHeader>
+                  <CardTitle>Location</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="aspect-square rounded-lg overflow-hidden bg-gray-200 relative">
+                    {!isMapLoaded && (
+                      <Skeleton className="absolute inset-0 w-full h-full" />
+                    )}
+                    <MapNavigation
+                      destination={{
+                        latitude: data.latitude,
+                        longitude: data.longitude,
+                        name: data.name,
+                      }}
+                    />
+                    <div className="absolute bottom-4 right-4">
+                      <a
+                        href={`https://www.google.com/maps?q=${data.latitude},${data.longitude}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors flex items-center justify-center"
+                        title="Open in Google Maps"
+                      >
+                        <ExternalLink className="h-4 w-4 text-gray-700" />
+                      </a>
+                    </div>
+                  </div>
+                  {data.address && (
+                    <p className="text-gray-600 flex items-start gap-2">
+                      <MapPin className="h-5 w-5 flex-shrink-0 mt-0.5 text-gray-400" />
+                      <span>{data.address}</span>
+                    </p>
                   )}
-                  <MapNavigation
-                    destination={{
-                      latitude: data.latitude,
-                      longitude: data.longitude,
-                      name: data.name,
-                    }}
-                  />
-                  <div className="absolute bottom-4 right-4">
+                  <Button variant="outline" className="w-full" asChild>
                     <a
-                      href={`https://www.google.com/maps?q=${data.latitude},${data.longitude}`}
+                      href={`https://www.google.com/maps/dir/?api=1&destination=${data.latitude},${data.longitude}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors flex items-center justify-center"
-                      title="Open in Google Maps"
                     >
-                      <ExternalLink className="h-4 w-4 text-gray-700" />
+                      Get Directions
                     </a>
-                  </div>
-                </div>
-                {data.address && (
-                  <p className="mt-3 text-gray-600 flex items-start gap-2">
-                    <MapPin className="h-5 w-5 flex-shrink-0 mt-0.5 text-gray-400" />
-                    <span>{data.address}</span>
-                  </p>
-                )}
-                <Button variant="outline" className="w-full mt-4" asChild>
-                  <a
-                    href={`https://www.google.com/maps/dir/?api=1&destination=${data.latitude},${data.longitude}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Get Directions
-                  </a>
-                </Button>
-              </div>
+                  </Button>
+                </CardContent>
+              </Card>
             )}
+
             {/* Booking CTA */}
             <Booking name={data.name} />
+
             {/* Metadata */}
             <MetaData createdAt={data.createdAt} updatedAt={data.updatedAt} />
           </div>

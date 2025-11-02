@@ -24,6 +24,15 @@ import {
 } from "lucide-react";
 import { formatDuration } from "@/lib/utils";
 import MDEditor from "@uiw/react-md-editor";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 const WaterTransportationView = () => {
   const { id } = useParams();
@@ -59,21 +68,23 @@ const WaterTransportationView = () => {
   if (error) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4 animate-in fade-in duration-300">
-        <div className="text-center">
-          <div className="text-6xl mb-4">🌊</div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">
-            Oops! Something went wrong
-          </h2>
-          <p className="text-gray-600 mb-4">
-            We couldn't load the water transportation details.
-          </p>
-          <button
-            onClick={() => window.location.reload()}
-            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
-          >
-            <RefreshCw size={18} /> Try Again
-          </button>
-        </div>
+        <Card className="w-full max-w-md text-center">
+          <CardContent className="pt-6">
+            <div className="text-6xl mb-4">🌊</div>
+            <CardTitle className="text-2xl font-bold text-gray-800 mb-2">
+              Oops! Something went wrong
+            </CardTitle>
+            <CardDescription className="text-gray-600 mb-4">
+              We couldn't load the water transportation details.
+            </CardDescription>
+            <Button
+              onClick={() => window.location.reload()}
+              className="flex items-center gap-2"
+            >
+              <RefreshCw size={18} /> Try Again
+            </Button>
+          </CardContent>
+        </Card>
       </div>
     );
   }
@@ -81,15 +92,17 @@ const WaterTransportationView = () => {
   if (!data) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4 animate-in fade-in duration-300">
-        <div className="text-center">
-          <div className="text-6xl mb-4">🚢</div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">
-            Water Transportation Not Found
-          </h2>
-          <p className="text-gray-600">
-            The water transportation service you're looking for doesn't exist.
-          </p>
-        </div>
+        <Card className="w-full max-w-md text-center">
+          <CardContent className="pt-6">
+            <div className="text-6xl mb-4">🚢</div>
+            <CardTitle className="text-2xl font-bold text-gray-800 mb-2">
+              Water Transportation Not Found
+            </CardTitle>
+            <CardDescription>
+              The water transportation service you're looking for doesn't exist.
+            </CardDescription>
+          </CardContent>
+        </Card>
       </div>
     );
   }
@@ -189,13 +202,16 @@ const WaterTransportationView = () => {
         <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
           <div className="max-w-6xl mx-auto">
             <div className="flex items-center gap-3 mb-2">
-              <span className="px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800  backdrop-blur-sm flex items-center gap-1">
+              <Badge variant="secondary" className="flex items-center gap-1">
                 <Ship size={16} /> Water Transportation
-              </span>
+              </Badge>
               {images.length > 1 && (
-                <span className="px-3 py-1 rounded-full text-sm bg-black/30 backdrop-blur-sm flex items-center gap-1">
+                <Badge
+                  variant="outline"
+                  className="bg-black/30 backdrop-blur-sm"
+                >
                   <Info size={16} /> {currentImageIndex + 1} / {images.length}
-                </span>
+                </Badge>
               )}
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-2 drop-shadow-lg">
@@ -204,7 +220,7 @@ const WaterTransportationView = () => {
             {data.expected_fee && (
               <div className="flex items-center gap-2 text-lg opacity-90 drop-shadow-md">
                 <Ticket size={20} />
-                <span>From ${data.expected_fee}</span>
+                <span>From ₱{data.expected_fee}</span>
               </div>
             )}
           </div>
@@ -216,222 +232,218 @@ const WaterTransportationView = () => {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
             {/* Description */}
-            <div className="bg-white rounded-xl shadow-sm p-6 animate-in fade-in duration-300">
-              <div className="flex items-center gap-2 mb-4">
-                <Info className="text-blue-600" size={24} />
-                <h2 className="text-2xl font-bold text-gray-800">
+            <Card className="animate-in fade-in duration-300">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Info className="text-blue-600" size={24} />
                   About This Service
-                </h2>
-              </div>
-              <div className="text-gray-600 leading-relaxed text-lg">
-                {data.description ? (
-                  <MDEditor.Markdown
-                    source={data.description}
-                    style={{ background: "transparent", color: "inherit" }}
-                  />
-                ) : (
-                  <div className="flex items-center gap-2 text-gray-400">
-                    <AlertCircle size={18} />
-                    <p>No description available</p>
-                  </div>
-                )}
-              </div>
-            </div>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-gray-600 leading-relaxed text-lg">
+                  {data.description ? (
+                    <MDEditor.Markdown
+                      source={data.description}
+                      style={{ background: "transparent", color: "inherit" }}
+                    />
+                  ) : (
+                    <div className="flex items-center gap-2 text-gray-400">
+                      <AlertCircle size={18} />
+                      <p>No description available</p>
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
 
             {/* Image Gallery */}
             {images.length > 1 && (
-              <div className="bg-white rounded-xl shadow-sm p-6 animate-in fade-in duration-300">
-                <div className="flex items-center gap-2 mb-4">
-                  <ImageIcon className="text-blue-600" size={24} />
-                  <h2 className="text-2xl font-bold text-gray-800">
+              <Card className="animate-in fade-in duration-300">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <ImageIcon className="text-blue-600" size={24} />
                     Photo Gallery
-                  </h2>
-                </div>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {images.map((image, index) => (
-                    <div
-                      key={index}
-                      className={`relative aspect-square rounded-lg overflow-hidden cursor-pointer border-2 transition-all ${
-                        index === currentImageIndex
-                          ? "border-blue-500"
-                          : "border-transparent hover:border-gray-300"
-                      }`}
-                      onClick={() => goToImage(index)}
-                    >
-                      <img
-                        src={image}
-                        alt={`${data.name} - Image ${index + 1}`}
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                      />
-                      {index === currentImageIndex && (
-                        <div className="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded text-xs font-medium flex items-center gap-1">
-                          <Circle fill="white" size={12} /> Current
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    {images.map((image, index) => (
+                      <div
+                        key={index}
+                        className={`relative aspect-square rounded-lg overflow-hidden cursor-pointer border-2 transition-all ${
+                          index === currentImageIndex
+                            ? "border-blue-500"
+                            : "border-transparent hover:border-gray-300"
+                        }`}
+                        onClick={() => goToImage(index)}
+                      >
+                        <img
+                          src={image}
+                          alt={`${data.name} - Image ${index + 1}`}
+                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                        />
+                        {index === currentImageIndex && (
+                          <div className="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded text-xs font-medium flex items-center gap-1">
+                            <Circle fill="white" size={12} /> Current
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
             )}
 
             {/* Schedule */}
-            <div className="bg-white rounded-xl shadow-sm p-6 animate-in fade-in duration-300">
-              <div className="flex items-center gap-2 mb-4">
-                <Clock className="text-blue-600" size={24} />
-                <h2 className="text-2xl font-bold text-gray-800">
+            <Card className="animate-in fade-in duration-300">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Clock className="text-blue-600" size={24} />
                   Schedule Information
-                </h2>
-              </div>
-              <div className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="flex items-start gap-3">
-                    <Calendar className="text-blue-600 mt-1" size={20} />
-                    <div>
-                      <p className="text-gray-600 mb-1">Departure Days:</p>
-                      <p className="font-medium">
-                        {formatDays(data.departure_days)}
-                      </p>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="flex items-start gap-3">
+                      <Calendar className="text-blue-600 mt-1" size={20} />
+                      <div>
+                        <p className="text-gray-600 mb-1">Departure Days:</p>
+                        <p className="font-medium">
+                          {formatDays(data.departure_days)}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <Clock className="text-blue-600 mt-1" size={20} />
+                      <div>
+                        <p className="text-gray-600 mb-1">Departure Time:</p>
+                        <p className="font-medium">
+                          {data.departure_time || "Not specified"}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <Clock className="text-blue-600 mt-1" size={20} />
-                    <div>
-                      <p className="text-gray-600 mb-1">Departure Time:</p>
-                      <p className="font-medium">
-                        {data.departure_time || "Not specified"}
-                      </p>
+                  {data.duration && (
+                    <div className="flex items-start gap-3">
+                      <Waves className="text-blue-600 mt-1" size={20} />
+                      <div>
+                        <p className="text-gray-600 mb-1">Duration:</p>
+                        <p className="font-medium">
+                          {formatDuration(data.duration)}
+                        </p>
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
-                {data.duration && (
-                  <div className="flex items-start gap-3">
-                    <Waves className="text-blue-600 mt-1" size={20} />
-                    <div>
-                      <p className="text-gray-600 mb-1">Duration:</p>
-                      <p className="font-medium">
-                        {formatDuration(data.duration)}
-                      </p>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
+              </CardContent>
+            </Card>
 
             {/* Policies */}
-            <div className="bg-white rounded-xl shadow-sm p-6 animate-in fade-in duration-300">
-              <div className="flex items-center gap-2 mb-4">
-                <Shield className="text-blue-600" size={24} />
-                <h2 className="text-2xl font-bold text-gray-800">Policies</h2>
-              </div>
-              <div className="space-y-6">
-                {data.guidelines_and_policies && (
-                  <div>
-                    <div className="flex items-center gap-2 mb-2">
-                      <Info className="text-blue-600" size={20} />
-                      <h3 className="font-medium text-lg">
-                        Guidelines & Policies
-                      </h3>
+            <Card className="animate-in fade-in duration-300">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Shield className="text-blue-600" size={24} />
+                  Policies
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-6">
+                  {data.guidelines_and_policies && (
+                    <div>
+                      <div className="flex items-center gap-2 mb-2">
+                        <Info className="text-blue-600" size={20} />
+                        <h3 className="font-medium text-lg">
+                          Guidelines & Policies
+                        </h3>
+                      </div>
+                      <p className="text-gray-600">
+                        {data.guidelines_and_policies}
+                      </p>
                     </div>
-                    <p className="text-gray-600">
-                      {data.guidelines_and_policies}
-                    </p>
-                  </div>
-                )}
-                {data.rebooking_supercharges && (
-                  <div>
-                    <div className="flex items-center gap-2 mb-2">
-                      <RefreshCw className="text-blue-600" size={20} />
-                      <h3 className="font-medium text-lg">Rebooking Policy</h3>
+                  )}
+                  {data.rebooking_supercharges && (
+                    <div>
+                      <div className="flex items-center gap-2 mb-2">
+                        <RefreshCw className="text-blue-600" size={20} />
+                        <h3 className="font-medium text-lg">
+                          Rebooking Policy
+                        </h3>
+                      </div>
+                      <p className="text-gray-600">
+                        {data.rebooking_supercharges}
+                      </p>
                     </div>
-                    <p className="text-gray-600">
-                      {data.rebooking_supercharges}
-                    </p>
-                  </div>
-                )}
-                {data.refund_policy && (
-                  <div>
-                    <div className="flex items-center gap-2 mb-2">
-                      <CreditCard className="text-blue-600" size={20} />
-                      <h3 className="font-medium text-lg">Refund Policy</h3>
+                  )}
+                  {data.refund_policy && (
+                    <div>
+                      <div className="flex items-center gap-2 mb-2">
+                        <CreditCard className="text-blue-600" size={20} />
+                        <h3 className="font-medium text-lg">Refund Policy</h3>
+                      </div>
+                      <p className="text-gray-600">{data.refund_policy}</p>
                     </div>
-                    <p className="text-gray-600">{data.refund_policy}</p>
-                  </div>
-                )}
-              </div>
-            </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
           </div>
 
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Pricing */}
-            <div className="bg-white rounded-xl shadow-sm p-6 animate-in fade-in duration-300">
-              <div className="flex items-center gap-2 mb-4">
-                <DollarSign className="text-blue-600" size={24} />
-                <h3 className="text-xl font-bold text-gray-800">
+            <Card className="animate-in fade-in duration-300">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <span className="text-blue-600 text-lg">₱</span>
                   Pricing Information
-                </h3>
-              </div>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <div className="flex items-center gap-2">
-                    <Users className="text-blue-600" size={18} />
-                    <span className="text-gray-700">Expected Fee:</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-2">
+                      <Users className="text-blue-600" size={18} />
+                      <span className="text-gray-700">Expected Fee:</span>
+                    </div>
+                    <span className="font-medium flex items-center gap-1">
+                      <span className="text-lg">₱</span>
+                      {data.expected_fee || "Not specified"}
+                    </span>
                   </div>
-                  <span className="font-medium flex items-center gap-1">
-                    <DollarSign size={16} />
-                    {data.expected_fee || "Not specified"}
-                  </span>
                 </div>
-              </div>
-            </div>
-
-            {/* Booking CTA */}
-            {/* <div className="bg-gradient-to-r from-blue-600 to-teal-700 rounded-xl shadow-sm p-6 text-white animate-in fade-in duration-300">
-              <div className="flex items-center gap-2 mb-2">
-                {[...Array(4)].map((_, i) => (
-                  <Star key={i} className="text-yellow-300" size={20} />
-                ))}
-                <Star className="text-yellow-300/50" size={20} />
-              </div>
-              <div className="flex items-center gap-2 mb-2">
-                <Ticket className="text-white" size={24} />
-                <h3 className="text-xl font-bold">Ready to Book?</h3>
-              </div>
-              <p className="mb-4 opacity-90 flex items-center gap-2">
-                <Ship size={18} /> Reserve your water transportation today
-              </p>
-              <button className="w-full bg-white text-blue-600 font-semibold py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors flex items-center justify-center gap-2">
-                <CreditCard size={18} /> Book Now
-              </button>
-            </div> */}
+              </CardContent>
+            </Card>
 
             {/* Additional Information */}
-            <div className="bg-white rounded-xl shadow-sm p-6 animate-in fade-in duration-300">
-              <div className="flex items-center gap-2 mb-4">
-                <Info className="text-blue-600" size={24} />
-                <h3 className="text-xl font-bold text-gray-800">
+            <Card className="animate-in fade-in duration-300">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Info className="text-blue-600" size={24} />
                   Additional Information
-                </h3>
-              </div>
-              <div className="space-y-3 text-sm text-gray-600">
-                {data.createdAt && (
-                  <div className="flex items-center gap-2">
-                    <Calendar size={16} />
-                    <span>
-                      Listed: {new Date(data.createdAt).toLocaleDateString()}
-                    </span>
-                  </div>
-                )}
-                {data.updatedAt && (
-                  <div className="flex items-center gap-2">
-                    <RefreshCw size={16} />
-                    <span>
-                      Updated: {new Date(data.updatedAt).toLocaleDateString()}
-                    </span>
-                  </div>
-                )}
-              </div>
-            </div>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3 text-sm text-gray-600">
+                  {data.createdAt && (
+                    <div className="flex items-center gap-2">
+                      <Calendar size={16} />
+                      <span>
+                        Listed: {new Date(data.createdAt).toLocaleDateString()}
+                      </span>
+                    </div>
+                  )}
+                  {data.updatedAt && (
+                    <div className="flex items-center gap-2">
+                      <RefreshCw size={16} />
+                      <span>
+                        Updated: {new Date(data.updatedAt).toLocaleDateString()}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>
