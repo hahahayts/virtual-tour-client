@@ -18,4 +18,7 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  preview: {
+    allowedHosts: ["virtual-tour-client-1ln9.onrender.com"],
+  },
 });
