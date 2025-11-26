@@ -26,7 +26,7 @@ const PanoramaSphere: React.FC<{ imageUrl: string }> = ({ imageUrl }) => {
 
   texture.wrapS = THREE.RepeatWrapping;
   texture.repeat.x = -1;
-  texture.encoding = THREE.sRGBEncoding;
+  texture.colorSpace = THREE.SRGBColorSpace;
 
   return (
     <mesh ref={meshRef}>
