@@ -11,6 +11,8 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 
+import ReactMarkdown from "react-markdown";
+
 interface Props {
   filteredDestinations: z.infer<typeof DestinationSchema>[];
 }
@@ -57,7 +59,8 @@ export const GridListDestination = ({ filteredDestinations }: Props) => {
 
           <CardContent className="flex-grow px-6 pb-4">
             <CardDescription className="text-gray-600 text-sm leading-relaxed line-clamp-5">
-              {destination.description}
+              {/* {destination.description} */}
+              <ReactMarkdown>{destination.description}</ReactMarkdown>
             </CardDescription>
 
             {/* Meta Info */}

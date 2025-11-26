@@ -157,21 +157,21 @@ export const Form = () => {
       </div>
 
       <div className="flex items-center justify-between text-sm">
-        <div className="flex items-center">
+        {/* <div className="flex items-center">
           <input
             type="checkbox"
             className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
           />
           <span className="ml-2 text-gray-600">Remember me</span>
-        </div>
-        <Button
+        </div> */}
+        {/* <Button
           type="button" // Prevent form submission
           variant="link"
           className="text-blue-600 hover:text-blue-800 p-0 h-auto font-normal"
         >
           <HelpCircle className="w-4 h-4 mr-1" />
           Forgot password?
-        </Button>
+        </Button> */}
       </div>
 
       <Button
@@ -180,7 +180,7 @@ export const Form = () => {
         className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white py-2 px-4 rounded-md transition duration-200 flex items-center justify-center gap-2"
       >
         <LogIn className="w-4 h-4" />
-        {isSubmitting ? "Signing In..." : "Sign In"}
+        {isSubmitting ? "Logging In..." : "Log In"}
       </Button>
     </form>
   );

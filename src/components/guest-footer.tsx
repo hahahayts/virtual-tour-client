@@ -49,7 +49,7 @@ export const GuestFooter = () => {
                 <h3 className="text-2xl font-bold">
                   Tara na sa <span className="text-yellow-300">TUBIGON</span>
                 </h3>
-                <p className="text-blue-200 text-sm">Your Gateway to Bohol</p>
+                <p className="text-blue-200 text-sm">Your Gateway to Tubigon</p>
               </div>
             </div>
 
@@ -60,7 +60,7 @@ export const GuestFooter = () => {
             </p>
 
             {/* Contact Info */}
-            <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-8">
+            {/* <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-8">
               <div className="flex items-center justify-center space-x-3 group">
                 <div className="bg-blue-500/20 p-2 rounded-lg group-hover:bg-blue-500/30 transition-colors">
                   <Phone className="w-4 h-4 text-blue-300" />
@@ -74,7 +74,7 @@ export const GuestFooter = () => {
                 </div>
                 <span className="text-gray-300">visit@tubigon.gov.ph</span>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* Social Media */}
@@ -86,26 +86,30 @@ export const GuestFooter = () => {
                   icon: Facebook,
                   color: "hover:text-blue-400",
                   bg: "hover:bg-blue-500/20",
+                  url: "https://www.facebook.com/tourismtubigon",
                 },
                 {
                   icon: Instagram,
                   color: "hover:text-pink-400",
                   bg: "hover:bg-pink-500/20",
+                  url: "#",
                 },
                 {
                   icon: Twitter,
                   color: "hover:text-sky-400",
                   bg: "hover:bg-sky-500/20",
+                  url: "#",
                 },
                 {
                   icon: Youtube,
                   color: "hover:text-red-400",
                   bg: "hover:bg-red-500/20",
+                  url: "#",
                 },
               ].map((social, index) => (
                 <a
                   key={index}
-                  href="#"
+                  href={social.url}
                   className={`p-3 rounded-full bg-white/10 border border-white/20 text-white ${social.color} ${social.bg} transition-all duration-300 hover:scale-110 hover:shadow-lg group`}
                 >
                   <social.icon className="w-5 h-5 group-hover:scale-110 transition-transform" />

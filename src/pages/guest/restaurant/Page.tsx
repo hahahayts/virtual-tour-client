@@ -78,7 +78,7 @@ const GuestRestaurantPage = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <Header
-        title="Restaurants"
+        title="Restaurants in"
         description="Discover the best dining experiences in Tubigon"
       />
 

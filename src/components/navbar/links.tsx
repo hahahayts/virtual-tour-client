@@ -7,7 +7,7 @@ interface Props {
 
 export const LinkNavigation = ({ links }: Props) => {
   return (
-    <div className="absolute top-full left-0 mt-2 w-48 bg-white/95 backdrop-blur-md rounded-xl shadow-xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+    <div className="absolute top-full right-0 mt-2 w-48 bg-white/95 backdrop-blur-md rounded-xl shadow-xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
       <div className="p-2">
         {links.map((type, index) => (
           <Link
@@ -20,7 +20,7 @@ export const LinkNavigation = ({ links }: Props) => {
               <div className="text-sm font-medium text-gray-800">
                 {type.name}
               </div>
-              <div className="text-xs text-gray-600">{type.desc}</div>
+              {/* <div className="text-xs text-gray-600">{type.desc}</div> */}
             </div>
           </Link>
         ))}

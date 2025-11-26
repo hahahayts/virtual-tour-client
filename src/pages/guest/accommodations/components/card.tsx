@@ -5,16 +5,14 @@ import { Link } from "react-router";
 export const AccommodationCard = ({
   accommodation,
   viewMode,
-
   getTypeColor,
 }: {
   accommodation: AccommodationType;
   viewMode: "grid" | "list";
-
   getTypeColor: (type: string) => string;
 }) => {
   return viewMode === "grid" ? (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow flex flex-col min-h-[420px]">
       {/* Image */}
       <div className="relative h-48 overflow-hidden">
         {accommodation.imageUrl_1 ? (
@@ -31,9 +29,9 @@ export const AccommodationCard = ({
       </div>
 
       {/* Content */}
-      <div className="p-4">
+      <div className="flex flex-col flex-grow p-4">
         <div className="flex justify-between items-start mb-2">
-          <h3 className="text-lg font-bold text-gray-800">
+          <h3 className="text-lg font-bold text-gray-800 line-clamp-1">
             {accommodation.name}
           </h3>
           <span
@@ -47,27 +45,35 @@ export const AccommodationCard = ({
 
         {accommodation.address && (
           <div className="flex items-center text-gray-500 text-sm mb-2">
-            <MapPin className="w-4 h-4 mr-1" />
-            <span>{accommodation.address}</span>
+            <MapPin className="w-4 h-4 mr-1 shrink-0" />
+            <span className="truncate">{accommodation.address}</span>
           </div>
         )}
 
-        {accommodation.description && (
-          <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-            {accommodation.description}
-          </p>
-        )}
+        {/* Description area takes up space but limited */}
+        <div className="flex-grow mb-4">
+          {accommodation.description ? (
+            <p className="text-gray-600 text-sm line-clamp-3">
+              {accommodation.description}
+            </p>
+          ) : (
+            <p className="text-gray-400 text-sm italic">
+              No description available
+            </p>
+          )}
+        </div>
 
-        <div className="flex justify-between items-center">
+        {/* Footer (button aligned bottom) */}
+        <div className="mt-auto flex justify-between items-center pt-2">
           <div className="flex space-x-2">
-            {accommodation.phone && (
+            {/* {accommodation.phone && (
               <a
                 href={`tel:${accommodation.phone}`}
                 className="p-2 bg-gray-100 rounded-lg text-gray-600 hover:bg-gray-200"
               >
                 <Phone className="w-4 h-4" />
               </a>
-            )}
+            )} */}
           </div>
           <Link
             to={`/accommodations/${accommodation.id}`}
@@ -81,10 +87,11 @@ export const AccommodationCard = ({
       </div>
     </div>
   ) : (
+    // List View
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-      <div className="flex flex-col md:flex-row">
+      <div className="flex flex-col md:flex-row min-h-[200px]">
         {/* Image */}
-        <div className="md:w-1/3 h-48">
+        <div className="md:w-1/3 h-48 md:h-auto">
           {accommodation.imageUrl_1 ? (
             <img
               src={accommodation.imageUrl_1}
@@ -99,7 +106,7 @@ export const AccommodationCard = ({
         </div>
 
         {/* Content */}
-        <div className="md:w-2/3 p-4">
+        <div className="md:w-2/3 p-4 flex flex-col">
           <div className="flex justify-between items-start mb-2">
             <h3 className="text-xl font-bold text-gray-800">
               {accommodation.name}
@@ -120,11 +127,19 @@ export const AccommodationCard = ({
             </div>
           )}
 
-          {accommodation.description && (
-            <p className="text-gray-600 mb-4">{accommodation.description}</p>
-          )}
+          <div className="flex-grow">
+            {accommodation.description ? (
+              <p className="text-gray-600 mb-4 line-clamp-3">
+                {accommodation.description}
+              </p>
+            ) : (
+              <p className="text-gray-400 italic mb-4">
+                No description available
+              </p>
+            )}
+          </div>
 
-          <div className="flex justify-between items-center">
+          <div className="mt-auto flex justify-between items-center">
             <div className="flex space-x-2">
               {accommodation.phone && (
                 <a

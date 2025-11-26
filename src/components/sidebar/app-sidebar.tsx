@@ -72,14 +72,7 @@ export function AppSidebar() {
           icon={Car}
         />
 
-        {/* Management Section */}
-        {/* <CollapsibleGroup
-          title="Management"
-          items={managementItems}
-          isCollapsed={isManagementCollapsed}
-          setIsCollapsed={setIsManagementCollapsed}
-          icon={Shield}
-        /> */}
+        
       </SidebarContent>
 
       <SidebarFooter className="border-t border-sidebar-border bg-sidebar">

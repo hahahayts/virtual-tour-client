@@ -18,6 +18,8 @@ import {
 } from "@/components/ui/card";
 import { Link } from "react-router";
 
+import ReactMarkdown from "react-markdown";
+
 interface Props {
   filteredRestaurants: RestaurantType[];
   getImageCount?: (restaurant: RestaurantType) => number;
@@ -77,11 +79,12 @@ export const GridListRestaurant = ({
 
           <CardContent className="flex-grow px-6 pb-4">
             <CardDescription className="text-gray-600 text-sm leading-relaxed line-clamp-5">
-              {restaurant.description}
+              {/* {restaurant.description} */}
+              <ReactMarkdown>{restaurant.description}</ReactMarkdown>
             </CardDescription>
 
             {/* Meta Info */}
-            <div className="space-y-2 mt-4">
+            {/* <div className="space-y-2 mt-4">
               {restaurant.address && (
                 <div className="flex items-center text-sm text-gray-500">
                   <MapPin className="w-4 h-4 mr-1" />
@@ -94,10 +97,10 @@ export const GridListRestaurant = ({
                   <span>{restaurant.phone}</span>
                 </div>
               )}
-            </div>
+            </div> */}
 
             {/* Social Links */}
-            <div className="flex flex-wrap gap-2 mt-4">
+            {/* <div className="flex flex-wrap gap-2 mt-4">
               {restaurant.website && (
                 <a
                   href={restaurant.website}
@@ -129,7 +132,7 @@ export const GridListRestaurant = ({
                   <Mail className="w-4 h-4" />
                 </a>
               )}
-            </div>
+            </div> */}
           </CardContent>
 
           <CardFooter className="mt-auto px-6 pb-6">

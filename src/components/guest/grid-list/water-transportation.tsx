@@ -34,8 +34,6 @@ interface Props {
   setSearchTerm: (s: string) => void;
   setSelectedDay: (d: string) => void;
   isListView: boolean;
-  favorites: Set<unknown>;
-  toggleFavorite: (id: string) => void;
 }
 
 export const GridListWaterTransportation = ({
@@ -44,8 +42,6 @@ export const GridListWaterTransportation = ({
   setSearchTerm,
   setSelectedDay,
   viewMode,
-  favorites,
-  toggleFavorite,
 }: Props) => {
   return (
     <div className="px-4 pb-12">
@@ -102,8 +98,6 @@ export const GridListWaterTransportation = ({
               key={transport.id}
               transport={transport}
               isListView={viewMode === "list"}
-              favorites={favorites}
-              toggleFavorite={toggleFavorite}
               index={index}
             />
           ))}

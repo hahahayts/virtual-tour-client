@@ -50,13 +50,13 @@ const GuestLandTransportations = () => {
   }
 
   if (isError) {
-    return <Error name="Land Transportations" />;
+    return <Error name="Land Transportations in" />;
   }
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Header
-        title="Land Transportations"
+        title="Land Transportations in"
         description="Convenient and reliable ground transportation options in Tubigon -
             from jeepneys to luxury vehicles"
       />
@@ -137,44 +137,44 @@ const GuestLandTransportations = () => {
         )}
       </div>
 
-      <div className="px-4 pb-12">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-2xl border border-gray-200 shadow-md p-6">
-            <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-              <MapPin className="w-5 h-5" />
-              Tubigon Transportation Hub
-            </h3>
-            <div className="grid md:grid-cols-2 gap-4 text-sm text-gray-600">
-              <div>
-                <p className="mb-2">
-                  <strong>Main Terminal:</strong> Tubigon Public Market Area
-                </p>
-                <p className="mb-2">
-                  <strong>Operating Hours:</strong> 5:00 AM - 10:00 PM
-                </p>
-                <p className="mb-2">
-                  <strong>Information:</strong> +63 38 515 0000
-                </p>
-              </div>
-              <div>
-                <p className="mb-2">
-                  <strong>Services:</strong> Local & Inter-city routes
-                </p>
-                <p className="mb-2">
-                  <strong>Payment:</strong> Cash, some accept digital
-                </p>
-                <p className="mb-2">
-                  <strong>Tips:</strong> Negotiate fares for special trips
-                </p>
+      {/* <div className="px-4 pb-12">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white rounded-2xl border border-gray-200 shadow-md p-6">
+              <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                <MapPin className="w-5 h-5" />
+                Tubigon Transportation Hub
+              </h3>
+              <div className="grid md:grid-cols-2 gap-4 text-sm text-gray-600">
+                <div>
+                  <p className="mb-2">
+                    <strong>Main Terminal:</strong> Tubigon Public Market Area
+                  </p>
+                  <p className="mb-2">
+                    <strong>Operating Hours:</strong> 5:00 AM - 10:00 PM
+                  </p>
+                  <p className="mb-2">
+                    <strong>Information:</strong> +63 38 515 0000
+                  </p>
+                </div>
+                <div>
+                  <p className="mb-2">
+                    <strong>Services:</strong> Local & Inter-city routes
+                  </p>
+                  <p className="mb-2">
+                    <strong>Payment:</strong> Cash, some accept digital
+                  </p>
+                  <p className="mb-2">
+                    <strong>Tips:</strong> Negotiate fares for special trips
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </div> */}
 
-      <button className="fixed bottom-6 right-6 w-14 h-14 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-full shadow-2xl hover:from-orange-600 hover:to-red-600 transition-all duration-200 transform hover:scale-110 flex items-center justify-center">
+      {/* <button className="fixed bottom-6 right-6 w-14 h-14 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-full shadow-2xl hover:from-orange-600 hover:to-red-600 transition-all duration-200 transform hover:scale-110 flex items-center justify-center">
         <Car className="w-6 h-6" />
-      </button>
+      </button> */}
     </div>
   );
 };

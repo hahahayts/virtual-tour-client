@@ -8,20 +8,16 @@ import {
 import { formatCurrency } from "@/lib/currency";
 import { formatDescription } from "@/lib/formt-description";
 import type { WaterTranspoType } from "@/lib/types";
-import { Calendar, Heart } from "lucide-react";
+import { Calendar } from "lucide-react";
 import { Link } from "react-router";
 
 export const WaterTransportCard = ({
   transport,
   isListView = false,
-  favorites,
-  toggleFavorite,
   index,
 }: {
   transport: WaterTranspoType;
   isListView: boolean;
-  favorites: Set<unknown>;
-  toggleFavorite: (id: string) => void;
   index: number;
 }) => (
   <Card
@@ -32,20 +28,6 @@ export const WaterTransportCard = ({
       animation: `fadeInUp 0.6s ease-out ${0.5 + index * 0.1}s both`,
     }}
   >
-    {/* Favorite Button */}
-    <button
-      onClick={() => toggleFavorite(transport.id)}
-      className="absolute top-3 right-3 z-10 p-2 rounded-full bg-white/90 backdrop-blur-md hover:bg-white transition-all duration-200 shadow-md"
-    >
-      <Heart
-        className={`w-4 h-4 transition-colors ${
-          favorites.has(transport.id)
-            ? "fill-red-500 text-red-500"
-            : "text-gray-600"
-        }`}
-      />
-    </button>
-
     {/* Image Section */}
     <div
       className={`
@@ -90,7 +72,7 @@ export const WaterTransportCard = ({
           {formatDescription(transport.description)}
         </p>
 
-        <div className="space-y-2 mb-3">
+        {/* <div className="space-y-2 mb-3">
           <div className="flex items-start gap-2 text-xs text-gray-500">
             <Calendar className="w-3 h-3 mt-0.5 flex-shrink-0" />
             <div>
@@ -104,9 +86,9 @@ export const WaterTransportCard = ({
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
-        <div className="flex flex-wrap gap-1 mb-3">
+        {/* <div className="flex flex-wrap gap-1 mb-3">
           {transport.departure_days.slice(0, 3).map((day, index) => (
             <span
               key={index}
@@ -120,7 +102,7 @@ export const WaterTransportCard = ({
               +{transport.departure_days.length - 3}
             </span>
           )}
-        </div>
+        </div> */}
       </CardContent>
 
       <CardFooter className="p-0 mt-auto">

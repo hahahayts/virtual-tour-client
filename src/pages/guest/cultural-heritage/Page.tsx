@@ -32,13 +32,8 @@ const CulturalAndHeritage = () => {
     queryFn: () => fetchData("history"),
   });
 
-  if (isPending) {
-    return <TableSkeleton />;
-  }
-
-  if (error) {
-    return <ErrorPage name="history" />;
-  }
+  if (isPending) return <TableSkeleton />;
+  if (error) return <ErrorPage name="history" />;
 
   const histories: HistoryItem[] = data?.histories || [];
 
@@ -51,7 +46,7 @@ const CulturalAndHeritage = () => {
               <Calendar className="h-full w-full" />
             </div>
             <h3 className="text-lg font-medium text-gray-900 mb-2">
-              No Cultural Heritage Found
+              No Culture, Arts and Heritage Found
             </h3>
             <p className="text-gray-500">
               We're working on adding rich cultural and heritage content to
@@ -80,10 +75,8 @@ const CulturalAndHeritage = () => {
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-orange-50">
       {/* Header Section */}
       <Header
-        title=" Cultural & Heritage"
-        description=" Discover the rich history and cultural treasures of Tubigon,
-              Bohol. Explore stories that shaped our community and heritage that
-              defines us."
+        title="Cultural & Heritage in"
+        description="Discover the rich history and cultural treasures of Tubigon, Bohol. Explore stories that shaped our community and heritage that defines us."
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -94,7 +87,8 @@ const CulturalAndHeritage = () => {
             <span className="font-semibold text-amber-600">
               {histories.length}
             </span>{" "}
-            cultural heritage {histories.length === 1 ? "item" : "items"}
+            culture, arts and heritage{" "}
+            {histories.length === 1 ? "item" : "items"}
           </p>
         </div>
 
@@ -107,7 +101,7 @@ const CulturalAndHeritage = () => {
             return (
               <Card
                 key={item.id}
-                className="group hover:shadow-xl transition-all duration-300 border-0 shadow-md bg-white/80 backdrop-blur-sm hover:bg-white/90 animate-in slide-in-from-top-5"
+                className="group hover:shadow-xl transition-all duration-300 border-0 shadow-md bg-white/80 backdrop-blur-sm hover:bg-white/90 animate-in slide-in-from-top-5 flex flex-col"
                 style={{
                   animationDelay: `${index * 100}ms`,
                 }}
@@ -140,41 +134,40 @@ const CulturalAndHeritage = () => {
                   </div>
                 )}
 
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-lg font-semibold text-gray-900 line-clamp-2 group-hover:text-amber-700 transition-colors duration-200">
-                    {item.name}
-                  </CardTitle>
+                {/* Content Section */}
+                <div className="flex flex-col flex-1">
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-lg font-semibold text-gray-900 line-clamp-2 group-hover:text-amber-700 transition-colors duration-200">
+                      {item.name}
+                    </CardTitle>
 
-                  {(item.createdAt || item.updatedAt) && (
-                    <div className="flex items-center gap-2 text-xs text-gray-500">
-                      <Calendar className="h-3 w-3" />
-                      {item.updatedAt ? (
-                        <span>Updated {formatDate(item.updatedAt)}</span>
-                      ) : (
-                        <span>Created {formatDate(item.createdAt)}</span>
-                      )}
+                    {(item.createdAt || item.updatedAt) && (
+                      <div className="flex items-center gap-2 text-xs text-gray-500">
+                        <Calendar className="h-3 w-3" />
+                        {item.updatedAt ? (
+                          <span>Updated {formatDate(item.updatedAt)}</span>
+                        ) : (
+                          <span>Created {formatDate(item.createdAt)}</span>
+                        )}
+                      </div>
+                    )}
+                  </CardHeader>
+
+                  <CardContent className="pt-0 flex flex-col flex-1">
+                    <CardDescription className="text-gray-600 line-clamp-3 text-sm leading-relaxed flex-1">
+                      {item.description}
+                    </CardDescription>
+
+                    <div className="mt-4 flex items-center justify-end">
+                      <Link
+                        to={`/cultural-heritage/${item.id}`}
+                        className="text-amber-600 hover:text-amber-700 font-medium text-sm transition-colors duration-200"
+                      >
+                        Learn More →
+                      </Link>
                     </div>
-                  )}
-                </CardHeader>
-
-                <CardContent className="pt-0">
-                  <CardDescription className="text-gray-600 line-clamp-3 text-sm leading-relaxed">
-                    {item.description}
-                  </CardDescription>
-
-                  <div className="mt-4 flex items-center justify-between">
-                    <Badge variant="outline" className="text-xs">
-                      Heritage Item
-                    </Badge>
-
-                    <Link
-                      to={`/cultural-heritage/${item.id}`}
-                      className="text-amber-600 hover:text-amber-700 font-medium text-sm transition-colors duration-200"
-                    >
-                      Learn More →
-                    </Link>
-                  </div>
-                </CardContent>
+                  </CardContent>
+                </div>
               </Card>
             );
           })}

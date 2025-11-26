@@ -9,9 +9,12 @@ export const MediaControlButton: React.FC<MediaControlButtonProps> = ({
   <button
     onClick={onClick}
     className={`
-      flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-full 
-      transition-all duration-300 border backdrop-blur-sm hover:scale-105
-      animate-in slide-in-from-top-5duration-300
+      flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 
+      text-xs sm:text-sm font-semibold rounded-full 
+      transition-all border backdrop-blur-sm 
+      active:scale-95 sm:hover:scale-105
+      min-h-[44px] touch-manipulation
+      animate-in slide-in-from-top-5 duration-300
       ${
         isActive
           ? "bg-gradient-to-r from-sky-500 to-blue-600 text-white border-sky-500 shadow-lg shadow-sky-500/25"
@@ -19,7 +22,7 @@ export const MediaControlButton: React.FC<MediaControlButtonProps> = ({
       }
     `}
   >
-    <Icon className="w-4 h-4" />
-    {label}
+    <Icon className="w-4 h-4 sm:w-4 sm:h-4 flex-shrink-0" />
+    <span className="whitespace-nowrap">{label}</span>
   </button>
 );

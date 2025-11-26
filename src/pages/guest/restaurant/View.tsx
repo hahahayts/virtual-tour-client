@@ -11,18 +11,17 @@ import {
   ChevronLeft,
   ChevronRight,
   ArrowLeft,
-  ExternalLink,
-  Star,
 } from "lucide-react";
 import { MapNavigation } from "@/components/map-navigation";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { RestaurantType } from "@/lib/types";
+import ReactMarkdown from "react-markdown";
+import { GetDirectionsButton } from "../destinations/components/get-direction";
 
 const RestaurantView = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isMapLoaded, setIsMapLoaded] = useState(false);
 
   const { data, isFetching, error } = useQuery<RestaurantType>({
     queryKey: ["restaurant", id],
@@ -73,21 +72,23 @@ const RestaurantView = () => {
   if (error) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4 animate-in fade-in duration-300">
-        <div className="text-center">
-          <div className="text-6xl mb-4">😞</div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">
-            Oops! Something went wrong
-          </h2>
-          <p className="text-gray-600 mb-4">
-            We couldn't load the restaurant details.
-          </p>
-          <button
-            onClick={() => window.location.reload()}
-            className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors"
-          >
-            Try Again
-          </button>
-        </div>
+        <Card className="max-w-md">
+          <CardContent className="pt-6 text-center">
+            <div className="text-6xl mb-4">😞</div>
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">
+              Oops! Something went wrong
+            </h2>
+            <p className="text-gray-600 mb-4">
+              We couldn't load the restaurant details.
+            </p>
+            <button
+              onClick={() => window.location.reload()}
+              className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors"
+            >
+              Try Again
+            </button>
+          </CardContent>
+        </Card>
       </div>
     );
   }
@@ -95,15 +96,17 @@ const RestaurantView = () => {
   if (!data) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4 animate-in fade-in duration-300">
-        <div className="text-center">
-          <div className="text-6xl mb-4">🍽️</div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">
-            Restaurant Not Found
-          </h2>
-          <p className="text-gray-600">
-            The restaurant you're looking for doesn't exist.
-          </p>
-        </div>
+        <Card className="max-w-md">
+          <CardContent className="pt-6 text-center">
+            <div className="text-6xl mb-4">🍽️</div>
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">
+              Restaurant Not Found
+            </h2>
+            <p className="text-gray-600">
+              The restaurant you're looking for doesn't exist.
+            </p>
+          </CardContent>
+        </Card>
       </div>
     );
   }
@@ -209,187 +212,158 @@ const RestaurantView = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
-            {/* Description */}
-            <div className="bg-white rounded-xl shadow-sm p-6 animate-in fade-in duration-300">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">
-                About This Restaurant
-              </h2>
-              <p className="text-gray-600 leading-relaxed text-lg">
-                {data.description || "No description available."}
-              </p>
-            </div>
-
-            {/* Image Gallery */}
-            {images.length > 1 && (
-              <div className="bg-white rounded-xl shadow-sm p-6 animate-in fade-in duration-300">
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">
-                  Photo Gallery
-                </h2>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {images.map((image, index) => (
-                    <div
-                      key={index}
-                      className={`relative aspect-square rounded-lg overflow-hidden cursor-pointer border-2 transition-all ${
-                        index === currentImageIndex
-                          ? "border-red-500"
-                          : "border-transparent hover:border-gray-300"
-                      }`}
-                      onClick={() => goToImage(index)}
-                    >
-                      <img
-                        src={image}
-                        alt={`${data.name} - Image ${index + 1}`}
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                      />
-                      {index === currentImageIndex && (
-                        <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded text-xs font-medium">
-                          Current
-                        </div>
-                      )}
-                    </div>
-                  ))}
+            {/* Description Card */}
+            <Card className="animate-in fade-in duration-300">
+              <CardHeader>
+                <CardTitle className="text-2xl">
+                  About This Restaurant
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="prose prose-sm sm:prose-base max-w-none text-gray-600">
+                  <ReactMarkdown>{data.description}</ReactMarkdown>
                 </div>
-              </div>
+              </CardContent>
+            </Card>
+
+            {/* Image Gallery Card */}
+            {images.length > 1 && (
+              <Card className="animate-in fade-in duration-300">
+                <CardHeader>
+                  <CardTitle className="text-2xl">Photo Gallery</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    {images.map((image, index) => (
+                      <div
+                        key={index}
+                        className={`relative aspect-square rounded-lg overflow-hidden cursor-pointer border-2 transition-all ${
+                          index === currentImageIndex
+                            ? "border-red-500"
+                            : "border-transparent hover:border-gray-300"
+                        }`}
+                        onClick={() => goToImage(index)}
+                      >
+                        <img
+                          src={image}
+                          alt={`${data.name} - Image ${index + 1}`}
+                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                        />
+                        {index === currentImageIndex && (
+                          <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded text-xs font-medium">
+                            Current
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
             )}
           </div>
 
           {/* Sidebar */}
           <div className="space-y-6">
-            {/* Contact Information */}
-            <div className="bg-white rounded-xl shadow-sm p-6 animate-in fade-in duration-300">
-              <h3 className="text-xl font-bold text-gray-800 mb-4">
-                Contact Information
-              </h3>
-              <div className="space-y-4">
-                {data.phone && (
+            {/* Contact Information Card */}
+            <Card className="animate-in fade-in duration-300">
+              <CardHeader>
+                <CardTitle className="text-xl">Contact Information</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-col gap-3 text-gray-700 text-sm sm:text-base">
+                  {data.email && (
+                    <div className="flex items-center gap-2">
+                      <Mail className="w-4 h-4 text-sky-600" />
+                      <span>{data.email}</span>
+                    </div>
+                  )}
+
+                  {data.phone && (
+                    <div className="flex items-center gap-2">
+                      <Phone className="w-4 h-4 text-sky-600" />
+                      <span>{data.phone}</span>
+                    </div>
+                  )}
+
+                  {data.website && (
+                    <div className="flex items-center gap-2">
+                      <Globe className="w-4 h-4 text-sky-600" />
+                      <span>{data.website}</span>
+                    </div>
+                  )}
+
+                  {data.facebook && (
+                    <div className="flex items-center gap-2">
+                      <Facebook className="w-4 h-4 text-sky-600" />
+                      <span>{data.facebook}</span>
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Location Card */}
+            {data.latitude && data.longitude && (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-xl">Location</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    <div className="aspect-video rounded-lg overflow-hidden bg-gray-200 relative">
+                      <MapNavigation
+                        destination={{
+                          latitude: data.latitude,
+                          longitude: data.longitude,
+                          name: data.name,
+                        }}
+                      />
+                    </div>
+                    {/* <a
+                      href={`https://www.google.com/maps/dir/?api=1&destination=${data.latitude},${data.longitude}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full bg-sky-600 hover:bg-sky-700 text-white py-3 px-4 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-center gap-2 font-medium text-sm sm:text-base"
+                    >
+                      <Route className="h-4 w-4 sm:h-5 sm:w-5" />
+                      Get Directions
+                    </a> */}
+                    <GetDirectionsButton destination={data} />
+                    {data.address && (
+                      <p className="text-gray-600 flex items-start gap-2 text-sm">
+                        <MapPin className="h-5 w-5 flex-shrink-0 mt-0.5 text-gray-400" />
+                        <span>{data.address}</span>
+                      </p>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {/* Social Media Card */}
+            {data.facebook && (
+              <Card className="animate-in fade-in duration-300">
+                <CardHeader>
+                  <CardTitle className="text-xl">Social Media</CardTitle>
+                </CardHeader>
+                <CardContent>
                   <a
-                    href={`tel:${data.phone}`}
-                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group"
-                  >
-                    <Phone
-                      className="text-red-600 group-hover:text-red-700"
-                      size={20}
-                    />
-                    <span className="text-gray-700 group-hover:text-gray-800">
-                      {data.phone}
-                    </span>
-                  </a>
-                )}
-                {data.email && (
-                  <a
-                    href={`mailto:${data.email}`}
-                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group"
-                  >
-                    <Mail
-                      className="text-red-600 group-hover:text-red-700"
-                      size={20}
-                    />
-                    <span className="text-gray-700 group-hover:text-gray-800">
-                      {data.email}
-                    </span>
-                  </a>
-                )}
-                {data.website && (
-                  <a
-                    href={data.website}
+                    href={data.facebook}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group"
                   >
-                    <Globe
+                    <Facebook
                       className="text-red-600 group-hover:text-red-700"
                       size={20}
                     />
                     <span className="text-gray-700 group-hover:text-gray-800">
-                      Visit Website
+                      Facebook
                     </span>
                   </a>
-                )}
-              </div>
-            </div>
-
-            {/* Map and location */}
-            {data.latitude && data.longitude && (
-              <div className="bg-white rounded-xl shadow-sm p-6">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">
-                  Location
-                </h3>
-                <div className="aspect-video rounded-lg overflow-hidden bg-gray-200 relative">
-                  {!isMapLoaded && (
-                    <Skeleton className="absolute inset-0 w-full h-full" />
-                  )}
-                  <MapNavigation
-                    destination={{
-                      latitude: data.latitude,
-                      longitude: data.longitude,
-                      name: data.name,
-                    }}
-                  />
-                  <div className="absolute bottom-4 right-4">
-                    <a
-                      href={`https://www.google.com/maps?q=${data.latitude},${data.longitude}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors flex items-center justify-center"
-                      title="Open in Google Maps"
-                    >
-                      <ExternalLink className="h-4 w-4 text-gray-700" />
-                    </a>
-                  </div>
-                </div>
-                {data.address && (
-                  <p className="mt-3 text-gray-600 flex items-start gap-2">
-                    <MapPin className="h-5 w-5 flex-shrink-0 mt-0.5 text-gray-400" />
-                    <span>{data.address}</span>
-                  </p>
-                )}
-              </div>
+                </CardContent>
+              </Card>
             )}
-
-            {/* Social Media */}
-            {data.facebook && (
-              <div className="bg-white rounded-xl shadow-sm p-6 animate-in fade-in duration-300">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">
-                  Social Media
-                </h3>
-                <div className="space-y-3">
-                  {data.facebook && (
-                    <a
-                      href={data.facebook}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group"
-                    >
-                      <Facebook
-                        className="text-red-600 group-hover:text-red-700"
-                        size={20}
-                      />
-                      <span className="text-gray-700 group-hover:text-gray-800">
-                        Facebook
-                      </span>
-                    </a>
-                  )}
-                </div>
-              </div>
-            )}
-
-            {/* Rating CTA */}
-            <div className="bg-gradient-to-r from-red-600 to-orange-700 rounded-xl shadow-sm p-6 text-white animate-in fade-in duration-300">
-              <div className="flex items-center gap-2 mb-2">
-                <Star className="text-yellow-300" size={20} />
-                <Star className="text-yellow-300" size={20} />
-                <Star className="text-yellow-300" size={20} />
-                <Star className="text-yellow-300" size={20} />
-                <Star className="text-yellow-300/50" size={20} />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Enjoy Your Meal!</h3>
-              <p className="mb-4 opacity-90">
-                Share your experience at {data.name}
-              </p>
-              <button className="w-full bg-white text-red-600 font-semibold py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors">
-                Leave a Review
-              </button>
-            </div>
           </div>
         </div>
       </div>

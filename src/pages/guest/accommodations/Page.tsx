@@ -13,7 +13,6 @@ const GuestAccommodationPage = () => {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [selectedType, setSelectedType] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
-  const [favorites, setFavorites] = useState<Set<string>>(new Set());
 
   const { data, isPending, error } = useQuery({
     queryKey: ["accommodations"],
@@ -39,14 +38,6 @@ const GuestAccommodationPage = () => {
       return matchesType && matchesSearch;
     });
   }, [data, searchTerm, selectedType]);
-
-  const toggleFavorite = (id: string) => {
-    setFavorites((prev) => {
-      const newFavorites = new Set(prev);
-      newFavorites.has(id) ? newFavorites.delete(id) : newFavorites.add(id);
-      return newFavorites;
-    });
-  };
 
   const getTypeColor = (type: string) => {
     switch (type) {

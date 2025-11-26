@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router";
-import { Calendar } from "lucide-react";
+import { Link, useParams } from "react-router";
+import { ArrowLeft, Calendar } from "lucide-react";
 import { ViewDestinationSkeleton } from "@/components/view-skeleton";
 import { ErrorView } from "@/components/error-view";
 import { NotFoundView } from "@/components/not-found";
@@ -49,12 +49,37 @@ const ViewHistory = () => {
   return (
     <div className="p-6 max-w-6xl mx-auto">
       {/* Header */}
-      <ViewPageHeader
+      {/* <ViewPageHeader
         name={data.name}
         itemName="History"
         id={data.id}
         url="history"
-      />
+      /> */}
+      <div className="mb-8">
+        <Link
+          to={`/admin/history`}
+          className="inline-flex items-center text-muted-foreground hover:text-foreground mb-4 transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          Back to Cultural and Heritage
+        </Link>
+
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="capitalize ext-3xl font-bold mb-2">{data.name}</h1>
+            <p className="text-muted-foreground">ID: {data.id}</p>
+          </div>
+
+          <div className="flex gap-2">
+            <Link
+              to={`/admin/history/${data.id}/edit`}
+              className="bg-primary text-primary-foreground px-4 py-2 rounded-md hover:bg-primary/90 transition-colors"
+            >
+              Edit Cultural and Heritage
+            </Link>
+          </div>
+        </div>
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Images Section */}

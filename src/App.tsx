@@ -52,6 +52,7 @@ import View from "./pages/admin/comments/View";
 import SettingsPage from "./pages/admin/settings/page";
 import TermsOfService from "./pages/guest/terms of service/page";
 import PrivacyPolicy from "./pages/guest/privacy policy/page";
+import { DestinationStatistics } from "./pages/admin/statistics/page";
 
 const App = () => {
   return (
@@ -144,6 +145,8 @@ const App = () => {
                 <Route path="settings">
                   <Route index element={<SettingsPage />} />
                 </Route>
+
+                <Route path="statistics" element={<DestinationStatistics />} />
               </Route>
             </Routes>
           </ProtectedRoutes>

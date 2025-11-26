@@ -4,6 +4,8 @@ import type z from "zod";
 import { Card, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import { Link } from "react-router";
 
+import ReactMarkdown from "react-markdown";
+
 interface Props {
   filteredDestinations: z.infer<typeof DestinationSchema>[];
 }
@@ -44,7 +46,8 @@ export const ListView = ({ filteredDestinations }: Props) => {
               </div>
 
               <CardContent className="text-gray-600 mb-3 leading-relaxed line-clamp-5 p-0">
-                {destination.description}
+                {/* {destination.description} */}
+                <ReactMarkdown>{destination.description}</ReactMarkdown>
               </CardContent>
 
               {destination.address && (

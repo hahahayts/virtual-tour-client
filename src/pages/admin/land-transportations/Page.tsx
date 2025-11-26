@@ -41,7 +41,7 @@ const LandTransportation = () => {
 
   return (
     <div className="p-6 space-y-4">
-      <PageHeader name="Land Transportation" url="land-transportations" />
+      <PageHeader name="Land Transportation " url="land-transportations" />
 
       {transportations.length === 0 ? (
         <div className="text-muted-foreground text-center py-8">

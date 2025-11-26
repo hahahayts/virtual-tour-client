@@ -47,7 +47,7 @@ export const VideoBackground = () => {
         poster="/videos/background-poster.jpg"
       >
         <source src="/videos/background.webm" type="video/webm" />
-        <source src="/videos/background-compressed.mp4" type="video/mp4" />
+        <source src="/videos/background2-compressed.mp4" type="video/mp4" />
         Your browser does not support HTML5 video.
       </video>
       <div className="absolute inset-0 bg-black/20"></div>

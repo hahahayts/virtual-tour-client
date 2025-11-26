@@ -316,11 +316,23 @@ const WaterTransportationView = () => {
                     </div>
                     <div className="flex items-start gap-3">
                       <Clock className="text-blue-600 mt-1" size={20} />
-                      <div>
+                      <div className="w-full overflow-hidden">
                         <p className="text-gray-600 mb-1">Departure Time:</p>
-                        <p className="font-medium">
-                          {data.departure_time || "Not specified"}
-                        </p>
+                        <div className="font-medium prose prose-sm max-w-none [&>*]:m-0 [&>ul]:pl-4 [&>ol]:pl-4 [&_p]:break-words">
+                          {data.departure_time ? (
+                            <MDEditor.Markdown
+                              source={data.departure_time}
+                              // style={{
+                              //   background: "transparent",
+                              //   color: "inherit",
+                              //   whiteSpace: "normal",
+                              //   wordBreak: "break-word",
+                              // }}
+                            />
+                          ) : (
+                            "Not specified"
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -330,7 +342,8 @@ const WaterTransportationView = () => {
                       <div>
                         <p className="text-gray-600 mb-1">Duration:</p>
                         <p className="font-medium">
-                          {formatDuration(data.duration)}
+                          {formatDuration(data.duration)}{" "}
+                          <span>but it's depend on the trip destination </span>
                         </p>
                       </div>
                     </div>
@@ -411,36 +424,6 @@ const WaterTransportationView = () => {
                       {data.expected_fee || "Not specified"}
                     </span>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Additional Information */}
-            <Card className="animate-in fade-in duration-300">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Info className="text-blue-600" size={24} />
-                  Additional Information
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3 text-sm text-gray-600">
-                  {data.createdAt && (
-                    <div className="flex items-center gap-2">
-                      <Calendar size={16} />
-                      <span>
-                        Listed: {new Date(data.createdAt).toLocaleDateString()}
-                      </span>
-                    </div>
-                  )}
-                  {data.updatedAt && (
-                    <div className="flex items-center gap-2">
-                      <RefreshCw size={16} />
-                      <span>
-                        Updated: {new Date(data.updatedAt).toLocaleDateString()}
-                      </span>
-                    </div>
-                  )}
                 </div>
               </CardContent>
             </Card>

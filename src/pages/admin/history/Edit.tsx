@@ -2,13 +2,13 @@ import Header from "@/components/form/header";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Camera } from "lucide-react";
+import { ArrowLeft, Camera } from "lucide-react";
 import MDEditor from "@uiw/react-md-editor";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { HistoryCreateSchema } from "@/schema/history";
-import { useNavigate, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import { ErrorMessage } from "@/components/form/err-message";
 import { LoadingBtn } from "@/components/form/loader-btn";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -96,6 +96,26 @@ const EditHistory = () => {
         description="Edit the history entry below. Click save when you're done."
         backUrl="histories"
       />
+
+      {/* <div className="flex justify-between items-center">
+        <div>
+          <Link
+            to={`/admin/history`}
+            className="flex justify-center items-center gap-2"
+          >
+            <ArrowLeft />
+            Back
+          </Link>
+        </div>
+        <div className="text-center">
+          <h2 className="text-2xl">Cultural and Heritage</h2>
+          <p className="opacity-75">
+            Edit the cultural and heritage entry below. Click save when you're
+            done.
+          </p>
+        </div>
+        <div></div>
+      </div> */}
 
       <form
         onSubmit={handleSubmit((formData) => mutate(formData))}

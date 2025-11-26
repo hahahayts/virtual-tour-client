@@ -1,6 +1,8 @@
+import { icon } from "leaflet";
 import {
   BarChart3,
   Car,
+  ChartBar,
   Clock,
   Hotel,
   Info,
@@ -70,6 +72,12 @@ export const mainItems = [
     title: "Comments",
     url: "comments",
     icon: MessageSquare,
+    badge: null,
+  },
+  {
+    title: "Statistics",
+    url: "statistics",
+    icon: ChartBar,
     badge: null,
   },
 ];

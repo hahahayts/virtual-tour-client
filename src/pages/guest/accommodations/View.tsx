@@ -27,6 +27,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+import ReactMarkdown from "react-markdown";
+import { GetDirectionsButton } from "../destinations/components/get-direction";
+
 const AccommodationView = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -117,6 +120,12 @@ const AccommodationView = () => {
               }}
             />
 
+            {/* <div
+              className="w-full h-full bg-center bg-cover transition-opacity duration-500  brightness-75"
+              style={{
+                backgroundImage: `url(${images[currentImageIndex]})`,
+              }}
+            ></div> */}
             {/* Navigation arrows */}
             {images.length > 1 && (
               <>
@@ -136,7 +145,6 @@ const AccommodationView = () => {
                 </button>
               </>
             )}
-
             {/* Image indicators */}
             {images.length > 1 && (
               <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
@@ -154,7 +162,6 @@ const AccommodationView = () => {
                 ))}
               </div>
             )}
-
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none"></div>
           </div>
         ) : (
@@ -212,7 +219,7 @@ const AccommodationView = () => {
                 <CardTitle>About This {data.type}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div
+                {/* <div
                   ref={descriptionRef}
                   className={`text-gray-600 leading-relaxed ${
                     !showFullDescription ? "line-clamp-5" : ""
@@ -220,7 +227,9 @@ const AccommodationView = () => {
                 >
                   {data.description ||
                     "No description available for this accommodation."}
-                </div>
+                </div> */}
+                <ReactMarkdown>{data.description}</ReactMarkdown>
+
                 {isDescriptionClamped && (
                   <button
                     onClick={() => setShowFullDescription(!showFullDescription)}
@@ -307,7 +316,7 @@ const AccommodationView = () => {
                       }}
                     />
                     <div className="absolute bottom-4 right-4">
-                      <a
+                      {/* <a
                         href={`https://www.google.com/maps?q=${data.latitude},${data.longitude}`}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -315,7 +324,8 @@ const AccommodationView = () => {
                         title="Open in Google Maps"
                       >
                         <ExternalLink className="h-4 w-4 text-gray-700" />
-                      </a>
+                      </a> */}
+                      <GetDirectionsButton destination={data} />
                     </div>
                   </div>
                   {data.address && (
@@ -389,7 +399,7 @@ const AccommodationView = () => {
             )}
 
             {/* Booking CTA */}
-            <Booking name={data.name} />
+            {/* <Booking name={data.name} /> */}
 
             {/* Metadata */}
             <MetaData createdAt={data.createdAt} updatedAt={data.updatedAt} />

@@ -378,7 +378,7 @@ const EditAccommodation = () => {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="space-y-2">
+            {/* <div className="space-y-2">
               <Label
                 htmlFor="three_sixty_imageUrl"
                 className="text-sm font-medium flex items-center gap-2"
@@ -394,8 +394,8 @@ const EditAccommodation = () => {
               {errors.three_sixty_imageUrl && (
                 <ErrorMessage message={errors.three_sixty_imageUrl.message} />
               )}
-            </div>
-
+            </div> */}
+            {/* 
             <div className="space-y-2">
               <Label
                 htmlFor="videoUrl"
@@ -412,7 +412,7 @@ const EditAccommodation = () => {
               {errors.videoUrl && (
                 <ErrorMessage message={errors.videoUrl.message} />
               )}
-            </div>
+            </div> */}
 
             <div className="space-y-3">
               <Label className="text-sm font-medium">Gallery Images</Label>

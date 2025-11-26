@@ -47,8 +47,7 @@ const History = () => {
                 <TableHead>Image</TableHead>
                 <TableHead>Name</TableHead>
                 <TableHead>Description</TableHead>
-                <TableHead>Created At</TableHead>
-                <TableHead>Updated At</TableHead>
+
                 <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
@@ -80,7 +79,7 @@ const History = () => {
                         {history.description}
                       </div>
                     </TableCell>
-                    <TableCell>
+                    {/* <TableCell>
                       {history.createdAt
                         ? new Date(history.createdAt).toLocaleString()
                         : "N/A"}
@@ -89,7 +88,7 @@ const History = () => {
                       {history.updatedAt
                         ? new Date(history.updatedAt).toLocaleString()
                         : "N/A"}
-                    </TableCell>
+                    </TableCell> */}
                     <TableCell>
                       <div className="flex gap-2">
                         <Button variant={"link"} size={"sm"}>

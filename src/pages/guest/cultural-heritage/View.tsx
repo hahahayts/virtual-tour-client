@@ -164,12 +164,12 @@ const CulturalAndHeritageView = () => {
             {/* Content Section */}
             <CardHeader className="px-4 sm:px-6 pb-3">
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-3">
-                <Badge className="bg-amber-100 text-amber-800 hover:bg-amber-200 w-fit">
+                {/* <Badge className="bg-amber-100 text-amber-800 hover:bg-amber-200 w-fit">
                   Cultural Heritage
-                </Badge>
+                </Badge> */}
 
                 {/* Date Info - Mobile stacked */}
-                {(heritage.createdAt || heritage.updatedAt) && (
+                {/* {(heritage.createdAt || heritage.updatedAt) && (
                   <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-xs text-gray-500">
                     {heritage.createdAt && (
                       <div className="flex items-center gap-1">
@@ -184,7 +184,7 @@ const CulturalAndHeritageView = () => {
                       </div>
                     )}
                   </div>
-                )}
+                )} */}
               </div>
 
               <CardTitle className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 leading-tight">
@@ -208,7 +208,7 @@ const CulturalAndHeritageView = () => {
           </Card>
 
           {/* Related Section - Mobile friendly */}
-          <div
+          {/* <div
             className="mt-6 sm:mt-8 animate-in slide-in-from-top-5"
             style={{ animationDelay: "200ms" }}
           >
@@ -243,7 +243,7 @@ const CulturalAndHeritageView = () => {
                 </div>
               </CardContent>
             </Card>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
