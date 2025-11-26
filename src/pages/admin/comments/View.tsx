@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { ErrorPage } from "@/components/error-page";
-import { PageHeader } from "@/components/page-header";
 import { TableSkeleton } from "@/components/table-skeleton";
 import { Button } from "@/components/ui/button";
 import {
@@ -77,20 +76,20 @@ export default function View() {
   });
 
   // ✅ Delete comment (DELETE)
-  const deleteMutation = useMutation({
-    mutationFn: async (id: string) => {
-      const res = await axios.delete(`http://localhost:3000/api/ratings/${id}`);
-      return res.data;
-    },
-    onSuccess: () => {
-      toast.success("Comment deleted successfully!", { richColors: true });
-      queryClient.invalidateQueries({ queryKey: ["comments"] });
-      queryClient.invalidateQueries({ queryKey: ["public-comments"] });
-    },
-    onError: () => {
-      toast.error("Failed to delete comment.", { richColors: true });
-    },
-  });
+  // const deleteMutation = useMutation({
+  //   mutationFn: async (id: string) => {
+  //     const res = await axios.delete(`http://localhost:3000/api/ratings/${id}`);
+  //     return res.data;
+  //   },
+  //   onSuccess: () => {
+  //     toast.success("Comment deleted successfully!", { richColors: true });
+  //     queryClient.invalidateQueries({ queryKey: ["comments"] });
+  //     queryClient.invalidateQueries({ queryKey: ["public-comments"] });
+  //   },
+  //   onError: () => {
+  //     toast.error("Failed to delete comment.", { richColors: true });
+  //   },
+  // });
 
   if (isPending) return <TableSkeleton />;
   if (error) return <ErrorPage name="comments" />;

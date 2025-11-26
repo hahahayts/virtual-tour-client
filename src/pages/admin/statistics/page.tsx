@@ -38,11 +38,11 @@ export const DestinationStatistics = () => {
 
     // Loop through destinations
     for (const d of data.destinations) {
-      pdf.setFont(undefined, "bold");
+      pdf.setFont("", "bold");
       pdf.text(d.name, 20, y);
       y += 6;
 
-      pdf.setFont(undefined, "normal");
+      pdf.setFont("", "normal");
 
       // Fetch latest chart data per destination
       const chartResponse = await fetchData(`destination-visit-stats/${d.id}`);

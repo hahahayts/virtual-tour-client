@@ -8,7 +8,6 @@ import {
 import { formatCurrency } from "@/lib/currency";
 import { formatDescription } from "@/lib/formt-description";
 import type { WaterTranspoType } from "@/lib/types";
-import { Calendar } from "lucide-react";
 import { Link } from "react-router";
 
 export const WaterTransportCard = ({

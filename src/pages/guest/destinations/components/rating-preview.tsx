@@ -93,7 +93,7 @@ export const RatingsPreview: React.FC<RatingsPreviewProps> = ({
         <div className="grid gap-4 sm:gap-6">
           {visibleReviews && visibleReviews.length > 0 ? (
             <>
-              {displayedReviews?.map((review) => (
+              {displayedReviews?.map((review: any) => (
                 <div
                   key={review.id}
                   className="bg-gradient-to-br from-gray-50 to-slate-50 rounded-xl p-4 sm:p-6 border border-gray-200/50"

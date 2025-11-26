@@ -16,16 +16,9 @@ import { getTypeColor, getTypeIcon, type AccommodationData } from "./types";
 import { NoData } from "./components/no-data";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Booking } from "./components/booking";
 import { MetaData } from "./components/meta-data";
 import { ContactInfo } from "./components/contact-info";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import ReactMarkdown from "react-markdown";
 import { GetDirectionsButton } from "../destinations/components/get-direction";
@@ -34,7 +27,7 @@ const AccommodationView = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isMapLoaded, setIsMapLoaded] = useState(false);
+  const [isMapLoaded] = useState(false);
   const descriptionRef = useRef<HTMLDivElement>(null);
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [isDescriptionClamped, setIsDescriptionClamped] = useState(false);

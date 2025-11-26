@@ -9,7 +9,7 @@ import {
   Globe,
   Facebook,
   Camera,
-  Video,
+ 
 } from "lucide-react";
 
 import MDEditor from "@uiw/react-md-editor";

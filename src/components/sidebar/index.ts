@@ -1,4 +1,3 @@
-import { icon } from "leaflet";
 import {
   BarChart3,
   Car,

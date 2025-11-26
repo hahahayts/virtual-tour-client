@@ -12,7 +12,6 @@ import {
 import type z from "zod";
 import { Button } from "@/components/ui/button";
 import { fetchData } from "@/db";
-import { PageHeader } from "@/components/page-header";
 import { ErrorPage } from "@/components/error-page";
 import { DeleteButton } from "@/components/delete-btn";
 import type { UserDataSchema } from "@/schema/user";

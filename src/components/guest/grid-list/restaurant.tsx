@@ -1,12 +1,4 @@
-import {
-  ArrowRight,
-  Image,
-  MapPin,
-  Phone,
-  Globe,
-  Mail,
-  Facebook,
-} from "lucide-react";
+import { ArrowRight, Image } from "lucide-react";
 import type { RestaurantType } from "@/lib/types";
 import {
   Card,

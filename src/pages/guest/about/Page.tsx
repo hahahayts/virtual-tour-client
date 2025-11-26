@@ -7,7 +7,6 @@ import { useState } from "react";
 
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import MDEditor from "@uiw/react-md-editor";
-import { useNavigate } from "react-router";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface GuestViewAboutProps {
@@ -15,7 +14,6 @@ interface GuestViewAboutProps {
 }
 
 const GuestViewAbout = ({ id = "1" }: GuestViewAboutProps) => {
-  const navigate = useNavigate();
   const { data, isFetching, error } = useQuery({
     queryKey: ["about", id],
     queryFn: () => fetchDataById(id, "about"),

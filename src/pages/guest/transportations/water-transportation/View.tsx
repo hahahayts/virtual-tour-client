@@ -5,7 +5,6 @@ import { useState } from "react";
 import {
   Clock,
   Calendar,
-  Star,
   Ship,
   Waves,
   ChevronLeft,
@@ -16,7 +15,6 @@ import {
   CreditCard,
   Shield,
   RefreshCw,
-  DollarSign,
   Info,
   Image as ImageIcon,
   Circle,

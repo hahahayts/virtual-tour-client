@@ -11,7 +11,7 @@ import {
 import { ViewDestinationSkeleton } from "@/components/view-skeleton";
 import { ErrorView } from "@/components/error-view";
 import { NotFoundView } from "@/components/not-found";
-import { formatDate, formatDepartureDays } from "@/lib/date-formatter";
+import { formatDate } from "@/lib/date-formatter";
 import { fetchDataById } from "@/db";
 import { ViewPageHeader } from "@/components/view-page-header";
 import { formatCurrency } from "@/lib/currency";

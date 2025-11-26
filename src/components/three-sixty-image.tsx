@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Html, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 
@@ -26,7 +26,7 @@ const PanoramaSphere: React.FC<{ imageUrl: string }> = ({ imageUrl }) => {
 
   texture.wrapS = THREE.RepeatWrapping;
   texture.repeat.x = -1;
-  texture.encoding = THREE.sRGBEncoding ;
+  texture.encoding = THREE.sRGBEncoding;
 
   return (
     <mesh ref={meshRef}>

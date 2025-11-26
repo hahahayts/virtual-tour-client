@@ -6,7 +6,7 @@ const GuestProtectedRoutes = ({
   redirectPath = "/admin/dashboard",
   children,
 }: Omit<ProtectedRoutesTypes, "user">) => {
-  const { user, isLoading } = useAuth();
+  const { user } = useAuth();
 
   // Show loading spinner while checking authentication
   // If no user after loading is complete, redirect to login

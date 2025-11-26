@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { MapPin, Car } from "lucide-react";
+import { Car } from "lucide-react";
 import { Header } from "@/components/guest/header";
 import { SearchAndFilterBar } from "@/components/guest/search-filter";
 import { LandTransportCard } from "@/components/guest/card/land-transpo";

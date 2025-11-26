@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Calendar, Clock, Image as ImageIcon } from "lucide-react";
+import { ArrowLeft, Calendar, Image as ImageIcon } from "lucide-react";
 import MDEditor from "@uiw/react-md-editor";
 
 import { fetchDataById } from "@/db";
@@ -72,16 +72,7 @@ const CulturalAndHeritageView = () => {
     heritage.imageUrl_2,
     heritage.imageUrl_3,
   ].filter(Boolean);
-
-  const formatDate = (dateString: string | null) => {
-    if (!dateString) return null;
-    return new Date(dateString).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  };
-
+  
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-orange-50">
       {/* Mobile-first container with proper padding */}

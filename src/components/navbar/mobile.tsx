@@ -9,7 +9,6 @@ import {
   X,
 } from "lucide-react";
 import { aboutItems, transportationTypes } from ".";
-import { Footer } from "./footer";
 import { Link } from "react-router";
 
 interface Props {
