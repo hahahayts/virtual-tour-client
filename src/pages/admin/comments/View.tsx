@@ -15,6 +15,7 @@ import {
 import { toast } from "sonner";
 import { Star } from "lucide-react";
 import { DeleteButton } from "@/components/delete-btn";
+import { API_BASE } from "@/constant";
 
 /* 🧩 Destination Type */
 interface Destination {
@@ -51,9 +52,7 @@ export default function View() {
   const { data, isPending, error } = useQuery<RatingsResponse>({
     queryKey: ["comments"],
     queryFn: async () => {
-      const res = await axios.get<RatingsResponse>(
-        "http://localhost:3000/api/ratings"
-      );
+      const res = await axios.get<RatingsResponse>(`${API_BASE}/ratings`);
       return res.data;
     },
   });
@@ -61,7 +60,7 @@ export default function View() {
   // ✅ Approve comment (PATCH)
   const approveMutation = useMutation({
     mutationFn: async (id: string) => {
-      await axios.patch(`http://localhost:3000/api/ratings/${id}/display`);
+      await axios.patch(`${API_BASE}/ratings/${id}/display`);
     },
     onSuccess: () => {
       toast.success("Comment approved successfully!", { richColors: true });
