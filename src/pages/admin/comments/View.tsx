@@ -52,7 +52,7 @@ export default function View() {
   const { data, isPending, error } = useQuery<RatingsResponse>({
     queryKey: ["comments"],
     queryFn: async () => {
-      const res = await axios.get<RatingsResponse>(`${API_BASE}/ratings`);
+      const res = await axios.get(`${API_BASE}/ratings`);
       return res.data;
     },
   });

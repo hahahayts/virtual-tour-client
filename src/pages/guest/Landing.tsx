@@ -12,7 +12,7 @@ const LandingPage = () => {
   useMetadata({
     title: "Tara na sa Tubigon",
     description: "The beauty of Tubigon, Bohol",
-    canonicalUrl: "http://localhost:5173/",
+    canonicalUrl: `${API_BASE}`,
   });
 
   useEffect(() => {
