@@ -4,6 +4,7 @@ import { Star, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import axios from "axios";
+import { API_BASE } from "@/constant";
 
 interface RatingFormProps {
   destinationId: string;
@@ -17,7 +18,7 @@ export const RatingForm: React.FC<RatingFormProps> = ({ destinationId }) => {
   const mutation = useMutation({
     mutationFn: async () => {
       try {
-        const res = await axios.post("http://localhost:3000/api/ratings", {
+        const res = await axios.post(`${API_BASE}/ratings`, {
           score: rating,
           comment,
           destinationId,
