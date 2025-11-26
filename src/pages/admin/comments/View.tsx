@@ -49,7 +49,7 @@ export default function View() {
   const queryClient = useQueryClient();
 
   // ✅ Fetch ratings using Axios
-  const { data, isPending, error } = useQuery<RatingsResponse>({
+  const { data, isLoading, error } = useQuery<RatingsResponse>({
     queryKey: ["comments"],
     queryFn: async () => {
       const res = await axios.get(`${API_BASE}/ratings`);
@@ -90,7 +90,7 @@ export default function View() {
   //   },
   // });
 
-  if (isPending) return <TableSkeleton />;
+  if (isLoading) return <TableSkeleton />;
   if (error) return <ErrorPage name="comments" />;
 
   return (
