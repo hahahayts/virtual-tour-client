@@ -91,7 +91,10 @@ export default function View() {
   // });
 
   if (isLoading) return <TableSkeleton />;
-  if (error) return <ErrorPage name="comments" />;
+  if (error) {
+    console.log(error);
+    return <ErrorPage name="comments" />;
+  }
 
   return (
     <div className="p-6">
