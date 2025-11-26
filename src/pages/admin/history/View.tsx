@@ -6,7 +6,6 @@ import { ErrorView } from "@/components/error-view";
 import { NotFoundView } from "@/components/not-found";
 import { formatDate } from "@/lib/date-formatter";
 import { fetchDataById } from "@/db";
-import { ViewPageHeader } from "@/components/view-page-header";
 import { useEffect, useState } from "react";
 import { GalleryImages } from "@/components/gallery-images";
 

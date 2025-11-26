@@ -2,15 +2,7 @@ import Header from "@/components/form/header";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  MapPin,
-  Phone,
-  Mail,
-  Globe,
-  Facebook,
-  Camera,
-  Video,
-} from "lucide-react";
+import { MapPin, Phone, Mail, Globe, Facebook, Camera } from "lucide-react";
 
 import MDEditor from "@uiw/react-md-editor";
 import { Controller, useForm } from "react-hook-form";
