@@ -27,12 +27,12 @@ interface HistoryItem {
 }
 
 const CulturalAndHeritage = () => {
-  const { data, isPending, error } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["histories"],
     queryFn: () => fetchData("history"),
   });
 
-  if (isPending) return <TableSkeleton />;
+  if (isLoading) return <TableSkeleton />;
   if (error) return <ErrorPage name="history" />;
 
   const histories: HistoryItem[] = data?.histories || [];

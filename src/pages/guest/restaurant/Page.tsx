@@ -17,7 +17,7 @@ const GuestRestaurantPage = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [viewMode, setViewMode] = useState("grid");
 
-  const { data, isPending, error } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["restaurants"],
     queryFn: () => fetchData("restaurants"),
   });
@@ -57,7 +57,7 @@ const GuestRestaurantPage = () => {
   //   return count;
   // };
 
-  if (isPending) {
+  if (isLoading) {
     return <Pending />;
   }
 

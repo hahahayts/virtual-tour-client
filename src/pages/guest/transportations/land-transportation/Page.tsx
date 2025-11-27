@@ -17,7 +17,7 @@ const GuestLandTransportations = () => {
   const [selectedVehicleType, setSelectedVehicleType] = useState("All");
   const [viewMode, setViewMode] = useState<string>("grid");
 
-  const { data, isPending, isError } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ["land-transportations"],
     queryFn: () => fetchData("land-transportations"),
   });
@@ -45,7 +45,7 @@ const GuestLandTransportations = () => {
     });
   }, [searchTerm, selectedVehicleType, data]);
 
-  if (isPending) {
+  if (isLoading) {
     return <Pending />;
   }
 
@@ -87,7 +87,7 @@ const GuestLandTransportations = () => {
 
       <div className="px-4 mb-6">
         <p className="text-center text-gray-600">
-          {isPending
+          {isLoading
             ? "Loading..."
             : `${filteredTransports.length} land transport${
                 filteredTransports.length !== 1 ? "s" : ""

@@ -14,7 +14,7 @@ const GuestAccommodationPage = () => {
   const [selectedType, setSelectedType] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
 
-  const { data, isPending, error } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["accommodations"],
     queryFn: () => fetchData("accommodations"),
   });
@@ -58,7 +58,7 @@ const GuestAccommodationPage = () => {
     return <Error />;
   }
 
-  if (isPending) {
+  if (isLoading) {
     return <Pending />;
   }
 

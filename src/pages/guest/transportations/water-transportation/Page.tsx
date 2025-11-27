@@ -14,7 +14,7 @@ const GuestWaterTransportationPage = () => {
   const [selectedDay, setSelectedDay] = useState("All");
   const [viewMode, setViewMode] = useState<string>("grid");
 
-  const { data, isPending, isError } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ["water-transportations"],
     queryFn: () => fetchData("water-transportations"),
   });
@@ -94,7 +94,7 @@ const GuestWaterTransportationPage = () => {
 
       <div className="px-4 mb-6">
         <p className="text-center text-gray-600">
-          {isPending
+          {isLoading
             ? "Loading..."
             : `${filteredTransports.length} water transportation${
                 filteredTransports.length !== 1 ? "s" : ""
@@ -105,7 +105,7 @@ const GuestWaterTransportationPage = () => {
       <GridListWaterTransportation
         filteredTransports={filteredTransports}
         isListView={viewMode === "list"}
-        isLoading={isPending}
+        isLoading={isLoading}
         setSearchTerm={setSearchTerm}
         setSelectedDay={setSelectedDay}
         viewMode={viewMode}

@@ -23,7 +23,7 @@ const GuestDestination = () => {
     description: "The beauty of Tubigon, Bohol",
   });
 
-  const { data, isPending, error } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["destinations"],
     queryFn: () => fetchData("destinations"),
     refetchInterval: 20000,
@@ -53,7 +53,7 @@ const GuestDestination = () => {
     setSearchTerm(cleanTerm);
   };
 
-  if (isPending) {
+  if (isLoading) {
     return <Pending />;
   }
 
