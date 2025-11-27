@@ -19,6 +19,6 @@ export default defineConfig({
     },
   },
   preview: {
-    allowedHosts: ["virtual-tour-client-1ln9.onrender.com"],
+    allowedHosts: ["virtual-tour-client-1ln9.onrender.com","tubigontourism.com"],
   },
 });

@@ -12,7 +12,7 @@ export const AppSidebarFooter = () => {
     try {
       await axios.post(
         `${API_BASE}/auth/logout`,
-        {},
+
         {
           headers: {
             Authorization: `Bearer ${JWT}`,
