@@ -85,7 +85,7 @@ const DestinationView: React.FC = () => {
   useEffect(() => {
     const sendMacAddress = async () => {
       try {
-        await axios.get(`${API_BASE}/log-destination-visit/${destination?.id}
+        await axios.get(`${API_BASE}/destination-visit-stats/${destination?.id}
 `);
       } catch (error) {
         console.error("Failed to fetch MAC address:", error);
